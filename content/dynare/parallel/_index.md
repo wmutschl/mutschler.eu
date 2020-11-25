@@ -16,7 +16,7 @@ lastmod: "2020-04-20T00:00:00Z"
 type: book
 
 # Position of this page in the menu. Remove this option to sort alphabetically
-weight: 30
+weight: 40
 
 # Page metadata.
 draft: false  # Is this a draft? true/false

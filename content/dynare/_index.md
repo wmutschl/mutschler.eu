@@ -10,6 +10,7 @@ header:
 Tutorials, codes, teaching, and research materials for [Dynare](https://www.dynare.org).
 
 - [Computations (Calibration, Steadystate)](computations)
+- [Identification](identification)
 - [Miscellaneous (Reporting bugs)](misc)
 - [Baseline models (RBC, New Keynesian, An-Schorfheide, Smets-Wouters)](models)
 - [Parallel computing (Linux, macOS, Windows)](parallel)
