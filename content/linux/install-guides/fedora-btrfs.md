@@ -89,7 +89,7 @@ Note that my disk is called `vda`, in most cases they are called `sda` for norma
 Let's mount our the top-level btrfs volume (which has always id 5):
 ```bash
 mkdir /btrfs_pool
-mount -o subvolid=5 /dev/mapper/luks-6e7e8f26-4f38-468e-aa2c-9ddaaad4aedf /btrfs_bool
+mount -o subvolid=5 /dev/mapper/luks-6e7e8f26-4f38-468e-aa2c-9ddaaad4aedf /btrfs_pool
 ls /btrfs_pool
 # home root
 ```
