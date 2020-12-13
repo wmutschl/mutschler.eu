@@ -260,7 +260,7 @@ mount /dev/vda1 /mnt/@/boot/efi
 Add a timeout to the systemd boot menu in order to easily access the recovery partition:
 ```bash
 echo "timeout 2" >> /mnt/@/boot/efi/loader/loader.conf
-cat /boot/efi/loader/loader.conf 
+cat /mnt/@/boot/efi/loader/loader.conf 
 # default Pop_OS-current
 # timeout 2
 ```
