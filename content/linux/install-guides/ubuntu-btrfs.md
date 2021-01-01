@@ -108,7 +108,7 @@ parted /dev/vda
 ```
 Do not set names or flags, as in my experience the Ubiquity installer has some problems with that.
 
-### Create luks1 partition and btrfs root filesystem
+### Create luks1 partition
 
 The default luks (Linux Unified Key Setup) format used by the cryptsetup tool has changed since the release of Ubuntu 18.04 Bionic. 18.04 used version 1 ("luks1") but more recent Ubuntu releases default to version 2 ("luks2") and check that `/boot` is not located inside an encrypted partition. GRUB is able to decrypt luks version 1 at boot time, but Ubiquity does not allow this by default. Note that if you want to use luks version 2 you should create an encrypted `/boot` partition using version 1, whereas the root filesystem can then be formatted using version 2. Either way, we need to prepare the luks1 partition or else GRUB will not be able to unlock the encrypted device. Note that most Linux distributions also default to version 1 if you do a full disk encryption (e.g. Manjaro Architect).
 
@@ -128,6 +128,14 @@ cryptsetup luksOpen /dev/vda3 cryptdata
 # Enter passphrase for /dev/vda3:
 ls /dev/mapper/
 # control  cryptdata
+```
+
+### Create filesystems for root and EFI System partitions
+
+Create a filesystem for the EFI System partition. If there was e.g. an NTFS filesystem at the beginning of the drive, the Ubiquity installer will be unable to mount the filesystem otherwise.
+
+```bash
+mkfs.fat -F32 /dev/vda1
 ```
 
 We need to pre-format `cryptdata` because, in my experience, the Ubiquity installer messes something up and complains about devices with the same name being mounted twice.
