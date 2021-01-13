@@ -52,6 +52,17 @@ The [installation guides](../../install-guides) are a write-up of my personal ex
 
 - [Repair the Bootloader](https://support.system76.com/articles/bootloader/)
 
+## Raspberry Pi
+
+- [How to install Ubuntu Desktop on Raspberry Pi 4](https://ubuntu.com/tutorials/how-to-install-ubuntu-desktop-on-raspberry-pi-4#1-overview)
+- [LUKS Disk Encryption on Raspberry Pi 4 and Ubuntu Desktop 20.10](https://askubuntu.com/questions/1287837/luks-disk-encryption-on-raspberry-pi-4-and-ubuntu-desktop-20-10)
+- [USB mass storage boot](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bootmodes/msd.md)
+- [USB-BOOT FÜR DEN RASPBERRY PI 4](https://kofler.info/usb-boot-fuer-den-raspberry-pi-4/)
+
+## VPS
+- [How to install LUKS encrypted Ubuntu 18.04.x Server and enable remote unlocking](https://hamy.io/post/0009/how-to-install-luks-encrypted-ubuntu-18.04.x-server-and-enable-remote-unlocking/#gsc.tab=0)
+
+
 ## Yubikey
 
 - [FIDO2: YubiKey als OpenPGP-Smartcard einsetzen ](https://www.heise.de/ratgeber/FIDO2-YubiKey-als-OpenPGP-Smartcard-einsetzen-4590032.html)
