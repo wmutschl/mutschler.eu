@@ -1,5 +1,5 @@
 ---
-title: Manjaro with btrfs-luks full disk encryption including /boot and auto-snapshots with Timeshift (in-progress)
+title: Manjaro Linux with btrfs-luks full disk encryption including /boot and auto-snapshots with Timeshift (in-progress)
 linktitle: Manjaro btrfs-luks
 toc: true
 type: book
@@ -13,6 +13,8 @@ weight: 31
 ```md
 {{< youtube  >}}
 ```
+
+***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***
 
 ## Overview 
 In this guide I will walk you through the installation procedure to get a Manjaro system with the following structure:

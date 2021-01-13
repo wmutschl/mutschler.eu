@@ -1,5 +1,5 @@
 ---
-title: Things to do after installing Fedora 33 (Apps, Settings, and Tweaks)
+title: Things to do after installing Fedora Workstation 33 (Apps, Settings, and Tweaks)
 linktitle: Fedora 33 apps-settings-tweaks
 toc: true
 type: book
@@ -9,6 +9,7 @@ draft: false
 # Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
 weight: 43
 ---
+***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***
 
 In the following I will go through my post installation steps, i.e. which settings I choose and which apps I install and use.
 

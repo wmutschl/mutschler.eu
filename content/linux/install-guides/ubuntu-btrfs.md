@@ -1,5 +1,5 @@
 ---
-title: Ubuntu 20.04 with btrfs-luks full disk encryption including /boot and auto-apt snapshots with Timeshift
+title: Ubuntu Desktop 20.04 with btrfs-luks full disk encryption including /boot and auto-apt snapshots with Timeshift
 linktitle: Ubuntu 20.04 btrfs-luks
 toc: true
 type: book
@@ -14,6 +14,8 @@ weight: 21
 {{< youtube yRSElRlp7TQ >}}
 ```
 *Note that this written guide is an updated version of the video and contains much more information.*
+
+***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***
 
 ## Overview 
 Since a couple of months, I am exclusively using btrfs as my filesystem on all my systems, see: [Why I (still) like btrfs](../../btrfs/). So, in this guide I will show how to install Ubuntu 20.04 with the following structure:

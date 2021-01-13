@@ -1,5 +1,5 @@
 ---
-title: Fedora 33 with btrfs-luks full disk encryption (optionally including /boot) and auto-dnf snapshots with Timeshift
+title: Fedora Workstation 33 with btrfs-luks full disk encryption (optionally including /boot) and auto-dnf snapshots with Timeshift
 linktitle: Fedora 33 btrfs-luks
 toc: true
 type: book
@@ -15,7 +15,7 @@ weight: 41
 ```
 *Note that this written guide is an updated version of the video and contains much more information.*
 
-
+***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***
 
 ## Overview 
 Since Fedora switched their default filesystem to btrfs I decided to give it a go as I am exclusively using btrfs aon all my systems, see: [Why I (still) like btrfs](../../btrfs/). Fedora's automatic installation routine with encryption is actually almost perfect for me except some changes regarding the btrfs mount options and subvolume names. 

@@ -1,5 +1,5 @@
 ---
-title: Things to do after installing Ubuntu 20.04 (Apps, Settings, and Tweaks)
+title: Things to do after installing Ubuntu Desktop 20.04 (Apps, Settings, and Tweaks)
 linktitle: Ubuntu 20.04 apps-settings-tweaks
 toc: true
 type: book
@@ -10,6 +10,7 @@ draft: false
 weight: 23
 ---
 
+***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***
 
 In the following I will go through my post installation steps, i.e. which settings I choose and which apps I install and use.
 
