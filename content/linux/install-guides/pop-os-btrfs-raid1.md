@@ -350,7 +350,7 @@ nano /mnt/@/etc/fstab
 sed -i '/cryptswap/d' /mnt/@/etc/fstab #temporarily remove the cryptswap line
 sed -i 's/defaults/defaults,subvol=@,ssd,noatime,space_cache,commit=120,compress=zstd/' /mnt/@/etc/fstab
 echo "UUID=$(blkid -s UUID -o value /dev/mapper/data_vda-root)   /home   btrfs   defaults,subvol=@home,ssd,noatime,space_cache,commit=120,compress=zstd   0 0" >> /mnt/@/etc/fstab
-echo "/dev/mapper/cryptswap  none  swap  defaults  0  0" >> /mnt/@/etc/fstab #add tje cryptswap file back
+echo "/dev/mapper/cryptswap  none  swap  defaults  0  0" >> /mnt/@/etc/fstab #add the cryptswap file back
 ```
 Either way your `fstab` should look like this:
 ```bash
