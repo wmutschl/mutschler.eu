@@ -93,7 +93,7 @@ mkdir -p /home/$USER/logs
 ```
 
 ### Monitoring Cron Jobs with logs and healthchecks.io
-I am runnning Cron Jobs for my maintenance scripts. To monitor these I am saving the output of the scripts into my `logs` folder. Moreover, I am using [healthchecks.io](healthchecks.io) such that in case a script does not succeed or is not executed on time I get a warning via email. In the scripts below the `BASEURL` environmental variables need to be adapted by the URLs to the healtchecks.io base urls.
+I am runnning Cron Jobs for my maintenance scripts. To monitor these I am saving the output of the scripts into my `logs` folder. Moreover, I am using [healthchecks.io](https://healthchecks.io) such that in case a script does not succeed or is not executed on time I get a warning via email. In the scripts below the `BASEURL` environmental variables need to be adapted by the URLs to the healtchecks.io base urls.
 
 My crontab looks like this (`sudo crontab -l`):
 ```sh
@@ -318,7 +318,7 @@ Instead of a [encrypted swap partition or file](../ubuntu-btrfs/#encrypted-swap)
 
 ## Docker
 
-As Docker might [gradually exhaust disk space on a BTRFS filesystem]((https://github.com/moby/moby/issues/27653)), I am creating an (encrypted) ext4 partition for my (disposable) docker images. Alternatively, I will also cover [putting Docker on its own pseudo filesystem using an image file](https://gist.github.com/hopeseekr/cd2058e71d01deca5bae9f4e5a555440). Note that my docker configuration files and personal data reside in my home directory which gets regular btrfs snapshots with Timeshift (see my [installation guide](../rapsi-btrfs)) and gets backed up to Wasabi daily.
+As Docker might [gradually exhaust disk space on a BTRFS filesystem](https://github.com/moby/moby/issues/27653), I am creating an (encrypted) ext4 partition for my (disposable) docker images. Alternatively, I will also cover [putting Docker on its own pseudo filesystem using an image file](https://gist.github.com/hopeseekr/cd2058e71d01deca5bae9f4e5a555440). Note that my docker configuration files and personal data reside in my home directory which gets regular btrfs snapshots with Timeshift (see my [installation guide](../raspi-btrfs)) and gets backed up to Wasabi daily.
 
 ### Option A: Create dedicated encrypted docker image partition
 I will show how to encrypt my second partition (`/dev/sda2`) with luks and auto-unlock it with a key-file. So, open an interactive root shell:
@@ -490,6 +490,6 @@ Doing a `docker-compose pull && docker-compose up -d``gets the service up and ru
 dc pull
 dc up -d
 ```
-Check whether it is working by opening the url of your Pi appended with port 8123 (e.g. [https://192.168.178.50:8123](https://192.168.178.50:8123)).
+Check whether it is working by opening the url of your Pi appended with port 8123 (e.g. [http://192.168.178.50:8123](http://192.168.178.50:8123)).
 
 
