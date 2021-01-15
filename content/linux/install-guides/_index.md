@@ -26,7 +26,6 @@ toc: true  # Show table of contents? true/false
 
 - [Installation guide Ubuntu Server 20.10 on Raspberry Pi 4 with USB Boot (no SD card) and full disk encryption (excluding /boot) using btrfs-inside-luks and auto-apt snapshots with Timeshift](raspi-btrfs)
 - [Things to do after installing Ubuntu Server on Raspberry Pi 4 -- Apps, Settings, and Tweaks](raspi-post-install)
-- [Homeassistant on Raspberry Pi 4 using Docker](homeassistant)
 <!-- - [Installation guide VPS Ubuntu Server 20.04 with full disk encryption (including /boot) using btrfs-inside-luks RAID1 and auto-apt snapshots with BTRBK (coming soon)](vps-btrfs-raid1) -->
 
 

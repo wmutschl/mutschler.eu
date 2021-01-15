@@ -52,6 +52,8 @@ The [installation guides](../../install-guides) are a write-up of my personal ex
 
 - [Repair the Bootloader](https://support.system76.com/articles/bootloader/)
 
+- [Check disk space of your BTRFS snapshots with btrfs-du](https://ownyourbits.com/2017/12/06/check-disk-space-of-your-btrfs-snapshots-with-btrfs-du)
+
 ## Raspberry Pi
 
 - [How to install Ubuntu Desktop on Raspberry Pi 4](https://ubuntu.com/tutorials/how-to-install-ubuntu-desktop-on-raspberry-pi-4#1-overview)
