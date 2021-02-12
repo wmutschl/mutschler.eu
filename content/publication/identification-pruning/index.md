@@ -34,12 +34,11 @@ tags:
 featured: false
 
 links:
-- name: Preprint
-  url: /files/papers/Mutschler_2015_JEDC_preprint.pdf
 - name: CQE Working Paper 33
   url: https://www.wiwi.uni-muenster.de/cqe/sites/cqe/files/CQE_Paper/CQE_WP_33_2014.pdf
 url_code: https://github.com/wmutschl/ReplicationDSGENonlinearIdentification
 url_dataset: ''
+url_preprint: /files/papers/Mutschler_2015_JEDC_preprint.pdf
 url_poster: ''
 url_project: ''
 url_slides: ''

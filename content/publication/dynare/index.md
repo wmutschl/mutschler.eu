@@ -12,7 +12,7 @@ authors:
 - Johannes Pfeifer
 - Marco Ratto
 - Sébastien Villemot 
-date: "2011-10-01T00:00:00Z"
+date: "2020-04-01T00:00:00Z"
 
 # Schedule page publish date (NOT publication's date).
 publishDate: ""
@@ -43,6 +43,7 @@ links:
   url: https://www.dynare.org/wp-repo/dynarewp001.pdf
 url_code: https://git.dynare.org/Dynare/dynare
 url_dataset: ''
+url_preprint: ''
 url_poster: ''
 url_project: ''
 url_slides: ''

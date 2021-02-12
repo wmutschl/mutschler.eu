@@ -1,12 +1,14 @@
 ---
 title: Dynare
+cms_exclude: true
 type: book  # Do not modify.
 
 # Optional header image (relative to `static/media/` folder).
-header:
-  caption: ""
-  image: ""
+#header:
+#  image: "dynare.png"
+#  caption: "Works"
 ---
+{{< figure src="dynare.png" library=1 >}}
 Tutorials, codes, teaching, and research materials for [Dynare](https://www.dynare.org).
 
 - [Computations (Calibration, Steadystate)](computations)

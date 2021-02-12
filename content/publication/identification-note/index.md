@@ -33,14 +33,13 @@ tags:
 featured: false
 
 links:
-- name: Preprint
-  url: /files/papers/Ivashchenko_Mutschler_2019_EcoMod_preprint.pdf
 - name: SFB823 Discussion Paper 7616
   url: http://dx.doi.org/10.17877/DE290R-17433
 - name: CQE Working Paper 83
   url: https://www.wiwi.uni-muenster.de/cqe/sites/cqe/files/CQE_Paper/cqe_wp_83_2019.pdf
 url_code: https://github.com/wmutschl/identification-note
 url_dataset: ''
+url_preprint: /files/papers/Ivashchenko_Mutschler_2019_EcoMod_preprint.pdf
 url_poster: ''
 url_project: ''
 url_slides: ''
