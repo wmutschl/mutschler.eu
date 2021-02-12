@@ -107,7 +107,7 @@ directions = "Enter Building CAWM and take the elevator or stairs to Office 305 
 office_hours = []
 
 # Enter an optional link for booking appointments (e.g. calendly.com).
-appointment_url = ""
+appointment_url = "https://calendly.com/mutschler"
 
 # Contact links
 #   Set to `[]` to disable, or comment out unwanted lines with a hash `#`.
