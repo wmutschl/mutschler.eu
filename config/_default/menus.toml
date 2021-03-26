@@ -36,12 +36,12 @@
 [[main]]
   name = "Dynare"
   url = "dynare/"
-  weight = 60
+  weight = 1
 
 [[main]]
   name = "Linux"
   url = "linux/"
-  weight = 65
+  weight = 2
 
 [[main]]
   name = "Contact"
