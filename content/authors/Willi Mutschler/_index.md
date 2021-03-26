@@ -36,14 +36,14 @@ interests:
 # Education to show in About widget
 education:
   courses:
-  - course: PhD in Econometrics
+  - course: PhD in Economics
     institution: University Münster
     year: 11/2015
   - course: MSc in Economics
     institution: University Münster
     year: 04/2012
   - course: BSc in Economics
-    institution: University Münster
+    institution: University Bonn
     year: 09/2009
 
 # Social/Academic Networking
