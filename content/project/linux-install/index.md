@@ -1,6 +1,6 @@
 ---
 title: Linux Stuff
-summary: My favorite Linux distributions are Pop!_OS, Ubuntu and Manjaro. In this project, I am covering my installation processes, experiences, and personal setup for the different distributions. Also you will find here my contributions to different projects, e.g. timeshift.
+summary: My favorite Linux distributions are Pop!_OS, Ubuntu and Fedora. In this project, I am covering my installation processes, experiences, and personal setup for the different distributions. Also you will find here my contributions to different projects, e.g. Timeshift-autosnap-apt.
 tags:
 - linux
 date: 2019-01-01
@@ -13,13 +13,13 @@ links:
   url: https://mutschler.eu/linux/install-guides/
 - name: YouTube Channel
   url: https://www.youtube.com/playlist?list=PLiN_C6lGtCc-KbqCP1XuWgMp4ky634v0X
-- name: timeshift-autosnap-apt
+- name: Timeshift-autosnap-apt
   url: https://github.com/wmutschl/timeshift-autosnap-apt
 ---
 
-My favorite Linux distributions are Pop!_OS, Ubuntu and Manjaro. In this project, I am covering my installation processes, experiences, and personal setup for the different distributions. Also you will find here my contributions to [timeshift-autosnap](https://gitlab.com/gobonja/timeshift-autosnap) and [timeshift-autosnap-apt](https://gitlab.com/gobonja/timeshift-autosnap) of which I am a developer.
+My favorite Linux distributions are Pop!_OS, Ubuntu and Fedora. In this project, I am covering my installation processes, experiences, and personal setup for the different distributions. Also you will find here my contributions to [Timeshift-autosnap](https://gitlab.com/gobonja/timeshift-autosnap) and [Timeshift-autosnap-apt](https://github.com/wmutschl/timeshift-autosnap-apt) of which I am a developer.
 
-I try to do both, provide written guides as well as videos about e.g. my installation process or stuff I do with Linux. For instance, I really like to use btrfs as a file system (until Ubuntu's ZFS support and implementation takes over), so the official installation processes need to be adapted and I will show how. Also I cover how to set up a RAID 1 on my systems.
+I try to do both, provide written guides as well as post videos about my installation process or stuff I do with Linux. For instance, I really like to use BTRFS as a file system, so the official installation processes need to be adapted and I will show how to do so.
 
-You can find the guides and links to YouTube videos on a dedicated sub page: [Installation Guides](../../linux/install-guides) and on my new [YouTube Channel](https://www.youtube.com/playlist?list=PLiN_C6lGtCc-KbqCP1XuWgMp4ky634v0X).
+You can find the guides and YouTube videos on a dedicated sub page: [Installation Guides](../../linux/install-guides) and on my new [YouTube Channel](https://www.youtube.com/playlist?list=PLiN_C6lGtCc-KbqCP1XuWgMp4ky634v0X).
 

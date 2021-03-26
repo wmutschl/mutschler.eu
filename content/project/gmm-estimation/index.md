@@ -1,6 +1,6 @@
 ---
-title: GMM/SMM/IRF-Matching Estimation in Dynare
-summary: In this project (joint with the Dynare Team) we plan to provide an interface for a GMM/SMM/IRF-matching toolbox in Dynare.
+title: GMM/SMM/GIRF-Matching Estimation in Dynare
+summary: In this project we develop a GMM/SMM/GIRF-matching toolbox for Dynare.
 tags:
 - Dynare
 - Estimation
@@ -29,8 +29,6 @@ links:
 links:
 - name: RoadMap
   url: https://git.dynare.org/Dynare/dynare/-/wikis/RoadMap
-- name: PullRequest
-  url: https://git.dynare.org/Dynare/dynare/-/merge_requests/1750
 # Slides (optional).
 #   Associate this project with Markdown slides.
 #   Simply enter your slide deck's filename without extension.
@@ -38,6 +36,15 @@ links:
 #   Otherwise, set `slides = ""`.
 #slides: example
 ---
-In this project (joint with the Dynare Team) we plan to provide an interface for a GMM/SMM/IRF-matching toolbox at perturbation orders up to three (using pruning) in Dynare. The code adapts the GMM Estimation Toolbox of Martin M. Andreasen and is documented in my *Econometrics & Statistics* paper.
+In this project (joint with [Johannes Pfeifer](https://sites.google.com/site/pfeiferecon)) we develop a toolbox that enables a Method-Of-Moments estimation of dynamic and stochastic models. The code greatly improves and enhances my GMM Estimation Toolbox which I used in my *2018 Econometrics & Statistics* paper and which was based on [Martin M. Andreasen's work](https://sites.google.com/site/mandreasendk/). It is available since Dynare 4.7.
 
-We have pushed a first implementation that is able to do GMM and SMM on nonlinear DSGE models to the master branch of Dynare. Now we are working on the exact interface.
+Features I am currently working on:
+
+- [x] Add interface
+- [x] GMM estimation up to third-order with pruning
+- [x] SMM estimation up to any order with or without pruning
+- [ ] IRF and GIRF Matching
+- [x] Analytical derivatives for optimization and standard errors
+- [ ] Support for measurement errors
+- [ ] Speed and memory improvements
+- [ ] Documentation and examples
