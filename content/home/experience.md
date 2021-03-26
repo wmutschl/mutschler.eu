@@ -57,7 +57,7 @@ experience:
     company_url: https://gepris.dfg.de/gepris/projekt/411754673?language=en
     location: Münster, Germany
     date_start: '2019-04-01'
-    date_end: ''
+    date_end: '2022-07-01'
     description: |2-
         DFG Project 411754673: *Identification and Estimation of Dynamic Stochastic General Equilibrium Models: Skewness Matters*
         
