@@ -39,6 +39,19 @@ experience:
         * Identification Toolbox
         * Method of Moments Estimation Toolbox
 
+  - title: Assistant Professor in International Macroeconomics
+    company: University of Tübingen
+    company_url: https://uni-tuebingen.de/en/19615
+    location: Tübingen, Germany
+    date_start: '2021-04-01'
+    date_end: ''
+    description: |2-
+        Responsibilities include:
+
+        * Research
+        * Teaching
+        * PhD Supervision
+  
   - title: Principal Investigator (DFG funded)
     company: University Münster
     company_url: https://gepris.dfg.de/gepris/projekt/411754673?language=en

@@ -6,10 +6,12 @@ title: Willi Mutschler
 superuser: true
 
 # Role/position
-role: Principal Investigator & PostDoc & Open-Source Enthusiast
+role: Assistant Professor for International Macroeconomics & Open-Source Enthusiast
 
 # Organizations/Affiliations to show in About widget
 organizations:
+- name: University of Tübingen
+  url: https://uni-tuebingen.de/en/19615
 - name: DFG Project 411754673
   url: "https://gepris.dfg.de/gepris/projekt/411754673?language=en"
 - name: Center for Quantitative Economics (University Münster)

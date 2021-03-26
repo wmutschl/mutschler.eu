@@ -89,18 +89,18 @@ show_related = {book = true, page = false, post = true, project = true, publicat
 
 # Enter contact details (optional). To hide a field, clear it to "".
 email = "willi@mutschler.eu"
-phone = "+49-251-83-22954"
+phone = "+49-7071-29-Tba"
 
 # Address
 # For country_code, use the 2-letter ISO code (see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 )
-address = {street = "Am Stadtgraben 9", city = "Münster", region = "NRW", postcode = "48143", country = "Germany", country_code = "DE"}
+address = {street = "Nauklerstraße Tba", city = "Tübingen", region = "BW", postcode = "72074", country = "Germany", country_code = "DE"}
 
 # Geographic coordinates
 # To get your coordinates, right-click on Google Maps and choose "What's here?". The coords will show up at the bottom.
-coordinates = {latitude = "51.961357", longitude = "7.618138"}
+coordinates = {latitude = "48.52953", longitude = "9.06369"}
 
 # Directions for visitors to locate you.
-directions = "Enter Building CAWM and take the elevator or stairs to Office 305 on Floor 3"
+directions = "Enter Building Tba and take the elevator or stairs to Office Tba on Floor Tba."
 
 # Office hours
 # A list of your office hours. To remove, set to an empty list `[]`.
