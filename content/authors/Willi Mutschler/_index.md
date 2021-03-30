@@ -14,8 +14,6 @@ organizations:
   url: https://uni-tuebingen.de/en/19615
 - name: DFG Project 411754673
   url: "https://gepris.dfg.de/gepris/projekt/411754673?language=en"
-- name: Center for Quantitative Economics (University Münster)
-  url: "https://www.wiwi.uni-muenster.de/cqe/de/center/personen/willi-mutschler-1"
 - name: Dynare Developer
   url: "https://www.dynare.org/about"
 
