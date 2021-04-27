@@ -18,11 +18,13 @@ header:
 Verantwortlich für den Inhalt dieser Webseite:   
 
 Willi Mutschler  
-Institut für Ökonometrie und Wirtschaftsstatistik  
-Am Stadtgraben 9  
-48143 Münster  
-Tel. +49-251-83-22954
+Eberhard-Karls-University Tübingen
+School of Business and Economics
+Department of International Macroeconomics and Finance
+Nauklerstr. 50
+D-72074 Tübingen
 [willi@mutschler.eu](mailto:willi@mutschler.eu)
+
 
 ### Haftung für Inhalte
 Als Betreiber sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.

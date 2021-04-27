@@ -93,14 +93,14 @@ phone = "+49-7071-29-Tba"
 
 # Address
 # For country_code, use the 2-letter ISO code (see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 )
-address = {street = "Hölderlinstr. 29", city = "Tübingen", region = "BW", postcode = "72074", country = "Germany", country_code = "DE"}
+address = {street = "Eberhard-Karls-University Tübingen<br />School of Business and Economics<br />Department of International Macroeconomics and Finance<br />Nauklerstr. 50", city = "Tübingen", region = "BW", postcode = "D-72074", country = "Germany", country_code = "DE"}
 
 # Geographic coordinates
 # To get your coordinates, right-click on Google Maps and choose "What's here?". The coords will show up at the bottom.
 coordinates = {latitude = "48.52808", longitude = "9.06072"}
 
 # Directions for visitors to locate you.
-directions = "Enter building and take the stairs to Office 211. Unfortunately, barrier-free access to the office is not possible, so please make an appointment and I will arrange an alternative location."
+directions = "Please use the above address if you want to reach me by postal mail.<br />My office is located in Hölderlinstr. 29. Enter the building and take the stairs to Office 211. Unfortunately, barrier-free access to the office is not possible. If you require such, please indicate this when making an appointment and I will arrange an alternative location."
 
 # Office hours
 # A list of your office hours. To remove, set to an empty list `[]`.

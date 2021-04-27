@@ -39,8 +39,8 @@ experience:
         * Identification Toolbox
         * Method of Moments Estimation Toolbox
 
-  - title: Assistant Professor in International Macroeconomics
-    company: University of Tübingen
+  - title: Assistant Professor for International Macroeconomics
+    company: University Tübingen
     company_url: https://uni-tuebingen.de/en/19615
     location: Tübingen, Germany
     date_start: '2021-04-01'
