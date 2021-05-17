@@ -11,7 +11,8 @@ header:
 {{< figure src="linuxhacker.jpg" library=1 >}}
 Tutorials and personal projects about Linux.
 
-- [Installation guides (Fedora, Manjaro, Pop!_OS, Ubuntu)](install-guides)
+- [Installation guides](install-guides)
 - [BTRFS](btrfs)
 - [Timeshift](timeshift)
+- [Backup](backup)
 - [References](references)
