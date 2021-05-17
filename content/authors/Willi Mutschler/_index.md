@@ -13,7 +13,7 @@ organizations:
 - name: "University Tübingen"
   url: https://uni-tuebingen.de/en
 - name: "Department of International Macroeconomics and Finance"
-  url: https://uni-tuebingen.de/en/19615
+  url: https://uni-tuebingen.de/en/34644
 - name: DFG Project 411754673
   url: "https://gepris.dfg.de/gepris/projekt/411754673?language=en"
 - name: Dynare Developer
