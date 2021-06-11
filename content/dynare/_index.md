@@ -16,3 +16,4 @@ Tutorials, codes, teaching, and research materials for [Dynare](https://www.dyna
 - [Miscellaneous (Reporting bugs)](misc)
 - [Baseline models (RBC, New Keynesian, An-Schorfheide, Smets-Wouters)](models)
 - [Parallel computing (Linux, macOS, Windows)](parallel)
+- [Materials used in YouTube videos](youtube)
