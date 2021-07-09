@@ -10,7 +10,7 @@ role: "Assistant Professor for International Macroeconomics<br/>Open-Source Enth
 
 # Organizations/Affiliations to show in About widget
 organizations:
-- name: "University Tübingen"
+- name: "University of Tuebingen"
   url: https://uni-tuebingen.de/en
 - name: "Department of International Macroeconomics and Finance"
   url: https://uni-tuebingen.de/en/34644
@@ -37,10 +37,10 @@ interests:
 education:
   courses:
   - course: PhD in Economics
-    institution: University Münster
+    institution: University of Muenster
     year: 11/2015
   - course: MSc in Economics
-    institution: University Münster
+    institution: University of Muenster
     year: 04/2012
   - course: BSc in Economics
     institution: University Bonn
@@ -85,7 +85,7 @@ email: "willi@mutschler.eu"
 # Highlight the author in author lists? (true/false)
 highlight_name: false
 ---
-I am an *Assistant Professor* 🧑‍🏫 in *International Macroeconomics* 🌍 at the [University Tübingen](https://uni-tuebingen.de/en/19615) 🎓. My research interests 🔬 include quantitative macroeconomics 💹 and econometrics 🧮 with a focus on developing identification and estimation methods 🔮 for dynamic and stochastic models with skewed distributions 🪝 and rare disasters 🌪️. I am also a member of [Dynare's](https://www.dynare.org/about/#team) 📈 core development team and maintain the identification and method-of-moments toolboxes 🧰.
+I am an *Assistant Professor* 🧑‍🏫 in *International Macroeconomics* 🌍 at the [University of Tuebingen](https://uni-tuebingen.de/en/19615) 🎓. My research interests 🔬 include quantitative macroeconomics 💹 and econometrics 🧮 with a focus on developing identification and estimation methods 🔮 for dynamic and stochastic models with skewed distributions 🪝 and rare disasters 🌪️. I am also a member of [Dynare's](https://www.dynare.org/about/#team) 📈 core development team and maintain the identification and method-of-moments toolboxes 🧰.
 
 I am an enthusiastic *Apple* 🍏 and *Linux* 🐧 user and actively contribute to several *open-source projects* 🤓 such as [Dynare](https://dynare.org), [Timeshift](https://github.com/wmutschl/timeshift) and [Timeshift-autosnap-apt](https://github.com/wmutschl/timeshift-autosnap-apt). You can find 🔍 me on several forums #️⃣ like [Ask Fedora](https://ask.fedoraproject.org/u/wmutschl), [Dynare](https://forum.dynare.org/u/wmutschl), [Destination Linux](https://discourse.destinationlinux.network/u/wmutschl/), [EndeavourOS](https://forum.endeavouros.com/u/wmutschl), [Pop!_Planet](https://pop-planet.info/forums/members/wmutschl.104) or [Ubuntu](https://discourse.ubuntu.com/u/wmutschl).
 

@@ -17,9 +17,9 @@ header:
 ### Angaben gemäß § 5 TMG
 Verantwortlich für den Inhalt dieser Webseite:   
 
-Willi Mutschler  
-Eberhard-Karls-University Tübingen
-School of Business and Economics
+Willi Mutschler
+Eberhard-Karls-Universität Tübingen
+Wirtschafts- und Sozialwissenschaftlichen Fakultät
 Department of International Macroeconomics and Finance
 Nauklerstr. 50
 D-72074 Tübingen

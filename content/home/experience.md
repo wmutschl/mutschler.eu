@@ -40,7 +40,7 @@ experience:
         * Method of Moments Estimation Toolbox
 
   - title: Assistant Professor for International Macroeconomics
-    company: University Tübingen
+    company: University of Tuebingen
     company_url: https://uni-tuebingen.de/en/19615
     location: Tübingen, Germany
     date_start: '2021-04-01'
@@ -53,7 +53,7 @@ experience:
         * PhD Supervision
   
   - title: Principal Investigator (DFG funded)
-    company: University Münster
+    company: University of Muenster
     company_url: https://gepris.dfg.de/gepris/projekt/411754673?language=en
     location: Münster, Germany
     date_start: '2019-04-01'
@@ -68,7 +68,7 @@ experience:
         * Research
 
   - title: Full Professor in Econometrics
-    company: University Münster
+    company: University of Muenster
     company_url: https://www.wiwi.uni-muenster.de/cqe/de/center/personen/willi-mutschler-1
     location: Münster, Germany
     date_start: '2017-10-01'
@@ -108,7 +108,7 @@ experience:
     description: Computational Statistics and Data Analysis, Economic Modelling, Journal of Economic Dynamics and Control, National Science Centre Poland, The B.E. Journal of Macroeconomics
 
   - title: Research Associate (PhD Student)
-    company: University Münster
+    company: University of Muenster
     company_url: https://www.wiwi.uni-muenster.de/oeew/de
     location: Münster, Germany
     date_start: '2012-06-01'

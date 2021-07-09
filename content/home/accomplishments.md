@@ -39,7 +39,7 @@ item:
   date_end: ""
   date_start: "2017-01-01"
   description: ""
-  organization: University Münster
+  organization: University of Muenster
   organization_url: https://www.wiwi.uni-muenster.de/fakultaet/en
   title: Faculty Prize for best PhD-Thesis in Economics
   url: https://www.uni-muenster.de/news/view.php?cmdid=8629
@@ -57,7 +57,7 @@ item:
   date_end: ""
   date_start: "2012-10-01"
   description: ""
-  organization: University Münster
+  organization: University of Muenster
   organization_url: https://www.wiwi.uni-muenster.de/fakultaet/en
   title: Best Student Award of the Economics Department
   url: ""
