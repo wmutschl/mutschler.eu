@@ -36,9 +36,9 @@ The [installation guides](../../install-guides) are a write-up of my personal ex
 
 - [01 Installing Ubuntu1804 with btrfs, raid and encryption](https://www.youtube.com/watch?v=RoseaO8ziCo)
 
-- [[HowTo] Install Manjaro using UEFI, systemd-boot, luks and btrfs](https://forum.manjaro.org/t/howto-install-manjaro-using-uefi-systemd-boot-luks-and-btrfs/116534)
+- [[HowTo] Install Manjaro using UEFI, systemd-boot, luks and btrfs](https://archived.forum.manjaro.org/t/howto-install-manjaro-using-uefi-systemd-boot-luks-and-btrfs/116534)
 
-- [[btrfs] Tips and Tricks](https://forum.manjaro.org/t/btrfs-tips-and-tricks/71186)
+- [[btrfs] Tips and Tricks](https://archived.forum.manjaro.org/t/btrfs-tips-and-tricks/71186)
 
 - [Setting up Btrfs on Arch Linux](https://www.hiteshpaul.com/posts/14829/)
 
