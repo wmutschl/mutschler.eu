@@ -26,7 +26,7 @@ Since a couple of months, I am exclusively using btrfs as my filesystem on all m
 - automatic system snapshots and easy rollback similar to *zsys* using:
    - [Timeshift](https://github.com/teejee2008/timeshift) which will regularly take (almost instant) snapshots of the system
    - [timeshift-autosnap-apt](https://github.com/wmutschl/timeshift-autosnap-apt) which will automatically run Timeshift on any apt operation and also keep a backup of your EFI partition inside the snapshot
-- If you need RAID1, follow this guide: [Pop!_OS 20.04 btrfs-luks-raid1](../pop-os-btrfs-raid1)
+- If you need RAID1, follow this guide: [Pop!_OS 20.04 btrfs-luks-raid1](../pop-os-btrfs-raid1-20-04)
 
 With this setup you basically get the same comfort of Ubuntu's 20.04's ZFS and *zsys* initiative, but with much more flexibility and comfort due to the awesome [Timeshift](https://github.com/teejee2008/timeshift) program, which saved my bacon quite a few times. This setup works similarly well on other distributions, for which I also have [installation guides with optional RAID1](../../install-guides).
 
@@ -79,7 +79,7 @@ Some remarks:
 - The LVM is actually a bit of an overkill for my typical use case, but otherwise the installer cannot access the luks partition.
 - `/boot` will reside on the encrypted partition. The systemd bootloader is able to decrypt this at boot time.
 - With btrfs I do not need any other partitions for e.g. `/home`, as we will use subvolumes instead. 
-- I will show how to correctly create a swapfile on btrfs inside its own subvolume `@swap`. If you plan to use RAID1, swapfiles are not supported, and you should set up a swap partition instead. In my other [pop-os-btrfs-luks-raid1 guide](../pop-os-btrfs-raid1) I cover how to create an encrypted swap partition on Pop!_OS (actually the installer will do that for you).
+- I will show how to correctly create a swapfile on btrfs inside its own subvolume `@swap`. If you plan to use RAID1, swapfiles are not supported, and you should set up a swap partition instead. In my other [pop-os-btrfs-luks-raid1 guide](../pop-os-btrfs-raid1-20-04) I cover how to create an encrypted swap partition on Pop!_OS (actually the installer will do that for you).
 
 Let's use `parted` for this (feel free to use `gparted` accordingly):
 ```bash

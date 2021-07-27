@@ -28,7 +28,7 @@ Since a couple of months, I am exclusively using btrfs as my filesystem on all m
 - automatic system snapshots and easy rollback similar to *zsys* using:
    - [Timeshift](https://github.com/teejee2008/timeshift) which will regularly take (almost instant) snapshots of the system
    - [timeshift-autosnap-apt](https://github.com/wmutschl/timeshift-autosnap-apt) which will automatically run Timeshift on any APT operation and also keep a backup of your EFI partition inside the snapshot
-- If you don't need RAID1, follow this guide: [Pop!_OS 20.04 btrfs-luks](../pop-os-btrfs)
+- If you don't need RAID1, follow this guide: [Pop!_OS 20.04 btrfs-luks](../pop-os-btrfs-20-04)
 
 With this setup you basically get the same comfort of Ubuntu's 20.04's ZFS and *zsys* initiative, but with much more flexibility and comfort due to the awesome [Timeshift](https://github.com/teejee2008/timeshift) program, which saved my bacon quite a few times. This setup works similarly well on other distributions, for which I also have [installation guides with optional RAID1](../../install-guides).
 

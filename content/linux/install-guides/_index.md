@@ -37,8 +37,9 @@ toc: true  # Show table of contents? true/false
 
 ## Pop!_OS installation guides
 
-- [Installation guide Pop!_OS Desktop with btrfs-LVM-inside-luks and auto-apt snapshots with Timeshift](pop-os-btrfs)
-- [Installation guide Pop!_OS Desktop with btrfs-LVM-inside-luks RAID1 and auto-apt snapshots with Timeshift](pop-os-btrfs-raid1)
+- [Installation guide Pop!_OS 21.04 Desktop with btrfs-LVM-inside-luks and auto-apt snapshots with Timeshift](pop-os-btrfs-21-04)
+- [Installation guide Pop!_OS 20.04 Desktop with btrfs-LVM-inside-luks and auto-apt snapshots with Timeshift](pop-os-btrfs-20-04)
+- [Installation guide Pop!_OS 20.04 Desktop with btrfs-LVM-inside-luks RAID1 and auto-apt snapshots with Timeshift](pop-os-btrfs-raid1-20-04)
 - [Things to do after installing Pop!_OS 20.04 -- Apps, Settings, and Tweaks](pop-os-post-install)
 
 ## Ubuntu installation guides
