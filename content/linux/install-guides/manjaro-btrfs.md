@@ -220,7 +220,7 @@ cd /run/timeshift/backup/@/var/cache
 ls | xargs sudo mv -t /run/timeshift/backup/@cache/
 
 
-export CRYPTUUID=$(blkid -s UUID -o value /dev/vda2)
+export CRYPTUUID=$(blkid -s UUID -o value /dev/mapper/crypt_vda3)
 echo "UUID=${CRYPTUUID}    /var/cache    btrfs    rw,noatime,compress=zstd:3,ssd,space_cache,commit=120,subvol=@cache 0 0" >> /etc/fstab
 sudo mount -av
 ```
