@@ -10,7 +10,7 @@ weight: 12
 ---
 
 ```md
-{{< youtube  >}}
+{{< youtube GTr9_bzMNRA >}}
 ```
 *Note that this written guide is an updated version of the video and contains much more information.*
 
