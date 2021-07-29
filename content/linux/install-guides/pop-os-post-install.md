@@ -1,9 +1,9 @@
 ---
-title: Things to do after installing Pop!_OS 20.04 (Apps, Settings, and Tweaks)
-linktitle: Pop!_OS 20.04 apps-settings-tweaks
+title: Things to do after installing Pop!_OS 21.04 (Apps, Settings, and Tweaks)
+linktitle: Pop!_OS 21.04 apps-settings-tweaks
 toc: true
 type: book
-date: "2020-04-24T00:00:00+01:00"
+date: "2021-07-28T00:00:00+01:00"
 draft: false
 
 # Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
@@ -16,18 +16,21 @@ In the following I will go through my post installation steps, i.e. which settin
 
 ## Basic Steps
 
-#### Go through welcome screen and create user account
-This is self-explanatory. Usually I already set up Online Accounts for Nextcloud.
+### Set hostname
+By default my machine is called `pop-os`; hence, I rename it for better accessability on the network:
+```sh
+hostnamectl set-hostname precision
+```
 
 #### Change the mirror for getting updates, set locales, get rid of unnecessary languages
 I am living in Germany, so I adapt my locales:
 ```bash
-sudo sed -i 's/us./de./' /etc/apt/sources.list
+sudo sed -i 's|http://us.|http://de.|' /etc/apt/sources.list.d/system.sources
 sudo locale-gen de_DE.UTF.8
 sudo locale-gen en_US.UTF.8
-sudo update-locale LANG=de_DE.UTF-8
+sudo update-locale LANG=en_US.UTF-8
 ```
-Open "language" in "region settings", do not update these, but first remove the unnecessary ones. Then reopen "languages" and update these.
+In Region Settings open "Manage Installed Languages", do not update these, but first remove the unnecessary ones. Then reopen "languages" and update these.
 
 #### Install updates and reboot
 ```bash
@@ -39,6 +42,7 @@ sudo apt autoclean
 sudo fwupdmgr get-devices
 sudo fwupdmgr get-updates
 sudo fwupdmgr update
+flatpak update
 sudo reboot now
 ```
 
@@ -51,25 +55,22 @@ sudo reboot now
 ```
 
 #### Get Thunderbolt Dock to work and adjust monitors
-I use a Thunderbolt Dock (DELL TB16) with three monitors, which is great but also a bit tricky to set up (see [Dell TB16 Archwiki](https://wiki.archlinux.org/index.php/Dell_TB16)). I noticed that sometimes I just need to plug the USB-C cable in and out a couple of times to make it work (there seems to be a loose contact). Anyways, for me the most important step is to check in "Settings-Privacy-Thunderbolt", whether the Thunderbolt dock works, so I can rearrange my three monitors in "monitor settings". I then save this as default for "gdm":
-```bash
-sudo cp ~/.config/monitors.xml ~gdm/.config/
-```
+I use a Thunderbolt Dock (DELL TB16 or Anker PowerExpand Elite 13-in-1 or builtin into my LG 38 curved monitor), which is great but also a bit tricky to set up (see [Dell TB16 Archwiki](https://wiki.archlinux.org/index.php/Dell_TB16)). I noticed that sometimes I just need to plug the USB-C cable in and out a couple of times to make it work (there seems to be a loose contact). Anyways, for me the most important step is to check in "Settings-Privacy-Thunderbolt", whether the Thunderbolt dock works, so I can rearrange my monitors in "monitor settings".
 
 #### Restore from Backup
 I mount my luks encrypted backup storage drive using nautilus and use rsync to copy over my files and important configuration scripts:
 ```bash
 export BACKUP=/media/$USER/UUIDOFBACKUPDRIVE/@home/$USER/
-sudo rsync -avuP $BACKUP/Bilder ~/
-sudo rsync -avuP $BACKUP/Dokumente ~/
+sudo rsync -avuP $BACKUP/Pictures ~/
+sudo rsync -avuP $BACKUP/Documents ~/
 sudo rsync -avuP $BACKUP/Downloads ~/
 sudo rsync -avuP $BACKUP/dynare ~/
 sudo rsync -avuP $BACKUP/Images ~/
-sudo rsync -avuP $BACKUP/Musik ~/
-sudo rsync -avuP $BACKUP/Schreibtisch ~/
+sudo rsync -avuP $BACKUP/Music ~/
+sudo rsync -avuP $BACKUP/Desktop ~/
 sudo rsync -avuP $BACKUP/SofortUpload ~/
 sudo rsync -avuP $BACKUP/Videos ~/
-sudo rsync -avuP $BACKUP/Vorlagen ~/
+sudo rsync -avuP $BACKUP/Templates ~/
 sudo rsync -avuP $BACKUP/Work ~/
 sudo rsync -avuP $BACKUP/.config/Nextcloud ~/.config/
 sudo rsync -avuP $BACKUP/.gitkraken ~/
@@ -77,7 +78,6 @@ sudo rsync -avuP $BACKUP/.gnupg ~/
 sudo rsync -avuP $BACKUP/.local/share/applications ~/.local/share/
 sudo rsync -avuP $BACKUP/.matlab ~/
 sudo rsync -avuP $BACKUP/.ssh ~/
-sudo rsync -avuP $BACKUP/wiwi ~/
 sudo rsync -avuP $BACKUP/.dynare ~/
 sudo rsync -avuP $BACKUP/.gitconfig ~/
 
@@ -100,20 +100,18 @@ ssh-add ~/.ssh/id_rsa
 ```
 Don't forget to add your public keys to GitHub, Gitlab, Servers, etc.
 
+### SSH keys
+If I want to create a new SSH key, I run e.g.:
+```sh
+ssh-keygen -t ed25519 -C "popos-on-precision"
+```
+Usually, however, I restore my `.ssh` folder from my backup (see above). Either way, afterwards, one needs to add the file containing your key, usually `id_rsa` or `id_ed25519`, to the ssh-agent:
+```sh
+bash -c 'eval "$(ssh-agent -s)"' #works both on bash and fish, on fish one could also do 'eval (ssh-agent -c)'
+ssh-add ~/.ssh/id_ed25519
+```
+Don't forget to add your public key to GitHub, Gitlab, Servers, etc.
 
-#### Filesystem optimizations: fstrim timer and tlp
-[Btrfs Async Discard Support Looks To Be Ready For Linux 5.6](https://www.phoronix.com/scan.php?page=news_item&px=Btrfs-Async-Discard); however, I am mostly on the 5.4 kernel, so I make sure that discard is not set in either my fstab or crypttab files, and also enable the fstrim.timer systemd service:
-```bash
-sudo sed -i "s|,discard||" /etc/fstab
-cat /etc/fstab #should be no discard
-sudo sed -i "s|,discard||" /etc/crypttab
-cat /etc/crypttab #should be no discard
-sudo systemctl enable fstrim.timer
-```
-Also, there is some debate whether tlp on btrfs is a good choice or should be deactivated. In any case, my laptops have sufficient battery power, so I remove it:
-```bash
-sudo apt remove --purge tlp
-```
 
 ## Security steps with Yubikey
 I have two Yubikeys and use them
@@ -151,13 +149,13 @@ Make sure that OpenPGP and PIV are enabled on both Yubikeys as shown above.
 #### Yubikey: two-factor authentication for admin/sudo password 
 Let's set up the Yubikeys as second-factor for everything related to sudo using the common-auth pam.d module:
 ```bash
-pamu2fcfg > ~/u2f_keys # When your device begins flashing, touch the metal contact to confirm the association.
+pamu2fcfg > ~/u2f_keys # When your device begins flashing, touch the metal contact to confirm the association. You might need to insert a user pin as well
 pamu2fcfg -n >> ~/u2f_keys # Do the same with your backup device
 sudo mv ~/u2f_keys /etc/u2f_keys
 # Make this required for common-auth
 echo "auth    required                        pam_u2f.so nouserok authfile=/etc/u2f_keys cue" | sudo tee -a /etc/pam.d/common-auth
-# Before you close the terminal, open a new one and check whether you can do `sudo echo test`
 ```
+Before you close the terminal, open a new one and check whether you can do `sudo echo test`
 
 #### Yubikey: two-factor authentication for luks partitions
 Let's set up the Yubikeys as second-factor to unlock the luks partitions. If you have brand new keys, then create a new key on them:
@@ -184,6 +182,10 @@ sudo systemctl enable pcscd
 sudo systemctl start pcscd
 # Insert yubikey
 gpg --card-status
+# If this did not find your Yubikey, then try to first reboot.
+# If it still does not work, then put
+# echo 'reader-port Yubico YubiKey' >> ~/.gnupg/scdaemon.conf
+# reboot and try again. Make sure to enable pcscd.
 cd ~/.gnupg
 gpg --import public.asc #this is my public key, my private one is on my yubikey
 export KEYID=91E724BF17A73F6D
@@ -199,12 +201,24 @@ gpg --decrypt --armor encrypted.txt
 # reboot and try again. Make sure to enable pcscd.
 ```
 
-#### Auto-login
-Now, as I have a fully encrypted luks system and am the sole user of my computer, I can turn on automatic login in the settings, and afterwards disable the keyring manager by setting a blank password on the login keyring.
-```bash
-sudo apt install -y seahorse
+
+#### Fish - A Friendly Interactive Shell
+I am trying out the Fish shell, due to its [user-friendly features](https://fedoramagazine.org/fish-a-friendly-interactive-shell/), so I install it and make it my default shell:
+```sh
+sudo apt install -y fish util-linux-user
+chsh -s /usr/bin/fish
 ```
-Open seahorse, right-click on login, change password, input an empty password. Lastly, select autologin in gnome settings.
+You will need to log out and back in for this change to take effect. Lastly, I want to add the ~/.local/bin to my $PATH [persistently](https://github.com/fish-shell/fish-shell/issues/527) in Fish:
+```sh
+mkdir -p /home/$USER/.local/bin
+set -Ua fish_user_paths /home/$USER/.local/bin
+```
+Also I make sure that it is in my $PATH also on bash:
+```sh
+bash -c 'echo $PATH'
+#/home/$USER/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin
+```
+If it isn't then I make the necessary changes in my `.bashrc`.
 
 
 ## Apps
@@ -217,12 +231,6 @@ sudo apt install snapd
 
 
 ### System utilities
-
-#### arandr
-In case my monitor settings need more tweaking:
-```bash
-sudo apt install -y arandr
-```
 
 #### Caffeine
 A little helper in case my laptop needs to stay up all night
@@ -251,7 +259,14 @@ Using gnome tweaks
 ```bash
 sudo apt install gnome-tweak-tool 
 ```
-I like to display my battery life using a percentage, set do nothing on lid close, and add weekday to the clock. Also clicking on the clock I set the location for wheather.
+In Gnome Tweaks I make the following changes:
+
+- Disable "Suspend when laptop lid is closed" in General
+- Disable "Activities Overview Hot Corner" in Top Bar
+- Enable "Weekday" and "Date" in "Top Bar"
+- Enable Battery Percentage (also possible in Gnome Settings - Power)
+- Check Autostart programs
+- Put the window controls to the left and disable the minimize button
 
 
 #### nautilus-admin
@@ -261,60 +276,17 @@ sudo apt install -y nautilus-admin
 ```
 
 
-#### Timeshift and timeshift-autosnap-apt
-Install Timeshift and configure it directly via the GUI for easy and almost instant system snapshots with btrfs:
-```bash
-sudo apt install -y timeshift
-sudo timeshift-gtk
-```
-* Select "BTRFS" as the "Snapshot Type"; continue with "Next"
-* Choose your BTRFS system partition as "Snapshot Location"; continue with "Next"  (even if timeshift does not see a btrfs system in the GUI it will still work, so continue (I already filed a bug report with timeshift))
-* "Select Snapshot Levels" (type and number of snapshots that will be automatically created and managed/deleted by Timeshift), my recommendations:
-  * Activate "Monthly" and set it to 1
-  * Activate "Weekly" and set it to 3
-  * Activate "Daily" and set it to 5
-  * Deactivate "Hourly"
-  * Activate "Boot" and set it to 3
-  * Activate "Stop cron emails for scheduled tasks"
-  * continue with "Next"
-  * I also include the `@home` subvolume (which is not selected by default). Note that when you restore a snapshot Timeshift you get the choise whether you want to restore it as well (which in most cases you don't want to).
-  * Click "Finish"
-* "Create" a manual first snapshot & exit Timeshift
-  
-*Timeshift* will now check every hour if snapshots ("hourly", "daily", "weekly", "monthly", "boot") need to be created or deleted. Note that "boot" snapshots will not be created directly but about 10 minutes after a system startup. *Timeshift* puts all snapshots into `/run/timeshift/backup`. Conveniently, the real root (subvolid 5) of your BTRFS partition is also mounted here, so it is easy to view, create, delete and move around snapshots manually. 
-
-Now let's install *timeshift-autosnap-apt* from GitHub
-```bash
-git clone https://github.com/wmutschl/timeshift-autosnap-apt.git /home/$USER/timeshift-autosnap-apt
-cd /home/$USER/timeshift-autosnap-apt
-sudo make install
-```
-
-After this, optionally, make changes to the configuration file:
-```bash
-sudo nano /etc/timeshift-autosnap-apt.conf
-```
-For example, as we don't have a dedicated `/boot` partition, we can set `snapshotBoot=false` in the `timeshift-autosnap-apt-conf` file to not rsync the `/boot` directory to `/boot.backup`. Note that the EFI partition is still rsynced into your snapshot to `/boot.backup/efi`.
-
-Check if everything is working:
-```bash
-sudo timeshift-autosnap-apt
-```
-Now, if you run `sudo apt install|remove|upgrade|dist-upgrade`, *timeshift-autosnap-apt* will create a snapshot of your system with *Timeshift*.
-
-
-
 #### Virtual machines: Quickemu and other stuff
 I used to set up KVM, Qemu, virt-manager and gnome-boxes as this is much faster as VirtualBox. However, I have found a much easier tool for most tasks: [Quickqemu](https://github.com/wmutschl/quickemu) which uses the snap package Qemu-virgil:
 ```bash
 git clone https://github.com/wmutschl/quickemu ~/quickemu
 sudo apt install snapd bsdgames wget
-sudo snap install qemu-virgil --edge
+sudo snap install qemu-virgil
 sudo snap connect qemu-virgil:kvm
 sudo snap connect qemu-virgil:raw-usb
 sudo snap connect qemu-virgil:removable-media
 sudo snap connect qemu-virgil:audio-record
-sudo ln -s ~/quickemu/quickemu /usr/local/bin/quickemu
+sudo ln -s ~/quickemu/quickemu /home/$USER/.local/bin/quickemu
 # Note that I keep my virtual machines on an external SSD
 ```
 In case I need the old stuff:
@@ -332,20 +304,23 @@ sudo chattr +C ~/.local/share/libvirt
 
 ### Networking
 
-#### Dropbox
-Unfortunately, I still have some use case for Dropbox:
+#### OpenSSH Server
+I sometimes access my linux machine via ssh from other machines, for this I install the OpenSSH server:
 ```bash
-sudo apt install -y nautilus-dropbox
+sudo apt install openssh-server
 ```
-Open dropbox and set it up, check options.
-
+Then I make some changes to 
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+to disable password login and to allow for X11forwarding.
 
 #### Nextcloud
 I have all my files synced to my own Nextcloud server, so I need the sync client:
 ```bash
 sudo apt install -y nextcloud-desktop
 ```
-Open Nextcloud and set it up. Recheck options and note to ignore hidden files once the first folder sync is set up.
+Open Nextcloud and set it up. Recheck options.
 
 
 #### OpenConnect and OpenVPN
@@ -355,42 +330,12 @@ sudo apt install -y openvpn network-manager-openvpn network-manager-openvpn-gnom
 ```
 Go to Settings-Network-VPN and add openconnect for my university VPN and openvpn for ProtonVPN, check connections.
 
-#### Remote desktop
-To access our University remote Windows desktop session:
-```bash
-sudo apt install -y rdesktop
-echo "rdesktop -g 1680x900 wiwi-farm.uni-muenster.de -r disk:home=/home/$USER/  &" > ~/wiwi.sh
-chmod +x wiwi.sh
-cat <<EOF > ~/.local/share/applications/wiwi.desktop
-[Desktop Entry]
-Name=WIWI Terminal Server
-Comment=WIWI Terminal Server wiwi-farm
-Keywords=WIWI;RDP;
-Exec=/home/$USER/wiwi.sh
-Icon=preferences-desktop-remote-desktop
-Terminal=false
-MimeType=application/x-remote-connection;x-scheme-handler/vnc;
-Type=Application
-StartupNotify=true
-Categories=Network;RemoteAccess;
-EOF
-```
-Note that I also add a shortcut launcher.
-
-#### TigerVNC Viewer
-To access my server via VNC I install a very tiny VNC viewer, which works great:
-```bash
-sudo apt install -y tigervnc-viewer
-```
-
-
 ### Coding
 
 #### Dynare related packages
 I am a developer of [Dynare](https://www.dynare.org) and need these packages to compile it from source and run it optimally ob Ubuntu-based systems:
 ```bash
-sudo apt install -y build-essential gfortran liboctave-dev libboost-graph-dev libgsl-dev libmatio-dev libslicot-dev libslicot-pic libsuitesparse-dev flex bison autoconf automake texlive texlive-publishers texlive-latex-extra texlive-fonts-extra texlive-latex-recommended texlive-science texlive-plain-generic lmodern python3-sphinx latexmk libjs-mathjax doxygen
-sudo apt install -y x13as
+sudo apt install -y build-essential gfortran liboctave-dev libboost-graph-dev libgsl-dev libmatio-dev libslicot-dev libslicot-pic libsuitesparse-dev flex bison autoconf automake texlive texlive-publishers texlive-latex-extra texlive-fonts-extra texlive-latex-recommended texlive-science texlive-plain-generic lmodern python3-sphinx latexmk libjs-mathjax doxygen x13as
 ```
 
 #### git related packages:
@@ -398,49 +343,27 @@ git is most important, as a GUI for it, I use GitKraken. Also to use lfs on some
 ```bash
 sudo apt install -y git git-lfs
 git-lfs install
-sudo apt install -y gitkraken
-# flatpak install -y gitkraken
+flatpak install -y gitkraken
 ```
-The flatpak version of GitKraken also works perfectly. Open GitKraken and set up Accounts and Settings. Note that in case of flatpak, one needs to add the following Custom Terminal Command: `flatpak-spawn --host gnome-terminal %d`. 
+The flatpak version of GitKraken works perfectly. Open GitKraken and set up Accounts and Settings. Note that in case of flatpak, one needs to add the following Custom Terminal Command: `flatpak-spawn --host gnome-terminal %d`. 
 
 #### Matlab
-I have a license for MATLAB R2020a, unzipping the installation files in the the home folder and running:
-```
-sudo /home/$USER/matlab_R2020a_glnxa64/install
-sudo apt install -y matlab-support
-matlab #activate matlab and close it again
+I have a license for MATLAB, unzipping the installation files in the the home folder and running:
+```bash
+sudo mkdir -p /usr/local/MATLAB/R2021a
 sudo chown -R $USER:$USER /usr/local/MATLAB
-sudo chown -R $USER:$USER /home/$USER/.matlab
+/home/$USER/matlab_R2021a_glnxa64/install
 ```
-sets up MATLAB perfectly. Note that there is still a [shared resources-for-x11-graphics bug](https://de.mathworks.com/matlabcentral/answers/342906-could-not-initialize-shared-resources-for-x11graphicsdevice#answer_425485?s_tid=prof_contriblnk), which can be solved by
+On Ubuntu based systems it is always recommended to install `matlab-support` which renames/excludes the GCC libraries that ship with MATLAB such that we can use the ones from our distro:
+```bash
+sudo apt install -y matlab-support
+```
+Run matlab and activate it. Note that there is still a [shared resources-for-x11-graphics bug](https://de.mathworks.com/matlabcentral/answers/342906-could-not-initialize-shared-resources-for-x11graphicsdevice#answer_425485?s_tid=prof_contriblnk), which can be solved by
 ```bash
 #this solves the shared resources for x11 graphics bug
-echo "-Djogl.disable.openglarbcontext=1" > /usr/local/MATLAB/R2020a/bin/glnxa64/java.opts
+echo "-Djogl.disable.openglarbcontext=1" > /usr/local/MATLAB/R2021a/bin/glnxa64/java.opts
 ```
-Run matlab and I change some settings to use Windows type shortcuts on the Keyboard, add `mod` files as supported extensions, and do not use MATLAB's source control capabilities.
-
-
-#### R
-For teaching and data analysis there is nothing better than R and RStudio. These are the packages I commonly use:
-```bash
-sudo apt install -y r-base r-base-dev libatlas3-base libopenblas-base r-cran-rgl r-cran-foreign r-cran-mass r-cran-minqa r-cran-nloptr r-cran-rcpp r-cran-rcppeigen r-cran-lme4 r-cran-sparsem r-cran-matrix r-cran-matrixmodels r-cran-matrixstats r-cran-pbkrtest r-cran-quantreg r-cran-car r-cran-lmtest r-cran-sandwich r-cran-zoo r-cran-evaluate r-cran-digest r-cran-stringr r-cran-stringi r-cran-yaml r-cran-catools r-cran-bitops r-cran-jsonlite r-cran-base64enc r-cran-digest r-cran-rcpp r-cran-htmltools r-cran-catools r-cran-bitops r-cran-jsonlite r-cran-base64enc r-cran-rprojroot r-cran-markdown r-cran-ggplot2 r-cran-dplyr r-cran-hmisc r-cran-readr r-cran-readxl
-```
-whereas R-Studio needs to be installed from a deb:
-```bash
-export RSTUDVER=1.2.5042
-wget https://download1.rstudio.org/desktop/bionic/amd64/rstudio-$RSTUDVER-amd64.deb --directory-prefix=/home/$USER/Downloads/
-sudo apt install libclang-dev
-sudo dpkg -i /home/$USER/Downloads/rstudio-$RSTUDVER-amd64.deb
-```
-Open rstudio, set it up to your liking.
-
-
-#### Java via Openjdk
-Install the default OpenJDK Runtime Environment:
-```bash
-sudo apt install -y default-jre default-jdk
-java -version
-```
+Run matlab and I change some settings to use Windows type shortcuts on the Keyboard, add `mod` and `inc` files as supported extensions, and do not use MATLAB's source control capabilities.
 
 
 #### Visual Studio Code
@@ -448,31 +371,18 @@ I am in the process of transitioning all my coding to Visual Studio code:
 ```bash
 sudo apt install -y code
 ```
-I still have to decide which extensions I find most usefull.
+I keep my profiles and extensions synced.
 
 ### Text-processing
 
 #### Latex related packages
-I write all my papers and presentations with Latex using mostly TexStudio as editor:
+I write all my papers and presentations with Latex using Visual Studio Code as editor:
 ```bash
 sudo apt install -y texlive texlive-font-utils texlive-pstricks-doc texlive-base texlive-formats-extra texlive-lang-german texlive-metapost texlive-publishers texlive-bibtex-extra texlive-latex-base texlive-metapost-doc texlive-publishers-doc texlive-binaries texlive-latex-base-doc texlive-science texlive-extra-utils texlive-latex-extra texlive-science-doc texlive-fonts-extra texlive-latex-extra-doc texlive-pictures texlive-xetex texlive-fonts-extra-doc texlive-latex-recommended texlive-pictures-doc texlive-fonts-recommended texlive-humanities texlive-lang-english texlive-latex-recommended-doc texlive-fonts-recommended-doc texlive-humanities-doc texlive-luatex texlive-pstricks perl-tk
-sudo apt install -y texstudio
 ```
 Open texstudio and set it up.
 
 
-
-#### Meld
-A very good program to visually compare differences between files and folders:
-```bash
-sudo apt install -y meld
-```
-
-#### Microsoft Fonts
-Sometimes I get documents which require fonts from Microsoft:
-```bash
-sudo apt install -y ttf-mscorefonts-installer
-```
 #### Masterpdf
 I have purchased a license for Master PDF in case I need advanced PDF editing tools:
 ```bash
@@ -481,32 +391,12 @@ flatpak install -y masterpdf
 Open masterpdf and enter license. Also I use flatseal to give the app full access to my home folder.
 
 
-#### Softmaker Office
-I have a personal license for Softmaker Office, which needs to be installed via deb:
-```bash
-export OFFICEVER=2018_976-01
-wget https://www.softmaker.net/down/softmaker-office-${OFFICEVER}_amd64.deb --directory-prefix=/home/$USER/Downloads/
-sudo apt install libgl1-mesa-glx
-sudo dpkg -i /home/$USER/Downloads/softmaker-office-${OFFICEVER}_amd64.deb
-sudo sh /usr/share/office2018/add_apt_repo.sh
-```
-Open it and enter license.
-
-
-#### Zotero
-Zotero is great to keep track of the literature I use in my research and teaching. I install it via a flatpak:
-```bash
-flatpak install -y zotero
-```
-Open zotero, log in to account, install extension [better-bibtex](https://github.com/retorquere/zotero-better-bibtex/releases/) and sync.
-
-
 ### Communication
 
 #### Mattermost
 Our Dynare team communication is happening via Mattermost:
 ```bash
-sudo snap install -y mattermost-desktop
+flatpak install -y mattermost-desktop
 ```
 Open mattermost and connect to server. I find that the snap works best for me in terms of displaying the icon in the tray.
 
@@ -554,94 +444,42 @@ Open OBS and set it up, import your scenes, etc.
 
 ## Misc tweaks and settings
 
-#### Reorder Favorites
-I like to reorder the favorites on the gnome launcher such that the program are accessible via shortcuts: <kbd>CTRL</kbd>+<kbd>1</kbd> opens the first program, <kbd>CTRL</kbd>+<kbd>2</kbd> opens the second one and so on.
+#### Reorder Favorites on Dock
+I like to reorder the favorites on the dock and add additional ones.
 
 #### Go through all programs
 Hit <kbd>META</kbd>+<kbd>A</kbd> and go through all programs, decide whether you need them or uninstall these.
 
-#### Change default apps
-My default programs:
-- web: firefox
-- email: geary
-- calendar: gnome-calendar
-- musik: vlc
-- video: vlc
-- photos: gnome-photos
-
-#### Check Startup programs
-I have the following startup programs:
-- Caffeine
-- Dropbox
-- Firmware Manager Check
-- ignore-lid-switch-tweak
-- im-launch
-- mattermost-desktop
-- Nextcloud
-- NVIDIA X Server Settings
-- Pop!_OS Release Check
-- SSH-Agent Keyring
 
 #### Bookmarks for netdrives
-Using <kbd>CTRL</kbd>+<kbd>L</kbd> in nautilus, I can open the following links insider nautilus
-- university netdrive: `davs://USER@wiwi-webdav.uni-muenster.de/`
+Using <kbd>CTRL</kbd>+<kbd>L</kbd> in nautilus, I can add some netdrives:
 - university cluster `sftp://palma2c.uni-muenster.de`
 - personal homepage `sftp://mutschler.eu`
 and add bookmarks to these drives for easy access with nautilus.
 
 
 #### History search in terminal using page up and page down
+When I use bash I like this feature:
 ```bash
 sudo nano /etc/inputrc
 # Uncomment "\e[5~": history-search-backward
 # Uncomment "\e[6~": history-search-forward
 ```
 
-#### Printer setup
-My home printer is automatically detected, but our network printer at work uses samba and needs to be set up manually. First, install some packages:
-```bash
-sudo -i
-apt install -y printer-driver-cups-pdf system-config-printer system-config-printer-gnome 
-apt install -y samba samba-common samba-common-bin samba-libs smbc smbclient
-nano /etc/samba/smb.conf #change workgroup to WIWI
-service cups stop
-service cups-browsed stop
-cat <<EOF >> /etc/cups/printers.conf
-<Printer Ricoh-Aficio-MP-C2051>
-PrinterId 1
-UUID urn:uuid:8b54aed6-6d75-3415-6dc7-bd2fe2b69f35
-Info Aficio Mp C2051
-MakeModel Ricoh Aficio MP C2051 PDF
-DeviceURI smb://WIWI-PRINTER/D-2240P04
-State Idle
-StateTime 1588060222
-ConfigTime 1588060817
-Type 12540
-Accepting Yes
-Shared Yes
-JobSheets none none
-QuotaPeriod 0
-PageLimit 0
-KLimit 0
-OpPolicy default
-ErrorPolicy retry-job
-Option outputorder normal
-</Printer>
-EOT
-
-service cups start
-```
-Go into printer setup and choose the right driver for the printer manually. Also I deactivate cups-browsed as I don't need constant checking of printers on the network.
-
 #### Go through Settings
 - Turn off bluetooth
 - Change wallpaper
+- Select Light Theme
+- Dock
+  - Deactivate Extend dock to the edges of the screen
+  - Dock visibility: intelligently hide
+  - Show Dock on Display: All Displays
 - Automatically delete recent files and trash
 - Turn of screen after 15 min
 - Turn on night mode
 - Add online account for Nextcloud
 - Deactivate system sounds, mute mic
-- Turn of suspend, shutdown for power button
+- Turn of suspend, turn on shutdown for power button
 - Turn on natural scrool for mouse touchpad
 - Go through keyboard shortcuts and adapt, I also add a custom one for xkill on <kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>X</kbd>
 - Check region and language, remove unnecessary languages, then update 
