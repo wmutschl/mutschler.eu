@@ -1,18 +1,15 @@
 ---
-title: Linux
-cms_exclude: true
-type: book  # Do not modify.
-
-# Optional header image (relative to `static/media/` folder).
-header:
-  caption: ""
-  image: ""
+title: 🐧 Linux
+linkTitle: Linux
+summary: Tutorials and personal projects about Linux.
+#date: '2021-01-24'
+type: book
+draft: false
+toc: false
+weight: 1
 ---
-{{< figure src="linuxhacker.jpg" library=1 >}}
-Tutorials and personal projects about Linux.
+{{< figure src="linuxhacker.jpg" >}}
 
-- [Installation guides](install-guides)
-- [BTRFS](btrfs)
-- [Timeshift](timeshift)
-- [Backup](backup)
-- [References](references)
+{{< toc hide_on="xl" >}}
+
+{{< list_children >}}

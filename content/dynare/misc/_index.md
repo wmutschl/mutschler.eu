@@ -1,25 +1,17 @@
 ---
-# Page title
 title: Miscellaneous
-
-# Title for the menu link if you wish to use a shorter link title
 linktitle: Miscellaneous 
-
-# Page summary for search engines
-summary: In these tutorials I will present some other stuff important when working with Dynare.
-
-# Date page published
-date: "2020-04-28T00:00:00Z"
-
-# Academic page type (do not modify)
+summary: In these tutorials and videos I will present other useful things when working with or developing for Dynare. I also cover my Dynare workflow.
+#date: "2021-08-18"
 type: book
-
-# Position of this page in the menu. Remove this option to sort alphabetically
-weight: 50
-
-# Page metadata.
-draft: false  # Is this a draft? true/false
-toc: true  # Show table of contents? true/false
+draft: false
+toc: false
+weight: 90
 ---
 
-- [How to debug and report Dynare errors](bugs)
+## What you will learn
+In these tutorials and videos I will present other useful things when working with or developing for Dynare. I also cover my Dynare workflow.
+
+## Miscellaneous
+
+{{< list_children >}}

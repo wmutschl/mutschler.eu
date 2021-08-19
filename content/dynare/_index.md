@@ -1,19 +1,15 @@
 ---
-title: Dynare
-cms_exclude: true
-type: book  # Do not modify.
-
-# Optional header image (relative to `static/media/` folder).
-#header:
-#  image: "dynare.png"
-#  caption: "Works"
+title: 📈 Dynare
+linkTitle: Dynare
+summary: Tutorials, videos, codes and teaching materials for Dynare.
+#date: '2021-08-18'
+type: book
+draft: false
+toc: false
+weight: 1
 ---
-{{< figure src="dynare.png" library=1 >}}
-Tutorials, codes, teaching, and research materials for [Dynare](https://www.dynare.org).
+{{< figure src="dynare-tutorials.jpg" >}}
 
-- [Computations (Calibration, Steadystate)](computations)
-- [Identification](identification)
-- [Miscellaneous (Reporting bugs)](misc)
-- [Baseline models (RBC, New Keynesian, An-Schorfheide, Smets-Wouters)](models)
-- [Parallel computing (Linux, macOS, Windows)](parallel)
-- [Materials used in YouTube videos](youtube)
+{{< toc hide_on="xl" >}}
+
+{{< list_children >}}

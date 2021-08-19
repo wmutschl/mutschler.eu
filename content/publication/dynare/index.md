@@ -12,7 +12,7 @@ authors:
 - Johannes Pfeifer
 - Marco Ratto
 - Sébastien Villemot 
-date: "2021-03-01T00:00:00Z"
+date: "2021-03-01"
 
 # Schedule page publish date (NOT publication's date).
 publishDate: ""

@@ -1,13 +1,12 @@
 ---
-title: Things to do after installing Pop!_OS 21.04 (Apps, Settings, and Tweaks)
-linktitle: Pop!_OS 21.04 apps-settings-tweaks
+title: 'Pop!_OS: Things to do after installation (Apps, Settings, and Tweaks)'
+#linktitle: Pop!_OS 21.04 apps-settings-tweaks
+summary: In the following I will go through my post installation steps on Pop!_OS, i.e. which settings I choose and which apps I install and use.
 toc: true
 type: book
-date: "2021-07-28T00:00:00+01:00"
+#date: "2021-07-28T"
 draft: false
-
-# Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
-weight: 13
+weight: 11
 ---
 
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***
@@ -347,7 +346,7 @@ flatpak install -y gitkraken
 ```
 The flatpak version of GitKraken works perfectly. Open GitKraken and set up Accounts and Settings. Note that in case of flatpak, one needs to add the following Custom Terminal Command: `flatpak-spawn --host gnome-terminal %d`. 
 
-#### Matlab
+#### MATLAB
 I have a license for MATLAB, unzipping the installation files in the the home folder and running:
 ```bash
 sudo mkdir -p /usr/local/MATLAB/R2021a

@@ -1,13 +1,12 @@
 ---
-title: Things to do after installing Fedora Workstation 33 (Apps, Settings, and Tweaks)
-linktitle: Fedora 33 apps-settings-tweaks
+title: 'Fedora Workstation: Things to do after installation (Apps, Settings, and Tweaks)'
+#linktitle: Fedora apps-settings-tweaks
+summary: In the following I will go through my post installation steps on Fedora, i.e. which settings I choose and which apps I install and use.
 toc: true
 type: book
-date: "2020-11-04T00:00:00+01:00"
+#date: "2020-11-04T"
 draft: false
-
-# Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
-weight: 43
+weight: 12
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***
 
@@ -759,7 +758,7 @@ mkdir -p /home/$USER/.local/bin
 ln -s /home/$USER/dynare/x13as/x13as /home/$USER/.local/bin/x13as
 ```
 
-Lastly, after installing Matlab, I am compiling several versions of Dynare from source:
+Lastly, after installing MATLAB, I am compiling several versions of Dynare from source:
 ```sh
 git clone --recurse-submodules --single-branch --branch 4.5 https://git.dynare.org/dynare/dynare.git /home/$USER/dynare/stable-4.5
 cd /home/$USER/dynare/stable-4.5
@@ -948,7 +947,7 @@ The same issue happens with [Nextcloud](#nextcloud).
 ### Text-processing
 
 #### Hugo
-My website uses the [Academic Template](https://github.com/wowchemy/starter-academic) for [Hugo](https://github.com/gohugoio/hugo), which is based on Go. As I need the extended version I don't install hugo from the repo, but instead download the official release binary from Github:
+My website uses the [Academic Template for Hugo](https://github.com/wmutschl/starter-hugo-academic), which is based on Go. As I need the extended version I don't install hugo from the repo, but instead download the official release binary from Github:
  
 ```sh
 sudo dnf install -y golang #dependency I need

@@ -1,21 +1,20 @@
 ---
-title: Pop!_OS 20.04 with btrfs-LVM-luks-RAID1 installation guide and auto-apt snapshots with Timeshift
-linktitle: Pop!_OS 20.04 btrfs-luks-raid1
+title: 'Pop!_OS 20.04: installation guide with btrfs-LVM-luks-RAID1 and auto-apt snapshots with Timeshift'
+#linktitle: Pop!_OS 20.04 btrfs-luks-raid1
+summary: In this guide I will walk you through the installation procedure to get a Pop!_OS 20.04 system with a luks-encrypted partition which contains a LVM with a logical volume for the root filesystem that is formatted with btrfs and contains a subvolume @ for / and a subvolume @home for /home. The system is set up in a RAID1 managed by the btrfs filesystem. I will show how to optimize the btrfs mount options and how to setup encrypted swap partitions which work with hibernation. This layout enables one to use Timeshift and timeshift-autosnap-apt which will regularly take snapshots of the system and particularly on any apt operation. The recovery system of Pop!_OS is also installed to both disks and accessible via the systemd bootloaders. Due to the RAID1 managed by btrfs you get redundancy of your data.
 toc: true
 type: book
-date: "2020-04-21T00:00:00+01:00"
+#date: "2020-04-21"
 draft: false
-
-# Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
-weight: 12
+weight: 29
 ---
+***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***
 
 ```md
 {{< youtube teD1bQ7rn9c >}}
 ```
 *Note that this written guide is an updated version of the video and contains much more information.*
 
-***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***
 
 ## Overview 
 Since a couple of months, I am exclusively using btrfs as my filesystem on all my systems, see [Why I (still) like btrfs](../../btrfs/). So, in this guide I will show how to install Pop!_OS 20.04 with the following structure:
@@ -38,7 +37,7 @@ In the video, I also show what to do if your RAID1 is broken.
 ## Step 0: General remarks
 **I strongly advise to try the following installation steps in a virtual machine first before doing anything like that on real hardware!**
 
-So, let's spin up a virtual machine with 4 cores, 8 GB RAM, and two 64GB disk using e.g. the awesome bash script [quickemu](https://github.com/wimpysworld/quickemu) which I have adapted on a [GitHub project](https://github.com/wmutschl/quickemu) to automatically create 2 disks. I can confirm that the installation works equally well on my Dell Precision 7520 (RAID1 between a SSD and NVME).
+So, let's spin up a virtual machine with 4 cores, 8 GB RAM, and two 64GB disk using e.g. my fork of the awesome bash script [quickemu](https://github.com/wmutschl/quickemu) to automatically create 2 disks. I can confirm that the installation works equally well on my Dell Precision 7520 (RAID1 between a SSD and NVME).
 
 This tutorial is made with Pop!_OS 20.04 from https://system76.com/pop copied to an installation media (usually a USB Flash device but may be a DVD or the ISO file attached to a virtual machine hypervisor). Other versions of Pop!_OS and other distributions that use Systemd boot manager should also work, see my other [installation guides](../../install-guides).
 
@@ -743,8 +742,8 @@ Install Timeshift and configure it directly via the GUI:
 sudo apt install -y timeshift
 sudo timeshift-gtk
 ```
-   * Select "BTRFS" as the "Snapshot Type"; continue with "Next"
-   * Choose your BTRFS system partition as "Snapshot Location"; continue with "Next"  (even if timeshift does not see a btrfs system in the GUI it will still work, so continue (I already filed a bug report with timeshift))
+   * Select "btrfs" as the "Snapshot Type"; continue with "Next"
+   * Choose your btrfs system partition as "Snapshot Location"; continue with "Next"  (even if timeshift does not see a btrfs system in the GUI it will still work, so continue (I already filed a bug report with timeshift))
    * "Select Snapshot Levels" (type and number of snapshots that will be automatically created and managed/deleted by Timeshift), my recommendations:
      * Activate "Monthly" and set it to 1
      * Activate "Weekly" and set it to 3
@@ -759,7 +758,7 @@ sudo timeshift-gtk
   
 *Timeshift* will now check every hour if snapshots ("hourly", "daily", "weekly", "monthly", "boot") need to be created or deleted. Note that "boot" snapshots will not be created directly but about 10 minutes after a system startup.
 
-*Timeshift* puts all snapshots into `/run/timeshift/backup`. Conveniently, the real root (subvolid 5) of your BTRFS partition is also mounted here, so it is easy to view, create, delete and move around snapshots manually.
+*Timeshift* puts all snapshots into `/run/timeshift/backup`. Conveniently, the real root (subvolid 5) of your btrfs partition is also mounted here, so it is easy to view, create, delete and move around snapshots manually.
 
 ```bash
 ls /run/timeshift/backup

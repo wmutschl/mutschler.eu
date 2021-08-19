@@ -2,7 +2,7 @@
 title: "Local Identification of Nonlinear and Non-Gaussian DSGE Models"
 authors:
 - Willi Mutschler
-date: "2016-02-18T00:00:00Z"
+date: "2016-02-18"
 
 # Schedule page publish date (NOT publication's date).
 publishDate: ""

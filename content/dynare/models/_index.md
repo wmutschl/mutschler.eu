@@ -1,34 +1,17 @@
 ---
-# Page title
-title: Dynare models
-
-# Title for the menu link if you wish to use a shorter link title
-linktitle: Baseline models
-
-# Page summary for search engines
-summary: In these tutorials I will discuss and derive some baseline DSGE models for usage in Dynare.
-
-# Date page published
-date: "2020-04-27T00:00:00Z"
-lastmod: "2020-04-27T00:00:00Z"
-
-# Academic page type (do not modify)
+title: Modern DSGE models
+linktitle: Modern DSGE models
+summary: 'In these tutorials and videos I will discuss and derive modern DSGE models and their usage in Dynare. The models considered are the Real-Business-Cycle model and the baseline New-Keynesian model (so far, more coming soon).'
+#date: "2021-08-18"
 type: book
-
-# Position of this page in the menu. Remove this option to sort alphabetically
-weight: 10
-
-# Page metadata.
-draft: false  # Is this a draft? true/false
-toc: true  # Show table of contents? true/false
+draft: false
+toc: false
+weight: 20
 ---
 
-In these tutorials, I will cover the necessary steps and derivations for some baseline DSGE models and their usage in Dynare: (i) RBC model, (ii) baseline New-Keynesian model, and (iii) Smets-Wouters (2007) model:
+## What you will learn
+In this series of tutorials and videos, I will cover the theoretical foundations of modern DSGE models. I will focus on several popular DSGE models and discuss both the underlying economic theory but also the mathematical steps to get the model equations we need for Dynare. Finally, we'll make intensive use of Dynare's preprocessing capabilities when creating the corresponding mod files.
 
-- [RBC model](rbc)
+## Models
 
-- [Baseline New Keynesian model](newkeynesian)
-
-- [An and Schorfheide (2007) model](anscho2007)
-
-- [Smets and Wouters (2007) model](sw2007)
+{{< list_children >}}

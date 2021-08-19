@@ -1,19 +1,13 @@
 ---
-title: Manjaro Linux with btrfs-luks full disk encryption including /boot and auto-snapshots with Timeshift (in-progress)
-linktitle: Manjaro btrfs-luks
+title: 'Manjaro Linux: installation guide with btrfs-luks full disk encryption including /boot and auto-snapshots with Timeshift'
+#linktitle: Manjaro btrfs-luks
+summary: In this guide I will walk you through the installation procedure to get a Manjaro system with a luks-encrypted partition for the root filesystem (including /boot) formatted with btrfs that contains a subvolume @ for /, a subvolume @home for /home and a subvolume @cache for /var/cache. I will show how to optimize the btrfs mount options and how to add a key-file to type the luks passphrase only once for GRUB. I will also cover how to setup an encrypted swap partition or swapfile. This layout enables one to use Timeshift and timeshift-autosnap which will regularly take snapshots of the system and particularly on any pacman operation. Moreover, using grub-btrfs all snapshots can be accessed and booted into from the GRUB menu.
 toc: true
 type: book
-date: "2020-05-08T00:00:00+01:00"
+#date: "2020-05-08T"
 draft: false
-
-# Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
-weight: 31
+weight: 59
 ---
-
-```md
-{{< youtube  >}}
-```
-
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***
 
 ## Overview 
@@ -29,7 +23,7 @@ In this guide I will walk you through the installation procedure to get a Manjar
 So with this setup you get the same comfort of e.g. Ubuntu's 20.04's ZFS and zsys initiative, but with much more flexibility and comfort due to the awesome *Timeshift* program. This setup works equally well on other distributions like Ubuntu, Linux Mint or Pop!_OS, for which I also have advanced [installation guides with RAID1 capability](https://mutschler.eu/linux/install-guides/).
 
 ## Installation Steps
-Let's spin up a virtual machine with 4 cores and 8 GB RAM using e.g. the awesome script for QEMU Virgil from Martin Wimpress called [quickemu](https://github.com/wimpysworld/quickemu). The same steps work on my Dell XPS 9630, my Dell precision 7520 (with additional luks-encrypted RAID1 between a SSD and NVME) and on my server (with additional luks-encrypted RAID1 between two HDD).
+Let's spin up a virtual machine with 4 cores and 8 GB RAM using e.g. my fork of the awesome script for QEMU Virgil from Martin Wimpress called [quickemu](https://github.com/wmutschl/quickemu). The same steps work on my Dell XPS 9630, my Dell precision 7520 (with additional luks-encrypted RAID1 between a SSD and NVME) and on my server (with additional luks-encrypted RAID1 between two HDD).
 
 This tutorial is made with [manjaro-architect-20.0-200426-linux56.iso](https://manjaro.org/downloads/official/architect/) copied to an installation media (usually a USB Flash device but may be a DVD or the ISO file attached to a virtual machine hypervisor). I also make sure that I am connected to the internet via an ethernet cable not wifi.
 
@@ -81,7 +75,7 @@ Click on `1 Prepare Installation`.
 
 6. LUKS Encryption (optional): Click on it and select Automatic LUKS Encryption for your root partition /dev/vda3. Choose a name, e.g. crypt_vda3, and use a very good password. Note that the encrypted partition is mapped to a device called `crypt_vda3` located in /dev/mapper. This is where we install our root file system. Select Back and Back to go back to the next Prepare Installation step.
 
-7. ZFS (optional): Skip this, as we will use btrfs instead of ZFS. Also this won't work since we do not have the ZFS kernel modules installed in this iso, see how to do so on the [Manjaro Forum](https://forum.manjaro.org/t/architect-zfs-installation/102764)
+7. ZFS (optional): Skip this, as we will use btrfs instead of ZFS. Also this won't work since we do not have the ZFS kernel modules installed in this iso, see how to do so on the [Manjaro Forum](https://archived.forum.manjaro.org/t/architect-zfs-installation/102764).
 
 8. Mount Partitions: Click on it and confirm the dialog. Make the following selection:
    - Select ROOT Partition: /dev/mapper/crypt_vda3, Filesystem btrfs, confirm the format, and choose and confirm the following mount options if you are on a SSD or NVME:
@@ -173,8 +167,8 @@ Install Timeshift and configure it either directly in the /etc/timeshift.json fi
 sudo pacman -S timeshift timeshift-autosnap grub-btrfs
 sudo timeshift-gtk
 ```
-   * Select “BTRFS” as the “Snapshot Type”; continue with “Next”
-   * Choose your BTRFS system partition as “Snapshot Location”; continue with “Next”
+   * Select btrfs as the “Snapshot Type”; continue with “Next”
+   * Choose your btrfs system partition as “Snapshot Location”; continue with “Next”
    * “Select Snapshot Levels” (type and number of snapshots that will be automatically created and managed/deleted by Timeshift), recommendations:
      * Keep “Daily” at 5
      * Activate “Boot”, but change to 3
@@ -186,7 +180,7 @@ sudo timeshift-gtk
 
 *Timeshift* will now check on every full hour if snapshots (hourly, daily, weekly, monthly) need to be created or deleted. Note that boot snapshots will actually be created about 10 minutes after boot, not directly at system startup.
 
-*Timeshift* puts all snapshots into `/run/timeshift/backup`. Conveniently, the real root (subvolid 5) of your BTRFS partition is also mounted here, so it is easy to view, create, delete and move around snapshots manually.
+*Timeshift* puts all snapshots into `/run/timeshift/backup`. Conveniently, the real root (subvolid 5) of your btrfs partition is also mounted here, so it is easy to view, create, delete and move around snapshots manually.
 
 ```bash
 ls /run/timeshift/backup

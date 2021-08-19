@@ -1,13 +1,12 @@
 ---
-title: Things to do after installing Ubuntu Server 20.10. on Raspberry Pi 4 (Apps, Settings, and Tweaks)
-linktitle: Raspberry Pi apps-settings-tweaks
+title: 'Ubuntu Server Raspberry Pi: Things to do after installation (Apps, Settings, and Tweaks)'
+#linktitle: Raspberry Pi apps-settings-tweaks
+summary: In the following I will go through my post installation steps, i.e. which settings I choose and which apps and containers I install and use on my Raspberry Pi 4 (4 GB)
 toc: true
 type: book
-date: "2021-01-11T00:00:00+01:00"
+#date: "2021-01-11"
 draft: false
-
-# Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
-weight: 52
+weight: 14
 ---
 
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***

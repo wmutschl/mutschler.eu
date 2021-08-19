@@ -1,14 +1,12 @@
 ---
-title: RBC model
+title: Real Business Cycle (RBC) model
 linktitle: RBC model
-toc: true
+summary: This tutorial covers the theory and derivations of the Real-Business-Cycle (RBC) model with leisure. The Dynare implementation makes use of model local variables to distinguish between a log-utility function and a more general CES-utility function.
+#date: "2021-08-18"
 type: book
-date: "2020-04-27T00:00:00+01:00"
 draft: false
-math: true
-
-# Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
-weight: 1
+toc: true
+weight: 11
 ---
 
 ## Model description
@@ -254,13 +252,3 @@ model;
     log(A) = rhoA*log(A(-1))+eps_A;
 end;
 ```
-
-## Computations
-### Calibration
-Checkout [calibration](../computations/calibration) on a tutorial on how to calibrate this model.
-
-### Steady state
-Checkout [steady state](../computations/steadystate) on different ways to compute the steady state
-
-
-### Did you find this page helpful? Consider sharing it 🙌

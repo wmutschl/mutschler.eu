@@ -1,24 +1,17 @@
 ---
-title: Fedora Workstation 33 with btrfs-luks full disk encryption (optionally including /boot) and auto-dnf snapshots with Timeshift
-linktitle: Fedora 33 btrfs-luks
+title: 'Fedora Workstation 33: installation guide with btrfs-luks full disk encryption (optionally including /boot) and auto snapshots with Timeshift'
+#linktitle: Fedora 33 btrfs-luks
+summary: In this guide I will walk you through the installation procedure to get a Fedora workstation 33 system with a luks-encrypted partition for the root filesystem (optionally including /boot) formatted with btrfs that contains (renamed) subvolumes @ and @home for / and /home, respectively. I will show how to optimize the btrfs mount options and, in case /boot is on the encrypted partition, how to add a key-file to type the luks passphrase only once for GRUB. This layout enables one to use Timeshift which will regularly take snapshots of the system. Moreover, using grub-btrfs all snapshots can be accessed and booted into from the GRUB menu.
 toc: true
 type: book
-date: "2020-11-04T00:00:00+01:00"
+#date: "2020-11-04"
 draft: false
-
-# Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
-weight: 41
+weight: 49
 ---
-
-```md
-{{< youtube  >}}
-```
-*Note that this written guide is an updated version of the video and contains much more information.*
-
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***
 
 ## Overview 
-Since Fedora switched their default filesystem to btrfs I decided to give it a go as I am exclusively using btrfs aon all my systems, see: [Why I (still) like btrfs](../../btrfs/). Fedora's automatic installation routine with encryption is actually almost perfect for me except some changes regarding the btrfs mount options and subvolume names. 
+Since Fedora switched their default filesystem to btrfs I decided to give it a go as I am exclusively using btrfs on all my systems, see: [Why I (still) like btrfs](../../btrfs/). Fedora's automatic installation routine with encryption is actually almost perfect for me except some changes regarding the btrfs mount options and subvolume names. 
 
 So, in this guide I will show how to install Fedora 33 with the following structure:
 
@@ -28,9 +21,8 @@ So, in this guide I will show how to install Fedora 33 with the following struct
 - there is no need for a swap partition as Fedora creates a [SwapOnZram](https://fedoraproject.org/wiki/Changes/SwapOnZRAM) during start-up
 - automatic system snapshots and easy rollback similar to *zsys* using:
    - [Timeshift](https://github.com/teejee2008/timeshift) which will regularly take (almost instant) snapshots of the system
-   - [timeshift-autosnap-dnf](https://github.com/wmutschl/timeshift-autosnap-dnf) which will automatically run Timeshift on any dnf operation and also keep a backup of your EFI partition inside the snapshot
+   - [timeshift-autosnap-dnf](https://github.com/wmutschl/timeshift-autosnap-dnf) which will automatically run Timeshift on any dnf operation and also keep a backup of your EFI partition inside the snapshot (NOT YET)
    - [grub-btrfs](https://github.com/Antynea/grub-btrfs) which will automatically create GRUB entries for all your btrfs snapshots
-- If you need RAID1, follow this guide: [Fedora 33 btrfs-luks-raid1](../fedora-btrfs-raid1)
 
 With this setup you basically get the same comfort of Ubuntu's 20.04's ZFS and *zsys* initiative, but with much more flexibility and comfort due to the awesome [Timeshift](https://github.com/teejee2008/timeshift) program, which saved my bacon quite a few times. This setup works similarly well on other distributions, for which I also have [installation guides with optional RAID1](../../install-guides).
 
@@ -40,7 +32,7 @@ With this setup you basically get the same comfort of Ubuntu's 20.04's ZFS and *
 ## Step 0: General remarks
 **I strongly advise to try the following installation steps in a virtual machine first before doing anything like that on real hardware!**
 
-So, let's spin up a virtual machine with 4 cores, 8 GB RAM, and a 64GB disk using e.g. the awesome bash script [quickemu](https://github.com/wimpysworld/quickemu). I can confirm that the installation works equally well on my Dell XPS 13 9360 and my Dell Precision 7520. 
+So, let's spin up a virtual machine with 4 cores, 8 GB RAM, and a 64GB disk using e.g. my fork of the awesome bash script [quickemu](https://github.com/wmutschl/quickemu). I can confirm that the installation works equally well on my Dell XPS 13 9360 and my Dell Precision 7520. 
 
 This tutorial is made with Fedora 33 Workstation from https://getfedora.org/de/workstation/download/ copied to an installation media (usually a USB Flash device but may be a DVD or the ISO file attached to a virtual machine hypervisor).
 
@@ -200,8 +192,8 @@ Install Timeshift and configure it directly via the GUI:
 sudo dnf install timeshift
 sudo timeshift-gtk
 ```
-   * Select “BTRFS” as the “Snapshot Type”; continue with “Next”
-   * Choose your BTRFS system partition as “Snapshot Location”; continue with “Next”
+   * Select btrfs as the “Snapshot Type”; continue with “Next”
+   * Choose your btrfs system partition as “Snapshot Location”; continue with “Next”
    * "Select Snapshot Levels" (type and number of snapshots that will be automatically created and managed/deleted by Timeshift), my recommendations:
      * Activate "Monthly" and set it to 2
      * Activate "Weekly" and set it to 3
@@ -216,7 +208,7 @@ sudo timeshift-gtk
 
 *Timeshift* will now check every hour if snapshots ("hourly", "daily", "weekly", "monthly", "boot") need to be created or deleted. Note that "boot" snapshots will not be created directly but about 10 minutes after a system startup.
 
-*Timeshift* puts all snapshots into `/run/timeshift/backup`. Conveniently, the real root (subvolid 5) of your BTRFS partition is also mounted here every time you start Timeshift, so it is easy to view, create, delete and move around snapshots manually. But you can also use `/btrfs_pool` for that.
+*Timeshift* puts all snapshots into `/run/timeshift/backup`. Conveniently, the real root (subvolid 5) of your btrfs partition is also mounted here every time you start Timeshift, so it is easy to view, create, delete and move around snapshots manually. But you can also use `/btrfs_pool` for that.
 
 ```bash
 ls /run/timeshift/backup
@@ -233,7 +225,7 @@ sudo timeshift --create --comments "before upgrade"
 sudo dnf upgrade
 ```
 
-Make sure to delete the snapshots every once in a while, you could set up a systemd process for this as described [here](https://forum.endeavouros.com/t/howto-gpt-uefi-install-with-full-disk-encryption-btrfsonluks-with-separate-root-home-and-pkg-subvolumes-hibernation-with-a-swapfile-auto-snapshots-with-easy-system-rollback-gui-boot-into-snapshots/3782)
+Make sure to delete the snapshots every once in a while, you could set up a systemd process for this as described [here](https://forum.endeavouros.com/t/howto-gpt-uefi-install-with-full-disk-encryption-btrfsonluks-with-separate-root-home-and-pkg-subvolumes-hibernation-with-a-swapfile-auto-snapshots-with-easy-system-rollback-gui-boot-into-snapshots/3782).
 
 
 

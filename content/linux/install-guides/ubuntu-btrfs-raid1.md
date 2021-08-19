@@ -1,21 +1,16 @@
 ---
-title: Ubuntu Desktop 20.04 with btrfs-luks-RAID1 full disk encryption including /boot and auto-apt snapshots with Timeshift
-linktitle: Ubuntu 20.04 btrfs-luks-raid1
+title: 'Ubuntu Desktop 20.04: installation guide with btrfs-luks-RAID1 full disk encryption including /boot and auto-apt snapshots with Timeshift'
+#linktitle: Ubuntu 20.04 btrfs-luks-raid1
+summary: In this guide I will walk you through the installation procedure to get an Ubuntu 20.04 system with a luks-encrypted partition for the root filesystem (including /boot) formatted with btrfs that contains a subvolume @ for / and a subvolume @home for /home. The system is set up in a RAID1 managed by the btrfs filesystem. I will show how to optimize the btrfs mount options and how to add key-files to type the luks passphrase only once for each disk for GRUB. I will also cover how to setup encrypted swap partitions. This layout enables one to use Timeshift and timeshift-autosnap-apt which will regularly take snapshots of the system and particularly on any apt operation. Moreover, using grub-btrfs all snapshots can be accessed and booted into from the GRUB menu. Due to the RAID1 managed by btrfs you get redundancy of your data.
 toc: true
 type: book
-date: "2020-05-21T00:00:00+01:00"
+#date: "2020-05-21"
 draft: false
-
-# Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
-weight: 22
+weight: 39
 ---
-
-```md
-{{< youtube  >}}
-```
-*Note that this written guide is an updated version of the video and contains much more information.*
-
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***
+
+
 
 ## Overview 
 Since a couple of months, I am exclusively using btrfs as my filesystem on all my systems, see: [Why I (still) like btrfs](../../btrfs/). So, in this guide I will show how to install Ubuntu 20.04 with the following structure:
@@ -38,7 +33,7 @@ In the video, I also show what to do if your RAID1 is broken.
 ## Step 0: General remarks
 **I strongly advise to try the following installation steps in a virtual machine first before doing anything like that on real hardware!**
 
-So, let's spin up a virtual machine with 4 cores, 8 GB RAM, and two 64GB disk using e.g. the awesome bash script [quickemu](https://github.com/wimpysworld/quickemu) which I have adapted on a [GitHub project](https://github.com/wmutschl/quickemu) to automatically create 2 disks. I can confirm that the installation works equally well on my Dell Precision 7520 (RAID1 between a SSD and NVME) and on my KVM server (RAID1 between two HDD).
+So, let's spin up a virtual machine with 4 cores, 8 GB RAM, and two 64GB disk using e.g. my fork of the awesome bash script [quickemu](https://github.com/wmutschl/quickemu) to automatically create 2 disks. I can confirm that the installation works equally well on my Dell Precision 7520 (RAID1 between a SSD and NVME) and on my KVM server (RAID1 between two HDD).
 
 This tutorial is made with [Ubuntu 20.04 Focal Fossa](http://releases.ubuntu.com/focal/) copied to an installation media (usually a USB Flash device but may be a DVD or the ISO file attached to a virtual machine hypervisor). Other versions of Ubuntu or distributions that use the Ubiquity installer (like Linux Mint) also work, see my other [installation guides](../../install-guides).
 
@@ -682,8 +677,8 @@ Install Timeshift and configure it directly via the GUI:
 sudo apt install timeshift
 sudo timeshift-gtk
 ```
-   * Select “BTRFS” as the “Snapshot Type”; continue with “Next”
-   * Choose your BTRFS system partition as “Snapshot Location”; continue with “Next”
+   * Select btrfs as the “Snapshot Type”; continue with “Next”
+   * Choose your btrfs system partition as “Snapshot Location”; continue with “Next”
    * "Select Snapshot Levels" (type and number of snapshots that will be automatically created and managed/deleted by Timeshift), my recommendations:
      * Activate "Monthly" and set it to 1
      * Activate "Weekly" and set it to 3
@@ -698,7 +693,7 @@ sudo timeshift-gtk
 
 *Timeshift* will now check every hour if snapshots ("hourly", "daily", "weekly", "monthly", "boot") need to be created or deleted. Note that "boot" snapshots will not be created directly but about 10 minutes after a system startup.
 
-*Timeshift* puts all snapshots into `/run/timeshift/backup`. Conveniently, the real root (subvolid 5) of your BTRFS partition is also mounted here, so it is easy to view, create, delete and move around snapshots manually.
+*Timeshift* puts all snapshots into `/run/timeshift/backup`. Conveniently, the real root (subvolid 5) of your btrfs partition is also mounted here, so it is easy to view, create, delete and move around snapshots manually.
 
 ```bash
 ls /run/timeshift/backup

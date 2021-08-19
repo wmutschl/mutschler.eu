@@ -3,15 +3,35 @@ title: Dynare tutorials and videos
 summary: We want to provide better documentation and a new user guide for Dynare. Therefore, I will post and update my teaching materials as written tutorials and create several videos on YouTube.
 tags:
 - Dynare
-date: 2020-03-20
+#date: "2020-03-20T00:00:00Z"
+
+# Optional external URL for project (replaces project detail page).
+external_link: ""
+
 image:  
-  caption: 'Image credit: [**Dynare Team**](https://www.dynare.org)'
+  caption: 'Image credit: [**Willi Mutschler (Dynare Team)**](https://www.dynare.org)'
   focal_point: Smart
+
 links:
 - name: Tutorials
   url: https://mutschler.eu/dynare/
 - name: YouTube Channel
   url: https://www.youtube.com/playlist?list=PLiN_C6lGtCc8bhPOuE781GTgeOqtMA5Bi
+#- icon: twitter
+#  icon_pack: fab
+#  name: Follow
+#  url: https://twitter.com/georgecushen
+#url_code: ""
+#url_pdf: ""
+#url_slides: ""
+#url_video: ""
+
+# Slides (optional).
+#   Associate this project with Markdown slides.
+#   Simply enter your slide deck's filename without extension.
+#   E.g. `slides = "example-slides"` references `content/slides/example-slides.md`.
+#   Otherwise, set `slides = ""`.
+# slides: example
 ---
 
 We have evaluated the results of Dynare's first user survey. One thing that came up frequently was a wish for more tutorials and examples on all the features Dynare offers. Albeit the manual covers most of it, it is a reference but not a user guide. Note that there is an outdated user guide which we do not support anymore, and which has also several errors in it.

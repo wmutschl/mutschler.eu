@@ -3,7 +3,7 @@ title: "The effect of observables, functional specifications, model features and
 authors:
 - Sergey Ivashchenko
 - Willi Mutschler
-date: "2020-10-01T00:00:00Z"
+date: "2020-10-01"
 doi: "10.1016/j.econmod.2019.09.039"
 
 # Schedule page publish date (NOT publication's date).

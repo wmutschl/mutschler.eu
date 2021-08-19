@@ -5,7 +5,7 @@ title: Willi Mutschler
 # Is this the primary user of the site?
 superuser: true
 
-# Role/position
+# Role/position/tagline
 role: "Assistant Professor for International Macroeconomics<br/>Open-Source Enthusiast"
 
 # Organizations/Affiliations to show in About widget
@@ -43,17 +43,26 @@ education:
     institution: University of Muenster
     year: 04/2012
   - course: BSc in Economics
-    institution: University Bonn
+    institution: University of Bonn
     year: 09/2009
 
 # Social/Academic Networking
-# For available icons, see: https://sourcethemes.com/academic/docs/page-builder/#icons
+# For available icons, see: https://wowchemy.com/docs/getting-started/page-builder/#icons
 #   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
 #   form "mailto:your-email@example.com" or "/#contact" for contact widget.
 social:
 - icon: envelope
   icon_pack: fas
-  link: '#contact'  # For a direct email link, use "mailto:test@example.org".
+  link: '#contact'
+#- icon: twitter
+#  icon_pack: fab
+#  link: https://twitter.com/GeorgeCushen
+#  label: Follow me on Twitter
+#  display:
+#    header: true
+#- icon: graduation-cap  # Alternatively, use `google-scholar` icon from `ai` icon pack
+#  icon_pack: fas
+#  link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
 - icon: researchgate
   icon_pack: ai
   link: https://www.researchgate.net/profile/Willi_Mutschler
@@ -71,13 +80,16 @@ social:
   link: https://git.dynare.org/wmutschl
 - icon: video
   link: https://www.youtube.com/channel/UCkW18RGgmhKg7Z-H9kYD2dg
+#- icon: linkedin
+#  icon_pack: fab
+#  link: https://www.linkedin.com/
 
 # Link to a PDF of your resume/CV.
-# To use: copy your resume to `static/media/resume.pdf`, enable `ai` icons in `params.toml`, 
+# To use: copy your resume to `static/uploads/resume.pdf`, enable `ai` icons in `params.toml`, 
 # and uncomment the lines below.
 # - icon: cv
 #   icon_pack: ai
-#   link: media/resume.pdf
+#   link: uploads/resume.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: "willi@mutschler.eu"

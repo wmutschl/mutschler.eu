@@ -2,7 +2,7 @@
 title: "Identification of DSGE models - The effect of higher-order approximation and pruning"
 authors:
 - Willi Mutschler
-date: "2015-07-01T00:00:00Z"
+date: "2015-07-01"
 doi: "10.1016/j.jedc.2015.04.007"
 
 # Schedule page publish date (NOT publication's date).

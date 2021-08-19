@@ -1,13 +1,12 @@
 ---
-title: Things to do after installing Ubuntu Desktop 20.04 (Apps, Settings, and Tweaks)
-linktitle: Ubuntu 20.04 apps-settings-tweaks
+title: 'Ubuntu Desktop: Things to do after installation (Apps, Settings, and Tweaks)'
+#linktitle: Ubuntu 20.04 apps-settings-tweaks
+summary: In the following I will go through my post installation steps on Ubuntu, i.e. which settings I choose and which apps I install and use.
 toc: true
 type: book
-date: "2020-04-24T00:00:00+01:00"
+#date: "2020-04-24"
 draft: false
-
-# Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
-weight: 23
+weight: 13
 ---
 
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***
@@ -226,8 +225,8 @@ Install Timeshift and configure it directly via the GUI for easy and almost inst
 sudo apt install -y timeshift
 sudo timeshift-gtk
 ```
-* Select "BTRFS" as the "Snapshot Type"; continue with "Next"
-* Choose your BTRFS system partition as "Snapshot Location"; continue with "Next"  (even if timeshift does not see a btrfs system in the GUI it will still work, so continue (I already filed a bug report with timeshift))
+* Select "btrfs" as the "Snapshot Type"; continue with "Next"
+* Choose your btrfs system partition as "Snapshot Location"; continue with "Next"  (even if timeshift does not see a btrfs system in the GUI it will still work, so continue (I already filed a bug report with timeshift))
 * "Select Snapshot Levels" (type and number of snapshots that will be automatically created and managed/deleted by Timeshift), my recommendations:
   * Activate "Monthly" and set it to 1
   * Activate "Weekly" and set it to 3
@@ -240,7 +239,7 @@ sudo timeshift-gtk
   * Click "Finish"
 * "Create" a manual first snapshot & exit Timeshift
   
-*Timeshift* will now check every hour if snapshots ("hourly", "daily", "weekly", "monthly", "boot") need to be created or deleted. Note that "boot" snapshots will not be created directly but about 10 minutes after a system startup. *Timeshift* puts all snapshots into `/run/timeshift/backup`. Conveniently, the real root (subvolid 5) of your BTRFS partition is also mounted here, so it is easy to view, create, delete and move around snapshots manually. 
+*Timeshift* will now check every hour if snapshots ("hourly", "daily", "weekly", "monthly", "boot") need to be created or deleted. Note that "boot" snapshots will not be created directly but about 10 minutes after a system startup. *Timeshift* puts all snapshots into `/run/timeshift/backup`. Conveniently, the real root (subvolid 5) of your btrfs partition is also mounted here, so it is easy to view, create, delete and move around snapshots manually. 
 
 Now let's install *timeshift-autosnap-apt* from GitHub
 ```bash
@@ -362,7 +361,7 @@ flatpak install -y gitkraken
 ```
 The flatpak version of GitKraken works perfectly for me and I do want to avoid using PPAs or DEB packages from vendors homepages. Open GitKraken and set up Accounts and Settings. Note that in case of flatpak, one needs to add the following Custom Terminal Command: `flatpak-spawn --host gnome-terminal %d`. 
 
-#### Matlab
+#### MATLAB
 I have a license for MATLAB R2020a, unzipping the installation files in the the home folder and running:
 ```
 sudo /home/$USER/matlab_R2020a_glnxa64/install

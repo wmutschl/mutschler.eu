@@ -1,21 +1,15 @@
 ---
-title: Ubuntu Server 20.10 on Raspberry Pi 4 with USB Boot (no SD card), full disk encryption (excluding /boot) using btrfs-inside-luks and auto-apt snapshots with Timeshift
-linktitle: Raspberry Pi Ubuntu Server 20.04 USB-boot-btrfs-luks
+title: 'Ubuntu Server 20.10 on Raspberry Pi 4: installation guide with USB Boot (no SD card) and full disk encryption (excluding /boot) using btrfs-inside-luks and auto-apt snapshots with Timeshift'
+summary: In this guide I will walk you through the installation procedure to get an Ubuntu 20.10 system with a luks-encrypted partition for the root filesystem (excluding /boot) formatted with btrfs that contains a subvolume @ for / and a subvolume @home for /home running on a Raspberry Pi 4. The system is installed to an external bootable USB drive so no SD card is required. I will show how to optimize the btrfs mount options and how to get a headless server, i.e. remotely unlock the luks partition using Dropbear which enables one to use SSH to decrypt the luks-encrypted partitions after a reboot. This layout enables one to use Timeshift and timeshift-autosnap-apt which will regularly take snapshots of the system and particularly on any apt operation.
+#linktitle: Raspberry Pi Ubuntu Server 20.04 USB-boot-btrfs-luks
 toc: true
 type: book
-date: "2021-01-10T00:00:00+01:00"
+#date: "2021-01-10"
 draft: false
-
-# Prev/next pager order (if `docs_section_pager` enabled in `params.toml`)
-weight: 51
+weight: 35
 ---
-
-```md
-{{< youtube >}}
-```
-*Note that this written guide is an updated version of the video and contains much more information. [Video coming soon]*
-
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***
+
 
 ## Overview 
 Since 2020, I am exclusively using btrfs as filesystem on all my systems, see: [Why I (still) like btrfs](../../btrfs/). So, in this guide I will show how to install Ubuntu Server 20.10 on a Raspberry Pi 4 with the following structure:
@@ -40,10 +34,10 @@ This tutorial is most likely not the fastest way to achieve this, but it works f
 
 
 ## Step 0 (optional): Enable USB Boot on Raspberry Pi 4
-Depending on when your Raspberry Pi 4 was manufactured, the bootloader EEPROM may need to be updated to enable booting from USB mass storage devices. I followed this [USB mass storage boot guide](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bootmodes/msd.md) to update my EEPROM, there is also an official [Ubuntu guide](https://ubuntu.com/tutorials/how-to-install-ubuntu-desktop-on-raspberry-pi-4#4-optional-usb-boot). Note that you need to do this only once, afterwards your Pi will always be able to boot from USB.
+Depending on when your Raspberry Pi 4 was manufactured, the bootloader EEPROM may need to be updated to enable booting from USB mass storage devices. I followed this [USB mass storage boot guide](https://www.raspberrypi.org/documentation/computers/raspberry-pi.html#usb-mass-storage-boot) to update my EEPROM, there is also an official [Ubuntu (optional) USB Boot guide](https://ubuntu.com/tutorials/how-to-install-ubuntu-desktop-on-raspberry-pi-4#4-optional-usb-boot). Note that you need to do this only once, afterwards your Pi will always be able to boot from USB.
 
 ## Step 1: Flash Ubuntu Server 20.10 on an external USB drive
-In this tutorial we flash [Ubuntu Server 20.10 for Raspberry Pi](https://ubuntu.com/raspberry-pi) to an external USB 3.0 drive. To download and flash the image I first installed the [Raspberry Pi Imager](https://snapcraft.io/rpi-imager) from the snap store (`sudo snap install rpi-imager`). On my Fedora machine I had to switch,temporarily, from *Wayland* to *Gnome on Xorg* to run it. Then select the following:
+In this tutorial we flash [Ubuntu Server 20.10 for Raspberry Pi](https://ubuntu.com/raspberry-pi) to an external USB 3.0 drive. To download and flash the image I first installed the [Raspberry Pi Imager](https://snapcraft.io/rpi-imager) from the snap store (`sudo snap install rpi-imager`). On my Fedora machine I had to switch, temporarily, from *Wayland* to *Gnome on Xorg* to run it. Then select the following:
 - `CHOOSE OS` -> Other general purpose OS -> Ubuntu -> Ubuntu Server 20.10 (RPi 3/4/400) 64-bit server OS for arm64 architectures
 - `CHOOSE SD CARD`: Your external USB 3.0 drive
 
@@ -601,7 +595,7 @@ sudo timeshift --list
 ```
 Note that the cron job and btrfs quotas are enabled on first run, so don't worry about the `qgroups: quotas not enabled` error. Timeshift will now check every hour if snapshots (“hourly”, “daily”, “weekly”, “monthly”, “boot”) need to be created or deleted. Note that “boot” snapshots will not be created directly but about 10 minutes after a system startup. I also include the `@home` subvolume (which is not selected by default). Note that when you restore a snapshot you can always choose whether or not you also want to restore @home (which in most cases you don't want to).
 
-Timeshift puts all snapshots into `/run/timeshift/backup/timeshift-btrfs`. Conveniently, the real root (subvolid 5) of your BTRFS partition is also mounted to `/run/timeshift/backup`, so it is easy to view, create, delete and move around snapshots manually.
+Timeshift puts all snapshots into `/run/timeshift/backup/timeshift-btrfs`. Conveniently, the real root (subvolid 5) of your btrfs partition is also mounted to `/run/timeshift/backup`, so it is easy to view, create, delete and move around snapshots manually.
 
 ### Timeshift-autosnap-apt
 Open a terminal and install some dependencies:

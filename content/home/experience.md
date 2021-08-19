@@ -6,9 +6,6 @@ widget: experience
 # This file represents a page section.
 headless: true
 
-# Activate this widget? true/false
-#active: = true
-
 # Order that this section appears on the page.
 weight: 95
 
@@ -27,7 +24,7 @@ date_format: Jan 2006
 experience:
   - title: Developer
     company: Dynare Team
-    company_url: https://www.dynare.org
+    company_url: https://www.dynare.org/about/#team
     location: CEPREMAP, France
     date_start: '2019-03-01'
     date_end: ''
@@ -53,9 +50,9 @@ experience:
         * PhD Supervision
   
   - title: Principal Investigator (DFG funded)
-    company: University of Muenster
+    company: Deutsche Forschungsgesellschaft (DFG)
     company_url: https://gepris.dfg.de/gepris/projekt/411754673?language=en
-    location: Münster, Germany
+    location: Münster/Tübingen, Germany
     date_start: '2019-04-01'
     date_end: '2022-07-01'
     description: |2-
@@ -114,4 +111,7 @@ experience:
     date_start: '2012-06-01'
     date_end: '2015-10-31'
     description: PhD Thesis on *Local identification of nonlinear and non-Gaussian DSGE models*. Taught courses in DSGE Models, Empirical Methods, Macroeconometrics, Multivariate Time Series Analysis, Introduction to R, and GMM/Indirect Inference/Bootstrap.
+
+design:
+  columns: '2'
 ---

@@ -7,7 +7,7 @@ tags:
 - GMM
 - SMM
 - IRF
-date: 2020-07-01
+#date: "2020-07-01T00:00:00Z"
 
 # Optional external URL for project (replaces project detail page).
 external_link: ""
@@ -29,6 +29,7 @@ links:
 links:
 - name: RoadMap
   url: https://git.dynare.org/Dynare/dynare/-/wikis/RoadMap
+
 # Slides (optional).
 #   Associate this project with Markdown slides.
 #   Simply enter your slide deck's filename without extension.
@@ -47,4 +48,4 @@ Features I am currently working on:
 - [x] Analytical derivatives for optimization and standard errors
 - [ ] Support for measurement errors
 - [ ] Speed and memory improvements
-- [ ] Documentation and examples
+- [x] Documentation and examples

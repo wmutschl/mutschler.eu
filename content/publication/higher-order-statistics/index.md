@@ -2,7 +2,7 @@
 title: "Higher-order statistics for DSGE models"
 authors:
 - Willi Mutschler
-date: "2018-04-01T00:00:00Z"
+date: "2018-04-01"
 doi: "10.1016/j.ecosta.2016.10.005"
 
 # Schedule page publish date (NOT publication's date).
