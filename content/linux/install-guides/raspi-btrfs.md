@@ -62,7 +62,7 @@ sudo parted /dev/sdb print
  # 1      1049kB  269MB   268MB   primary  fat32        boot, lba
  # 2      269MB   3348MB  3079MB  primary  ext4
 ```
-If you would now boot from the drive, the second partition would expand on first boot to take over all space. One would then need to manually shrink it and move files around. To make life a bit easier, we will leave some space after the second partition and create a third partition which will actually contain our LUKS encrypted root btrfs filesystem and re-use the second partition for something else (e.g. [encrypted swap](../ubuntu-btrfs/#encrypted-swap) or an [encrypted dedicated docker image partition](../raspi-post-install/#option-a-create-dedicated-encrypted-docker-image-partition)) later on. With btrfs I do not need any other partitions for e.g. `/home`, as we will use subvolumes instead. 
+If you would now boot from the drive, the second partition would expand on first boot to take over all space. One would then need to manually shrink it and move files around. To make life a bit easier, we will leave some space after the second partition and create a third partition which will actually contain our LUKS encrypted root btrfs filesystem and re-use the second partition for something else (e.g. [encrypted swap](../ubuntu-btrfs-20-04/#encrypted-swap) or an [encrypted dedicated docker image partition](../raspi-post-install/#option-a-create-dedicated-encrypted-docker-image-partition)) later on. With btrfs I do not need any other partitions for e.g. `/home`, as we will use subvolumes instead. 
 
 
 Let's use `parted` for this (feel free to use `gparted` accordingly):
@@ -650,7 +650,7 @@ Now, if you run any `sudo apt install|remove|upgrade|dist-upgrade` command, *Tim
 
 
 ## Step 13: Decide what to do with second ext4 partition
-Now as everything is up and running from `/dev/mapper/crypt_raspi` on `/dev/sda3`, we don't have any use for `/dev/sda2` anymore. So, either let it be, delete it, or use it as an [encrypted swap partition](../ubuntu-btrfs/#encrypted-swap) or (what I do) as an [encrypted docker image partition](../raspi-post-install/#option-a-create-dedicated-encrypted-docker-image-partition).
+Now as everything is up and running from `/dev/mapper/crypt_raspi` on `/dev/sda3`, we don't have any use for `/dev/sda2` anymore. So, either let it be, delete it, or use it as an [encrypted swap partition](../ubuntu-btrfs-20-04/#encrypted-swap) or (what I do) as an [encrypted docker image partition](../raspi-post-install/#option-a-create-dedicated-encrypted-docker-image-partition).
 
 **FINISHED! CONGRATULATIONS AND THANKS FOR STICKING THROUGH!**
 

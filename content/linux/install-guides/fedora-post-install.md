@@ -614,7 +614,7 @@ flatpak install -y flatseal
 ```
 
 #### Timeshift
-For Timeshift, you would need to change the subvolume layout of Fedora 33. I have described these steps in my [Fedora 33 installation guide](../fedora-btrfs).
+For Timeshift, you would need to change the subvolume layout of Fedora 33. I have described these steps in my [Fedora 33 installation guide](../fedora-btrfs-33).
 
 #### Virtual machines: Quickemu and other stuff
 Fedora by default has KVM, Qemu, virt-manager and gnome-boxes set up; however, I have found a much easier tool for most virtualization tasks: [Quickqemu](https://github.com/wmutschl/quickemu) which uses the snap package `Qemu-virgil`:

@@ -26,7 +26,7 @@ Since a couple of months, I am exclusively using btrfs as my filesystem on all m
    - [Timeshift](https://github.com/teejee2008/timeshift) which will regularly take (almost instant) snapshots of the system
    - [timeshift-autosnap-apt](https://github.com/wmutschl/timeshift-autosnap-apt) which will automatically run Timeshift on any apt operation and also keep a backup of your EFI partition inside the snapshot
    - [grub-btrfs](https://github.com/Antynea/grub-btrfs) which will automatically create GRUB entries for all your btrfs snapshots
-- If you need RAID1, follow this guide: [Ubuntu 20.04 btrfs-luks-raid1](../ubuntu-btrfs-raid1)
+- If you need RAID1, follow this guide: [Ubuntu 20.04 btrfs-luks-raid1](../ubuntu-btrfs-raid1-20-04)
 
 With this setup you basically get the same comfort of Ubuntu's 20.04's ZFS and *zsys* initiative, but with much more flexibility and comfort due to the awesome [Timeshift](https://github.com/teejee2008/timeshift) program, which saved my bacon quite a few times. This setup works similarly well on other distributions, for which I also have [installation guides with optional RAID1](../../install-guides).
 
