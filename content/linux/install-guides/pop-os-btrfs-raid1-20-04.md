@@ -459,6 +459,8 @@ cat /etc/kernelstub/configuration
 #   }
 # }
 ```
+**VERY IMPORTANTLY: Don't forget the comma after `"splash"`, otherwise you get errors when you later run `update-initramfs` (see below)!**
+
 
 5. Install `btrfs-progs`
 
@@ -521,6 +523,34 @@ Note that this has also updated the initramfs, but to just be sure, run it again
 ```bash
 update-initramfs -c -k all
 ```
+Note that if you run into errors like this:
+```sh
+update-initramfs: Generating /boot/initrd.img-5.11.0-7620-generic
+kernelstub.Config    : INFO     Looking for configuration...
+Traceback (most recent call last):
+  File "/usr/bin/kernelstub", line 244, in <module>
+    main()
+  File "/usr/bin/kernelstub", line 241, in main
+    kernelstub.main(args)
+  File "/usr/lib/python3/dist-packages/kernelstub/application.py", line 142, in main
+    config = Config.Config()
+  File "/usr/lib/python3/dist-packages/kernelstub/config.py", line 50, in __init__
+    self.config = self.load_config()
+  File "/usr/lib/python3/dist-packages/kernelstub/config.py", line 60, in load_config
+    self.config = json.load(config_file)
+  File "/usr/lib/python3.9/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+  File "/usr/lib/python3.9/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/usr/lib/python3.9/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/usr/lib/python3.9/json/decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+json.decoder.JSONDecodeError: Expecting ',' delimiter: line 20 column 7 (char 363)
+run-parts: /etc/initramfs/post-update.d//zz-kernelstub exited with return code 1
+```
+you probably forgot a comma after `"splash"` in the `/etc/kernelstub/configuration` file (see above).
+
 
 ## Step 5: Reboot, some checks, and update system
 
