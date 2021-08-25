@@ -87,14 +87,15 @@ I got lucky and purchased a VPS with (almost) unlimited storage. The VPS has two
   - vda3 and vdb3 are both encrypted with luks and mapped to backup_vda and backup_vdb
   - backup_vda and backup_vdb are formatted with btrfs and put into a RAID1 managed by btrfs
   - This is then used as the target for btrfs send/receive operations using BTRBK
+
 Basically, I run several docker containers ([SWAG](https://docs.linuxserver.io/general/swag), [Nextcloud](https://github.com/nextcloud/docker), [Gitea](https://docs.gitea.io/en-us/install-with-docker/)) using a single docker-compose file and some scripts for automatic snapshots and backups.
 
 My backup strategy:
   1. continuous sync of user data from different machines to this VPS using *Nextcloud* (*automatic*)
-  1. continuous mirroring of repositories from GitHub and Gitlab to this VPS using *Gitea* (*automatic*)
-  1. hourly, daily, weekly and monthly btrfs snapshots on system partitions using *BTRBK* (*automatic*)
-  1. hourly, daily, weekly and monthly btrfs send/receive of snapshots to the internal backup partitions using *BTRBK* (*automatic*)
-  1. daily snapshots to Wasabi cloud storage using *restic* (*automatic*)
+  2. continuous mirroring of repositories from GitHub and Gitlab to this VPS using *Gitea* (*automatic*)
+  3. hourly, daily, weekly and monthly btrfs snapshots on system partitions using *BTRBK* (*automatic*)
+  4. hourly, daily, weekly and monthly btrfs send/receive of snapshots to the internal backup partitions using *BTRBK* (*automatic*)
+  5. daily snapshots to Wasabi cloud storage using *restic* (*automatic*)
 
 Note that all machines sync data to this VPS so I really care about the integrity of the data and maintenance of the VPS and of Nextcloud. Therefore I run two btrfs maintenance tasks (a weekly balance and a monthly scrub) and a daily maintenance task for Nextcloud. Moreover, I heavily rely on [healthchecks.io](https://healthchecks.io) to monitor my server and outcome of the scripts and tools I use within my backup strategy. As all items on the backup strategy need to run automatically, I use cron for that. The exact commands and scripts I use are given in [this Github repository](https://github.com/wmutschl/scripts).
 
