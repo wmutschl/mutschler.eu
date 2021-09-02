@@ -1,7 +1,7 @@
 ---
 title: My backup strategy
 #linktitle: Backup-Strategy
-summary: My strategy to backup Linux, macOS and Windows machines using a combination of Nextcloud, RSync, restic, BTRBK and Time Machine.
+summary: My strategy to backup Linux, macOS and Windows machines using a combination of Nextcloud, rsync, restic, rclone, BTRBK and Time Machine.
 #date: "2021-05-13"
 type: book
 draft: false  # Is this a draft? true/false
@@ -28,22 +28,22 @@ graph TB
     xps{{"DELL XPS 13 (9360)<br/>internal 1TB NVME<br/>(Windows, NTFS, Bitlocker)<br/>@Home"}}
     honor{{"HONOR MAGICBOOK PRO LAPTOP<br/>internal 256GB SSD<br/>(Windows, NTFS, Bitlocker)<br/>@Parents"}}
     greenlantern{{"TOWER PC FOR TESTING<br/>internal 60 GB SSD<br/>(Windows, NTFS, Bitlocker)<br/>internal 256 GB SSD<br/>(Ubuntu, POP!_OS, Fedora, RHEL)<br/>@Home"}}
-    precision{{"DELL PRECISION 7520<br/>internal 512 GB NVME<br/>(Fedora, btrfs, LUKS)<br/>@Home"}}
+    precision{{"DELL PRECISION 7520<br/>internal 512 GB NVME<br/>(Fedora/POP!_OS, btrfs, LUKS)<br/>@Home"}}
     precision_sda[["Internal 512 GB SSD<br/>(btrfs, LUKS)<br/>@Home"]]
     fifei[("VPS UBUNTU SERVER<br/>2x internal 10 TB HDD<br/>(RAID1-btrfs, LUKS)<br/>Datacenter @Frankfurt")]
     fifei_2[["2x Internal 10 TB HDD<br/>(RAID1-btrfs, LUKS)<br/>Datacenter @Frankfurt"]]
     macbook{{"Apple MacBook Air (M1)<br/>internal 1TB SSD<br/>(MacOS Big Sur, encrypted APFS)<br/>@Home or @Office"}}
     
     wasabi[("Wasabi Cloud Storage")]
-    cnmemory[["External 1.5 TB HDD<br/>(exFAT)<br/>@Office"]]
-    porsche[["External 2 TB HDD<br/>(btrfs, LUKS)<br/>@Home"]]
+    cnmemory[["External 1.5 TB HDD<br/>(NTFS)<br/>@Office"]]
+    porsche[["External 2 TB HDD<br/>(ext4)<br/>@Home"]]
     old_hdds[["2x Old Spare 320GB HDDs<br/>(NTFS, Bitlocker)<br/>@Parents"]]    
     T5_home[["External 1 TB SSD<br/>(encrypted APFS)<br/>@Home (Docking Station)"]]
     T5_office[["External 1 TB SSD<br/>(encrypted APFS)<br/>@Office (Docking Station)"]]
     T7[["External 1 TB SSD<br/>(exFAT)<br/>@Home"]]
     git[("GitHub & Gitlab<br/>Repositories")]
 
-    xps -->|"RSync<br/>(on Christmas)"| old_hdds
+    xps -->|"ync<br/>(on Christmas)"| old_hdds
     xps -->|"restic<br/>(quarterly snapshots)"| cnmemory
     xps -->|"restic<br/>(weekly snapshots)"| T7
     xps ----|"Nextcloud<br/>(sync)"| fifei    
@@ -63,14 +63,14 @@ graph TB
     fifei -->|"BTRBK<br/>(hourly btrfs send/receive)"| fifei_2
     fifei -->|"restic<br/>(daily snapshots)"| wasabi
 
-    wasabi -->|"restic<br/>(quarterly restore)"| porsche 
+    wasabi -->|"rclone sync<br/>(quarterly)"| porsche 
 ```
 
 The most important piece of my backup strategy is Nextcloud which runs on my Ubuntu Server VPS (located in a datacenter in Frankfurt). On the one hand, this enables me to sync data between machines (which is one layer of redundancy) but if I mess up on one machine this will spread to all of my machines. So on the other hand, I take incremental hourly snapshots and backups of all data on the VPS. With this I can restore data from different points in time which is very important as corrupt files or malware stays often undetected for quite some time. The VPS itself has two disks and I combine these into RAID1 managed by the filesystem btrfs. I then create two partitions, one for the system and services, and the other one as send/receive target for the backups. Due to RAID1 managed by btrfs, I can do a monthly scrub of my data to find inconsistencies and (if there are any) btrfs will correct these automatically. This is also useful for backing up of my git repositories from GitHub and Gitlab. For this I use Gitea to mirror my repositories and due to the hourly snapshots on the VPS these get a continuous backup as well.
 
 I do have several other backups and redundancies due to machines being backed up to external disks, which I also keep at different locations. Ideally, this happens automatically, if there is another internal disk in the computer or if the external disks are always connected to a docking station. Otherwise, one needs to manually connect the external disks on a regular schedule and run the backup. So for this I have created reminders in my calendar that keep bugging me to do a backup.
 
-Nevertheless if all my machines, the VPS, and all external disks at all different locations brake or burn down simultaneously, I have one last backup as I keep (encrypted) snapshots of my data on a paid (but cheap) cloud storage plan of Wasabi. Of course, it is of uttermost importance to regularly check the integrity of the data. Therefore, every 3 months, I download the latest snapshot of Wasabi to a dedicated external HDD drive. While the data (about 1.5TB) downloads I validate my other backups, by going randomly through folders (particularly the most important ones) and opening documents and pictures. I do the same for the Wasabi data when the download is finished. As a neat by-product, the downloaded data on the external HDD serves as one more backup, albeit with no snapshots.
+Nevertheless if all my machines, the VPS, and all external disks at all different locations brake or burn down simultaneously, I have one last backup as I keep (encrypted) snapshots of my data on a paid (but cheap) cloud storage plan of Wasabi. Of course, it is of uttermost importance to regularly check the integrity of the data. Therefore, every 3 months, I sync all data of Wasabi to a dedicated external HDD drive using `rclone`. While the data (about 1TB) downloads I validate my other backups, by going randomly through folders (particularly the most important ones) and opening documents and pictures. When the download finishes I do a `restic -r MYREPO check --read-data` on the dedicated external HDD drive. Afterwards I open the latest snapshot and go through the most important files and folders.
 
     
 ## Machines and Tools
@@ -100,7 +100,11 @@ My backup strategy:
 Note that all machines sync data to this VPS so I really care about the integrity of the data and maintenance of the VPS and of Nextcloud. Therefore I run two btrfs maintenance tasks (a weekly balance and a monthly scrub) and a daily maintenance task for Nextcloud. Moreover, I heavily rely on [healthchecks.io](https://healthchecks.io) to monitor my server and outcome of the scripts and tools I use within my backup strategy. As all items on the backup strategy need to run automatically, I use cron for that. The exact commands and scripts I use are given in [this Github repository](https://github.com/wmutschl/scripts).
 
 ### 2. Wasabi Cloud Storage
-My overall data usage on my VPS tends to be below 1.5 TB, so I find Wasabi quite cheap as a **backup location of last resort**.  Every three months I check the integrity of my data by restoring the latest restic snapshot from Wasabi to an external 2TB HDD (btrfs encrypted with LUKS) drive. As a neat by-product, I have one more backup of all machines on this external HDD. Every six months I also run some maintenance tasks on Wasabi to prune the snapshots a bit. The exact commands and scripts I use are given in [this Github repository](https://github.com/wmutschl/scripts).
+My overall data usage on my VPS tends to be below 1.5 TB, so I find Wasabi quite cheap as a **backup location of last resort**.  Every three months I check the integrity of my backup on Wasabi by syncing it to an external 2TB HDD (ext4 formatted) drive using [rclone sync](https://rclone.org/s3/#wasabi):
+```sh
+rclone --config $HOME/scripts/wasabi-rclone.conf sync wasabi:$WASABI_BUCKET /media/$USER/$EXTERNAL_HDD/$WASABI_BUCKET -P
+```
+As a neat by-product, I have snapshots of my server (and therefore of all other machines) on this external HDD. Every six months I also run some maintenance tasks on Wasabi to prune the snapshots. The exact commands, configuration files and scripts I use are given in [this Github repository](https://github.com/wmutschl/scripts).
 
 ### 3. Apple MacBook Air M1 (MacOS BigSur)
 This is my main machine running MacOS Big Sur on a 1 TB drive (encrypted APFS). I use Nextcloud to sync data between this machine, the Dell XPS, and my Dell Precision.
@@ -110,7 +114,7 @@ My backup strategy:
   1. hourly snapshots using *Time-Machine* to an external 1TB SSD (Samsung T5 Portable formatted with encrypted APFS) which is always connected to my home docking station (*automatic*)
   1. hourly snapshots using *Time-Machine* to an external 1TB SSD (Samsung T5 Portable formatted with encrypted APFS) which is always connected to my office docking station (*automatic*)
   
-Time-Machine is very easy to use and as the external disks are always connected to the docking stations, the backup is done automatically. Moreover, they are located at two different locations, so this is quite perfect. I would also like to use an external storage like my VPS or Wasabi for yet another Time-Machine backup, so if you know how to set this up, let me know!
+Time-Machine is very easy to use and as the external disks are always connected to the docking stations, the backups are done automatically. Moreover, they are located at two different locations, so this is quite perfect. I would also like to use an external storage like my VPS or Wasabi for yet another Time-Machine backup, so if you know how to set this up, let me know!
 
 ### 4. Dell XPS 13 9360 (Windows)
 This is our home laptop running Windows 10 on a 1TB NVME drive (NTFS encrypted with Bitlocker). This machine is mainly used by my wife, but I also have an account to sync my data between this machine, the Dell Precision, and my MacBook Air.
@@ -118,13 +122,13 @@ This is our home laptop running Windows 10 on a 1TB NVME drive (NTFS encrypted w
 My backup strategy: 
   1. continuous sync of user data to the VPS using *Nextcloud* (*automatic*)
   1. weekly snapshots on Friday to an external 1TB SSD (Samsung T7 Portable formatted with exFAT, stays at home) using *restic* (*manual*)
-  1. quarterly snapshots to an (old) external 1.5TB HDD drive (formated with exFAT, stays at office) using *restic* (*manual*)
-  1. on Christmas (when I visit my parents) I copy the most important user data to two (very old internal) 320GB HDD drive (NTFS encrypted with Bitlocker, stays at my parent's house) using *RSync* (*manual*)
+  1. quarterly snapshots to an (old) external 1.5TB HDD drive (formated with NTFS, stays at office) using *restic* (*manual*)
+  1. on Christmas (when I visit my parents) I copy the most important user data to two (very old internal) 320GB HDD drive (NTFS encrypted with Bitlocker, stays at my parent's house) using *rsync* (*manual*)
 
-I am aware that both the old external and the old internal HDDs have some risk of failure. But so far, because I am only accessing them periodically, I did not see any corrupted data (yet) and will keep using them with care as a safe-net until they start breaking. The exact commands for restic and RSync (and a list of files and folders to ignore) is given in [this Github repository](https://github.com/wmutschl/scripts).
+I am aware that both the old external and the old internal HDDs have some risk of failure. But so far, because I am only accessing them periodically, I did not see any corrupted data (yet) and will keep using them with care as a safe-net until they start breaking. The exact commands for restic and rsync (and a list of files and folders to ignore) is given in [this Github repository](https://github.com/wmutschl/scripts).
 
-### 5. Dell Precision 7520 (Fedora)
-This is my former main machine running Fedora on a 512 GB internal NVME drive (btrfs encrypted with LUKS). The machine also has another internal 512GB SSD drive (btrfs encrypted with LUKS). I use Nextcloud to sync data between this machine, the Dell XPS, and my MacBook Air.
+### 5. Dell Precision 7520 (Linux)
+This is my former main machine running either Fedora or Pop!_OS on a 512 GB internal NVME drive (btrfs encrypted with LUKS). The machine also has another internal 512GB SSD drive (btrfs encrypted with LUKS). I use Nextcloud to sync data between this machine, the Dell XPS, and my MacBook Air.
 
 My backup strategy: 
   1. continuous sync of user data to the VPS using *Nextcloud* (*automatic*)
