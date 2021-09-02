@@ -87,18 +87,6 @@ sudo chown -R $USER:$USER /home/$USER
 I use Firefox and like to keep my bookmarks and extensions in sync. Particularly, I use Bitwarden for all my passwords.
 
 
-#### SSH keys
-If I want to create a new SSH key, I run:
-```bash
-ssh-keygen -t rsa -b 4096 -C "willi@mutschler"
-```
-Otherwise, I restore my `.ssh` folder from my backup. Either way, afterwards, one needs to add the file containing your key, usually `id_rsa`, to the ssh-agent:
-```bash
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_rsa
-```
-Don't forget to add your public keys to GitHub, Gitlab, Servers, etc.
-
 ### SSH keys
 If I want to create a new SSH key, I run e.g.:
 ```sh
