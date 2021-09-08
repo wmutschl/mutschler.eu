@@ -467,7 +467,7 @@ sudo nano /etc/inputrc
 - Add online account for Nextcloud
 - Deactivate system sounds, mute mic
 - Turn of suspend, turn on shutdown for power button
-- Turn on natural scrool for mouse touchpad
+- Turn on natural scroll for mouse touchpad
 - Go through keyboard shortcuts and adapt, I also add a custom one for xkill on <kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>X</kbd>
 - Check region and language, remove unnecessary languages, then update 
 - Change clock to 24h format
