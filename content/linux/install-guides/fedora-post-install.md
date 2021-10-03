@@ -342,7 +342,7 @@ fi
 
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
-then1
+then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 export PATH
