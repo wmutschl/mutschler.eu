@@ -94,7 +94,8 @@ ssh-keygen -t ed25519 -C "popos-on-precision"
 ```
 Usually, however, I restore my `.ssh` folder from my backup (see above). Either way, afterwards, one needs to add the file containing your key, usually `id_rsa` or `id_ed25519`, to the ssh-agent:
 ```sh
-bash -c 'eval "$(ssh-agent -s)"' #works both on bash and fish, on fish one could also do 'eval (ssh-agent -c)'
+eval "$(ssh-agent -s)" #works in bash
+eval (ssh-agent -c) #works in fish
 ssh-add ~/.ssh/id_ed25519
 ```
 Don't forget to add your public key to GitHub, Gitlab, Servers, etc.

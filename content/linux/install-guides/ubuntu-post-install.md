@@ -80,7 +80,8 @@ ssh-keygen -t rsa -b 4096 -C "willi@mutschler"
 ```
 Otherwise, I restore my `.ssh` folder from my backup. Either way, afterwards, one needs to add the file containing your key, usually `id_rsa`, to the ssh-agent:
 ```bash
-eval "$(ssh-agent -s)"
+eval "$(ssh-agent -s)" #works in bash
+eval (ssh-agent -c) #works in fish
 ssh-add ~/.ssh/id_rsa
 ```
 Don't forget to add your public keys to GitHub, Gitlab, Servers, etc.
