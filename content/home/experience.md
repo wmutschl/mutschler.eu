@@ -22,6 +22,19 @@ date_format: Jan 2006
 #   Leave `date_end` empty if it's your current employer.
 #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
 experience:
+  - title: Assistant Professor for International Macroeconomics
+    company: University of Tuebingen
+    company_url: https://uni-tuebingen.de/en/19615
+    location: Tübingen, Germany
+    date_start: '2021-04-01'
+    date_end: ''
+    description: |2-
+        Responsibilities include:
+
+        * Research
+        * Teaching
+        * PhD Supervision
+  
   - title: Developer
     company: Dynare Team
     company_url: https://www.dynare.org/about/#team
@@ -36,19 +49,6 @@ experience:
         * Identification Toolbox
         * Method of Moments Estimation Toolbox
 
-  - title: Assistant Professor for International Macroeconomics
-    company: University of Tuebingen
-    company_url: https://uni-tuebingen.de/en/19615
-    location: Tübingen, Germany
-    date_start: '2021-04-01'
-    date_end: ''
-    description: |2-
-        Responsibilities include:
-
-        * Research
-        * Teaching
-        * PhD Supervision
-  
   - title: Principal Investigator (DFG funded)
     company: Deutsche Forschungsgesellschaft (DFG)
     company_url: https://gepris.dfg.de/gepris/projekt/411754673?language=en
@@ -96,14 +96,6 @@ experience:
     date_end: '2015-07-31'
     description: Research stay at DG-E Fiscal Policies. Researched fiscal policy within the EAGLE model.
 
-  - title: Referee Service
-    company: ''
-    company_url: ''
-    location: ''
-    date_start: '2012-01-01'
-    date_end: ''
-    description: Computational Statistics and Data Analysis, Economic Modelling, Journal of Economic Dynamics and Control, National Science Centre Poland, The B.E. Journal of Macroeconomics
-
   - title: Research Associate (PhD Student)
     company: University of Muenster
     company_url: https://www.wiwi.uni-muenster.de/oeew/de
@@ -111,6 +103,14 @@ experience:
     date_start: '2012-06-01'
     date_end: '2015-10-31'
     description: PhD Thesis on *Local identification of nonlinear and non-Gaussian DSGE models*. Taught courses in DSGE Models, Empirical Methods, Macroeconometrics, Multivariate Time Series Analysis, Introduction to R, and GMM/Indirect Inference/Bootstrap.
+
+  - title: Referee Service
+    company: ''
+    company_url: ''
+    location: ''
+    date_start: '2012-01-01'
+    date_end: ''
+    description: Computational Statistics and Data Analysis, Economic Modelling, Journal of Economic Dynamics and Control, National Science Centre Poland, The B.E. Journal of Macroeconomics
 
 design:
   columns: '2'
