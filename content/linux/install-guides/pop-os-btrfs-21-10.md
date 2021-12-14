@@ -1,5 +1,5 @@
 ---
-title: 'Pop!_OS 21.10: installation guide with btrfs-LVM-luks and auto snapshots with BTRBK'
+title: 'DRAFT: Pop!_OS 21.10: installation guide with btrfs-LVM-luks and auto snapshots with BTRBK'
 #linktitle: Pop!_OS 21.10 btrfs-luks
 summary: In this guide I will walk you through the installation procedure to get a Pop!_OS 21.10 system with a luks-encrypted partition which contains a LVM with a logical volume for the root filesystem that is formatted with btrfs and contains a subvolume @ for / and a subvolume @home for /home. I will show how to optimize the btrfs mount options and how to setup an encrypted swap partition which works with hibernation. This layout enables one to use BTRBK which will regularly take snapshots of the system and optionally on any apt operation. The recovery system of Pop!_OS is also installed to the disk and accessible via the systemd bootloader.
 toc: true
@@ -171,14 +171,14 @@ Recheck everything (check the partitions where there is a black checkmark) and h
 ## Step 3: Post-Installation steps
 
 Open a terminal and switch to an interactive root session:
-```bash
+```sh
 sudo -i
 ```
 You might find maximizing the terminal window is helpful for working with the command-line.
 ### Mount the btrfs top-level root filesystem
 
 Let's mount our root partition (the top-level btrfs volume always has root-id 5), but with mount options that optimize performance and durability on SSD or NVME drives:
-```bash
+```sh
 cryptsetup luksOpen /dev/nvme0n1p3 cryptdata
 # Enter passphrase for /dev/nvme0n1p3
 mount -o subvolid=5,ssd,noatime,space_cache,commit=120,compress=zstd,discard=async /dev/mapper/data-root /mnt
@@ -197,7 +197,7 @@ We will later also append these mount options to the fstab, but it is good pract
 ### Create btrfs subvolumes `@` and `@home`
 
 Now we will first create the subvolume `@` and move all files and folders from the top-level filesystem into `@`. Note that as we use the optimized mount options like compression, these will be already applied during the moving process:
-```bash
+```sh
 btrfs subvolume create /mnt/@
 # Create subvolume '/mnt/@'
 cd /mnt
@@ -206,7 +206,7 @@ ls -a /mnt
 # . .. @
 ```
 Now let's create another subvolume called `@home` and move the user folder from `/mnt/@/home/` into `@home`:
-```bash
+```sh
 btrfs subvolume create /mnt/@home
 # Create subvolume '/mnt/@home'
 mv /mnt/@/home/* /mnt/@home/
@@ -227,16 +227,16 @@ We need to adapt the `fstab` to
 - make use of optimized btrfs mount options
 
 So open it with a text editor, e.g.:
-```bash
+```sh
 nano /mnt/@/etc/fstab
 ```
 or use these `sed` commands
-```bash
+```sh
 sed -i 's/btrfs  defaults/btrfs  defaults,subvol=@,ssd,noatime,space_cache,commit=120,compress=zstd,discard=async/' /mnt/@/etc/fstab
 echo "UUID=$(blkid -s UUID -o value /dev/mapper/data-root)  /home  btrfs  defaults,subvol=@home,ssd,noatime,space_cache,commit=120,compress=zstd,discard=async   0 0" >> /mnt/@/etc/fstab
 ```
 Either way your `fstab` should look like this:
-```bash
+```sh
 cat /mnt/@/etc/fstab
 # PARTUUID=6b533522-0c33-4f44-890f-4be275c5b06f  /boot/efi  vfat  umask=0077  0  0
 # PARTUUID=45bb9da4-9571-40bc-8f20-468332234a62  /recovery  vfat  umask=0077  0  0
@@ -259,7 +259,7 @@ cat /mnt/@/etc/crypttab
 ### Adjust configuration of kernelstub
 We need to adjust some settings for the systemd boot manager and also make sure these settings are not overwritten if we install or update kernels and modules. Namely, we need to add `rootflags=subvol=@` to the `"user"` kernel options of the kernelstub configuration file:
 
-```bash
+```sh
 nano /mnt/@/etc/kernelstub/configuration
 ```
 Here you need to add `rootflags=subvol=@` to the `"user"` kernel options. That is, your configuration file should look like this:
@@ -300,12 +300,12 @@ cat /mnt/@/etc/kernelstub/configuration
 
 ### Adjust configuration of systemd bootloader
 We need to adjust some settings for the systemd boot manager, so let's mount our EFI partition
-```bash
+```sh
 mount /dev/nvme0n1p1 /mnt/@/boot/efi
 ```
 
 Add `rootflags=subvol=@` to last line of `Pop_OS_current.conf` either using a text editor or the following command
-```bash
+```sh
 sed -i 's/splash/splash rootflags=subvol=@/' /mnt/@/boot/efi/loader/entries/Pop_OS-current.conf
 cat /mnt/@/boot/efi/loader/entries/Pop_OS-current.conf
 # title Pop!_OS
@@ -316,7 +316,7 @@ cat /mnt/@/boot/efi/loader/entries/Pop_OS-current.conf
 where `UUID_of_data-root` is the UUID of /dev/mapper/data-root.
 
 Optionally, add a timeout to the systemd boot menu in order to easily access the recovery partition:
-```bash
+```sh
 echo "timeout 2" >> /mnt/@/boot/efi/loader/loader.conf
 cat /mnt/@/boot/efi/loader/loader.conf 
 # default Pop_OS-current
@@ -328,19 +328,19 @@ cat /mnt/@/boot/efi/loader/loader.conf
 ### Create a chroot environment and update initramfs
 
 Now, let's create a chroot environment, which enables you to work directly inside your newly installed OS, without actually rebooting. For this, unmount the top-level root filesystem from `/mnt` and remount the subvolume `@` which we created for `/` to `/mnt`:
-```bash
+```sh
 cd /
 umount -l /mnt
 mount -o defaults,subvol=@,ssd,noatime,space_cache,commit=120,compress=zstd,discard=async /dev/mapper/data-root /mnt
 ```
 Then the following commands will put us into our system using chroot:
-```bash
+```sh
 for i in /dev /dev/pts /proc /sys /run; do mount -B $i /mnt$i; done
 chroot /mnt
 ```
 
 Cool, you are now inside your system and we can check whether our `fstab` mounts everything correctly:
-```bash
+```sh
 mount -av
 # /boot/efi                : successfully mounted
 # /recovery                : successfully mounted
@@ -349,7 +349,7 @@ mount -av
 # /home                    : successfully mounted
 ```
 Looks good! Now we need to update the initramfs to make it aware of our changes:
-```bash
+```sh
 update-initramfs -c -k all
 ```
 
@@ -385,7 +385,7 @@ you probably forgot a comma after `"splash"` in the `/etc/kernelstub/configurati
 
 Now, it is time to exit the chroot - cross your fingers - and reboot the system:
 
-```bash
+```sh
 exit
 # exit
 reboot now
@@ -395,7 +395,7 @@ If all went well you should see a single passphrase prompt (YAY!), where you ent
 
 Now let's click through the welcome screen and open a terminal to see whether everything is set up correctly:
 
-```bash
+```sh
 sudo mount -av
 # /boot/efi                : already mounted
 # /recovery                : already mounted
@@ -423,7 +423,7 @@ sudo btrfs subvolume list /
 
 If all look's good, let's update and upgrade the system:
 
-```bash
+```sh
 sudo apt update
 sudo apt upgrade
 sudo apt dist-upgrade
@@ -444,7 +444,7 @@ sudo grep "issue_discards" /etc/lvm/lvm.conf
 ```
 
 Now reboot:
-```bash
+```sh
 sudo reboot now
 ```
 
@@ -486,7 +486,7 @@ ls /btrfs_pool
 
 ### Step 5b: install and configure BTRBK
 Install BTRBK from the repos:
-```bash
+```s
 sudo apt install -y btrbk
 ```
 Next I create the following configuration file:
@@ -734,7 +734,7 @@ sudo mount -av
 
 I want my system to automatically unlock my backup disk such that I need to type my luks passphrase only once (this step is optional, but recommended). So let's create a key-file, secure it, and add it to our luks partition of the backup disk:
 
-```bash
+```sh
 sudo mkdir /etc/luks
 sudo dd if=/dev/urandom of=/etc/luks/boot_os.keyfile bs=4096 count=1
 # 1+0 records in
@@ -748,7 +748,7 @@ sudo cryptsetup luksAddKey /dev/sda1 /etc/luks/boot_os.keyfile
 
 Let's restrict the pattern of keyfiles and avoid leaking key material for the initramfs hook:
 
-```bash
+```sh
 echo "KEYFILE_PATTERN=/etc/luks/*.keyfile" | sudo tee -a /etc/cryptsetup-initramfs/conf-hook
 echo "UMASK=0077" | sudo tee -a /etc/initramfs-tools/initramfs.conf
 ```
@@ -756,7 +756,7 @@ These commands will harden the security options in the intiramfs configuration f
 
 Next, add the keyfile to your `crypttab`:
 
-```bash
+```sh
 echo "cryptbackup UUID=$(blkid -s UUID -o value /dev/sda1) /etc/luks/boot_os.keyfile luks,discard" | sudo tee -a /etc/crypttab
 
 cat /etc/crypttab
