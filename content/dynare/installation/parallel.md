@@ -8,7 +8,7 @@ type: book
 draft: false
 weight: 50
 ---
-***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***
+***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
 ## Description
 In this quick tutorial, I will cover the necessary steps to run dynare parallel for (i) [Windows](#windows), (ii) [macOS](#macos), and (iii) [Ubuntu Linux](#linux) (which should also work on other Linux distributions). After some general remarks and establishing the example model, where we estimate a small model using the Random-Walk Metropolis-Hastings with 4 chains computed in parallel, I provide the required steps for each operating system. There are also videos below you might find useful to follow.

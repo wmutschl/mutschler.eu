@@ -9,7 +9,7 @@ toc: true
 weight: 1
 ---
 
-***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/website-academic). Pull requests are very much appreciated.***
+***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
 ```md
 {{< youtube ZfsKGzR84hQ >}}

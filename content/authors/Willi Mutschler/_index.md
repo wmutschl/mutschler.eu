@@ -101,6 +101,6 @@ I am an *Assistant Professor* 🧑‍🏫 in *International Macroeconomics* 🌍
 
 I am an enthusiastic *Apple* 🍏 and *Linux* 🐧 user and actively contribute to several *open-source projects* 🤓 such as [Dynare](https://dynare.org), [Timeshift](https://github.com/wmutschl/timeshift) and [Timeshift-autosnap-apt](https://github.com/wmutschl/timeshift-autosnap-apt). You can find 🔍 me on several forums #️⃣ like [Ask Fedora](https://ask.fedoraproject.org/u/wmutschl), [Dynare](https://forum.dynare.org/u/wmutschl), [Destination Linux](https://discourse.destinationlinux.network/u/wmutschl/), [EndeavourOS](https://forum.endeavouros.com/u/wmutschl), [Pop!_Planet](https://pop-planet.info/forums/members/wmutschl.104) or [Ubuntu](https://discourse.ubuntu.com/u/wmutschl).
 
-You are highly encouraged to check out 👀 my [Dynare Teaching Materials](dynare) or [Linux Guides](linux). The source code 📜 of the entire site is available on [GitHub](https://github.com/wmutschl/website-academic); getting involved 👋 by opening issues or pull-request 🧑‍💻 is greatly appreciated 🙏. 
+You are highly encouraged to check out 👀 my [Dynare Teaching Materials](dynare) or [Linux Guides](linux). The source code 📜 of the entire site is available on [GitHub](https://github.com/wmutschl/mutschler.eu); getting involved 👋 by opening issues or pull-request 🧑‍💻 is greatly appreciated 🙏. 
 
 Feel free to *[contact](#contact)* 🗣️ me directly or to *[schedule an appointment](https://schedule.mutschler.eu)* 🗓️.
