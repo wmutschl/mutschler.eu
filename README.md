@@ -2,7 +2,5 @@ I am using the [Academic Template](https://github.com/wowchemy/starter-academic)
 
 This repository contains all content on the homepage and two useful scripts:
 
-- `update_hugo_extended.sh`: downloads the most recent version of Hugo Extended binary and copies it over to $HOME/.local/bin (make sure it is in your $PATH)
-- `hugo_rsync.sh`: rsync command I use to deploy to my server
-
-
+* `update_hugo_extended.sh`: downloads the most recent version of Hugo Extended binary and copies it over to $HOME/.local/bin (make sure it is in your $PATH)
+* `hugo_rsync.sh`: rsync command I use to deploy to my server
