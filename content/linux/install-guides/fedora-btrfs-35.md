@@ -1,7 +1,7 @@
 ---
-title: 'DRAFT: Fedora Workstation 35: installation guide with btrfs-luks full disk encryption (optionally including /boot) and automatic btrfs snapshots and backups with BTRBK'
+title: 'Fedora Workstation 35 with automatic btrfs snapshots and backups using BTRBK'
 #linktitle: Fedora 35 btrfs-luks
-#summary: In this guide I will walk you through the installation procedure to get a Fedora workstation 35 system with a luks-encrypted partition for the root filesystem (optionally including /boot) formatted with btrfs. I will show how to optimize the btrfs mount options and, in case /boot is on the encrypted partition, how to add a key-file to type the luks passphrase only once. BTRBK is then used and configured to regularly take both btrfs snapshots of the system as well as send/receive those snapshots to a backup disk. 
+#summary: In this guide I will show how to install Fedora 35 with automatic system snapshots and backups using BTRBK which will regularly take (almost instant) btrfs snapshots of the system and send/receive these to a backup disk given a chosen retention policy.
 toc: true
 type: book
 #date: "2021-12-14"
@@ -14,15 +14,9 @@ weight: 46
 
 Since Fedora switched their default filesystem to btrfs I decided to give it a go as I am exclusively using btrfs on all my systems, see: [Why I (still) like btrfs](../../btrfs/). Fedora's automatic installation routine with encryption is actually almost perfect for me except some changes regarding the btrfs mount options.
 
-So, in this guide I will show how to install Fedora 35 with the following structure:
-
-- an unencrypted EFI partition for the GRUB bootloader
-- a btrfs-inside-luks partition for the root filesystem containing the default subvolumes `root` for `/` and `home` for `/home`.[^1]
-- there is no need for a swap partition as Fedora creates a [SwapOnZram](https://fedoraproject.org/wiki/Changes/SwapOnZRAM) during start-up
-- automatic system snapshots and backups using [BTRBK](https://github.com/digint/btrbk) which will regularly take (almost instant) btrfs snapshots of the system and send/receive these to a backup disk given a chosen retention policy.
-- Optionally, I will also show how to encrypt the `/boot` partition, so you get a full-disk-encryption-system (including `/boot`) and only one passphrase prompt from GRUB.
-   
-[^1]: Note that in a previous guide for [Fedora 33](../fedora-btrfs-33) I showed how to rename the subvolumes to `@` and `@home` in order to make [Timeshift](https://github.com/teejee2008/timeshift) work properly. However, in this guide, I will focus on BTRBK instead of Timeshift as it provides an automatic way to not only make snapshots (like Timeshift) but also to make backups to another disk via btrfs send/receive.
+So, in this guide I will show how to install Fedora 35 with automatic system snapshots and backups using [BTRBK](https://github.com/digint/btrbk) which will regularly take (almost instant) btrfs snapshots of the system and send/receive these to a backup disk given a chosen retention policy.[^1]
+  
+[^1]: Note that in a previous guide for [Fedora 33](../fedora-btrfs-33) I showed how to rename the default subvolumes in Fedora from `root` and `home` to `@` and `@home` in order to make [Timeshift](https://github.com/teejee2008/timeshift) work properly. However, in this guide, I will focus on BTRBK instead of Timeshift as it provides an automatic way to not only make snapshots (like Timeshift) but also to make backups to another disk via btrfs send/receive. Moreover, in the previous guide I also showed how to optionally encrypt the boot partition; however, I typically use a Yubikey to unlock my luks partition(s) and that only works with a non-encrypted boot partition. Moreover, my personal thread level is that it is more likely that I'll loose my Laptop and I don't want people to access my files. The scenario where a person injects malicious code into my boot partition and the kernel files to then take over my computer is not relevant for me.
 
 **If you ever need to rollback your system, checkout [Restoring backups with BTRBK](https://github.com/digint/btrbk#restoring-backups).**
 
@@ -46,7 +40,7 @@ Click `Done` and enter your disk encryption passphrase, choose a good one. If th
 Let's update the system (either via software center or the terminal):
 
 ```sh
-sudo dnf upgrade
+sudo dnf update
 flatpak update
 ```
 
@@ -70,7 +64,7 @@ sudo lsblk
 # ├─nvme0n1p2                                   259:2    0     1G  0 part  /boot
 # └─nvme0n1p3                                   259:3    0 475.4G  0 part  
 #   └─luks-8bf48ffa-78e1-4a16-ad9e-301b7199d8ac 253:0    0 475.3G  0 crypt /home
-                                                                         /
+#                                                                          /
 sudo parted /dev/nvme0n1 unit MiB print
 # Model: PM961 NVMe SAMSUNG 512GB (nvme)
 # Disk /dev/nvme0n1: 488386MiB
@@ -231,13 +225,19 @@ sudo swapon
 
 ## Step 3: Post-Installation steps
 
+**All the steps below should be run from an interactive root shell:**
+```sh
+sudo -i
+```
+Otherwise some commands might not work properly.
+
 ### Step 3a: Mount the btrfs top-level filesystem to /btrfs_pool
 
 Let's mount our the top-level btrfs volume (which has always id 5) to a mount point `/btrfs_pool` using the fstab:
 
 ```sh
-sudo mkdir /btrfs_pool
-echo "UUID=$(blkid -s UUID -o value /dev/mapper/luks-$(blkid -s UUID -o value /dev/nvme0n1p3))  /btrfs_pool  btrfs  subvolid=5,compress=zstd:1,x-systemd.device-timeout=0 0 0" | sudo tee -a /etc/fstab
+mkdir /btrfs_pool
+echo "UUID=$(blkid -s UUID -o value /dev/mapper/luks-$(blkid -s UUID -o value /dev/nvme0n1p3))  /btrfs_pool  btrfs  subvolid=5,compress=zstd:1,x-systemd.device-timeout=0 0 0" >> /etc/fstab
 
 cat /etc/fstab
 # UUID=df2d4761-d84b-4fea-af88-2dd5d7eeca4c /                       btrfs   subvol=root,compress=zstd:1,x-systemd.device-timeout=0 0 0
@@ -246,7 +246,7 @@ cat /etc/fstab
 # UUID=df2d4761-d84b-4fea-af88-2dd5d7eeca4c /home                   btrfs   subvol=home,compress=zstd:1,x-systemd.device-timeout=0 0 0
 # UUID=df2d4761-d84b-4fea-af88-2dd5d7eeca4c /btrfs_pool             btrfs   subvolid=5,compress=zstd:1,x-systemd.device-timeout=0 0 0
 
-sudo mount -av
+mount -av
 # /                        : ignored
 # /boot                    : already mounted
 # /boot/efi                : already mounted
@@ -271,9 +271,9 @@ As the development of BTRFS continues and Fedora keeps pushing improvements upst
 - `compress=zstd`: allows to specify the compression algorithm which we want to use. btrfs provides lzo, zstd and zlib compression algorithms. Based on some Phoronix test cases, zstd seems to be the better performing candidate. Fedora has started to use v1, I will use v3.
 - `discard=async`: [Btrfs Async Discard Support Looks To Be Ready For Linux 5.6](https://www.phoronix.com/scan.php?page=news_item&px=Btrfs-Async-Discard)
 
-Let's make these changes with a text editor, e.g. `sudo nano /etc/fstab` or use these `sed` commands which replace the mount options
+Let's make these changes with a text editor, e.g. `nano /etc/fstab` or use these `sed` commands which replace the mount options
 ```sh
-sudo sed -i 's/compress=zstd:1/ssd,compress=zstd,discard=async/' /etc/fstab
+sed -i 's/compress=zstd:1/ssd,compress=zstd,discard=async/' /etc/fstab
 ```
 
 Either way your `fstab` should look like this:
@@ -286,9 +286,14 @@ cat /etc/fstab
 # UUID=df2d4761-d84b-4fea-af88-2dd5d7eeca4c /btrfs_pool  btrfs   subvolid=5,ssd,compress=zstd,discard=async,x-systemd.device-timeout=0   0 0
 ```
 
-Let's reboot to see whether this worked. So after the restart, check the following:
+Let's reboot to see whether this worked:
 ```sh
-sudo mount -v | grep /dev/mapper
+reboot now
+```
+
+So after the restart, check the following:
+```sh
+mount -v | grep /dev/mapper
 # /dev/mapper/luks-8bf48ffa-78e1-4a16-ad9e-301b7199d8ac on / type btrfs (rw,relatime,seclabel,compress=zstd:3,ssd,discard=async,space_cache,subvolid=257,subvol=/root)
 # /dev/mapper/luks-8bf48ffa-78e1-4a16-ad9e-301b7199d8ac on /btrfs_pool type btrfs (rw,relatime,seclabel,compress=zstd:3,ssd,discard=async,space_cache,subvolid=5,subvol=/)
 # /dev/mapper/luks-8bf48ffa-78e1-4a16-ad9e-301b7199d8ac on /home type btrfs (rw,relatime,seclabel,compress=zstd:3,ssd,discard=async,space_cache,subvolid=256,subvol=/home)
@@ -296,11 +301,16 @@ sudo mount -v | grep /dev/mapper
 This should reflect the changes you just made in the fstab. Note that you cannot have different mount options for your subvolumes on the same partition.
 
 ## Step 4: automatic snapshots and backups with btrfs using BTRBK
+**All the steps below should be run from an interactive root shell:**
+```sh
+sudo -i
+```
+Otherwise some commands might not work properly.
 
 ### Step 4a: preparations
 If you haven't done already, create a mount point `/btrfs_pool` for the top-level root of my btrfs partition (see above) as BTRBK needs a folder or subvolume to store the snapshots under the top-level. Let's call this folder `_btrbk_snap`:
 ```sh
-sudo mkdir /btrfs_pool/_btrbk_snap
+mkdir /btrfs_pool/_btrbk_snap
 ls /btrfs_pool
 # _btrbk_snap home root
 ```
@@ -309,12 +319,11 @@ Note that `_btrbk_snap` is a folder, whereas `home` and `root` are subvolumes.
 ### Step 4b: install and configure BTRBK for snapshots
 Install BTRBK from the repos:
 ```sh
-sudo dnf install -y btrbk
+dnf install -y btrbk
 ```
-Next I create the following configuration file:
+Next let's create the following configuration file at the default location `/etc/btrbk/` (there is also a `btrbk.conf.example` file with more explanations):
 ```sh
-mkdir -p $HOME/scripts
-nano $HOME/scripts/precision-btrbk.conf
+nano /etc/btrbk/btrbk.conf
 ```
 My configuration file (just for snapshots, I'll cover the configuration file with a target for send/receive backups below) looks like this:
 ```sh
@@ -334,12 +343,12 @@ volume /btrfs_pool
 This looks into `/btrfs_pool` and creates snapshots for the subvolumes `root` and `home` into the directory `/btrfs_pool/_btrbk_snap`. All snapshots are preserved for at least 3 hours, while the usual retention policy is to keep 6 hourly, 5 daily, 3 weekly and 1 monthly snapshot. Let's test this:
 
 ```sh
-sudo btrbk -c $HOME/scripts/precision-btrbk.conf dryrun
+btrbk dryrun
 # --------------------------------------------------------------------------------
 # Backup Summary (btrbk command line client, version 0.28.3)
 # 
 #     Date:   Tue Dec 14 10:34:23 2021
-#     Config: /home/wmutschl/scripts/precision-btrbk.conf
+#     Config: /etc/btrbk.conf
 #     Dryrun: YES
 # 
 # Legend:
@@ -359,12 +368,12 @@ sudo btrbk -c $HOME/scripts/precision-btrbk.conf dryrun
 ```
 If there was no error, let's actually run this to create our first snapshots (this should take a fraction of a second, that's the beauty of copy-on-write snapshots) and see whether they are stored correctly:
 ```sh
-sudo btrbk -c $HOME/scripts/precision-btrbk.conf run
+btrbk run
 
 ls /btrfs_pool/_btrbk_snap
 # home.20211214T1035  root.20211214T1035
 
-sudo btrfs subvolume list /
+btrfs subvolume list /
 # ID 256 gen 118 top level 5 path home
 # ID 257 gen 119 top level 5 path root
 # ID 262 gen 101 top level 257 path var/lib/machines
@@ -376,13 +385,13 @@ Now you can always revert your system to `root.20211214T1035` or restore your ho
 ### Step 4c: create systemd timer for BTRBK to run every hour
 On servers that run constantly I usually use the `crontab` for automatic snapshots with BTRBK; however, on my laptop I use a systemd timer instead. First let's check the timer and service that is shipped with BTRBK:
 ```sh
-sudo systemctl status btrbk.service
+systemctl status btrbk.service
 # ○ btrbk.service - btrbk backup
 #      Loaded: loaded (/usr/lib/systemd/system/btrbk.service; static)
 #      Active: inactive (dead)
 #        Docs: man:btrbk(1)
 
-sudo systemctl status btrbk.timer
+systemctl status btrbk.timer
 # ○ btrbk.timer - btrbk daily backup
 #      Loaded: loaded (/usr/lib/systemd/system/btrbk.timer; disabled; vendor preset: disabled)
 #      Active: inactive (dead)
@@ -390,40 +399,10 @@ sudo systemctl status btrbk.timer
 #    Triggers: ● btrbk.service
 ```
 
-Now let's make some small changes to the timer `sudo nano /lib/systemd/system/btrbk.timer` to make it `hourly`:
+Test if the service works (tip: you can exit the log outputs by writing `:q` or hitting `CTRL+C`):
 ```sh
-[Unit]
-Description=btrbk hourly snapshots and backup
-
-[Timer]
-OnCalendar=hourly
-AccuracySec=10min
-Persistent=true
-
-[Install]
-WantedBy=multi-user.target
-```
-
-and to the service `sudo nano /lib/systemd/system/btrbk.service` to make use of the custom configuration file that we created:
-```sh
-[Unit]
-Description=btrbk snapshots and backup
-Documentation=man:btrbk(1)
-
-[Service]
-Type=oneshot
-ExecStart=/usr/sbin/btrbk -c /home/wmutschl/scripts/precision-btrbk.conf run
-```
-
-Make sure the permissions are correct:
-```sh
-sudo chmod 644 /lib/systemd/system/btrbk.timer
-sudo chmod 644 /lib/systemd/system/btrbk.service
-```
-and checkout if it works (tip: you can exit the log outputs by writing `:q` or hitting `CTRL+C`):
-```sh
-sudo systemctl start btrbk.service
-sudo systemctl status btrbk.service
+systemctl start btrbk.service
+systemctl status btrbk.service
 # ○ btrbk.service - btrbk snapshots and backup
 #      Loaded: loaded (/usr/lib/systemd/system/btrbk.service; static)
 #      Active: inactive (dead)
@@ -451,13 +430,31 @@ cat /var/log/btrbk.log
 ls /btrfs_pool/_btrbk_snap
 # home.20211214T1035  home.20211214T1044  root.20211214T1035  root.20211214T1044
 ```
-Check if snapshots are created and if any errors occured. If all is well, then enable the timer:
+Check if snapshots are created or if any errors occurred. If not, then let's make a small change to the timer
 ```sh
-sudo systemctl enable btrbk.timer
+nano /lib/systemd/system/btrbk.timer
+``` 
+and make it run `hourly`:
+```sh
+[Unit]
+Description=btrbk hourly snapshots and backup
+
+[Timer]
+OnCalendar=hourly
+AccuracySec=10min
+Persistent=true
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Enable and start the timer:
+```sh
+systemctl enable btrbk.timer
 # Created symlink /etc/systemd/system/multi-user.target.wants/btrbk.timer → /usr/lib/systemd/system/btrbk.timer.
-sudo systemctl start btrbk.timer
-sudo systemctl daemon-reload
-sudo systemctl list-timers --all
+systemctl start btrbk.timer
+systemctl daemon-reload
+systemctl list-timers --all
 ```
 You should see the following line (tip: you can exit by inserting `:q` or clicking `CTRL+C`):
 ```sh
@@ -466,7 +463,7 @@ Tue 2021-12-14 11:00:00 CET 13min left    n/a                         n/a       
 ```
 Recheck the hourly timer after an hour (or 13min in my case) to make sure everything is working:
 ```sh
-sudo systemctl list-timers --all
+systemctl list-timers --all
 cat /var/log/btrbk.log
 ls /btrfs_pool/_btrbk_snap
 ```
@@ -474,19 +471,24 @@ Make sure the snapshots are created without errors.
 
 ## Step 5 (optional): Mount an encrypted backup disk as btrfs send/receive target
 I use my internal SSD as a backup disk to receive the incremental btrfs snapshots. The steps, however, also work with an external USB disk.
+**All the steps below should be run from an interactive root shell:**
+```sh
+sudo -i
+```
+Otherwise some commands might not work properly.
 
 ### Step 5a: Preparations
-So let's create a GPT table on it, create an encrypted partition and format it with the btrfs filesystem. I usually use GParted (`sudo dnf install gparted`); however, you can also use command-line tools like `parted`, e.g.:
+So let's create a GPT table on it, create an encrypted partition and format it with the btrfs filesystem. I usually use GParted (`dnf install gparted`); however, you can also use command-line tools like `parted`, e.g.:
 ```sh
-sudo parted /dev/sda mklabel gpt
+parted /dev/sda mklabel gpt
 # Warning: The existing disk label on /dev/sda will be destroyed and all data on this disk will
 # be lost. Do you want to continue?
 # Yes/No? Yes                                                               
 # Information: You may need to update /etc/fstab.
-sudo parted /dev/sda mkpart primary 1MiB 100%
+parted /dev/sda mkpart primary 1MiB 100%
 # Information: You may need to update /etc/fstab.
-sudo parted /dev/sda name 1 BACKUP
-sudo parted /dev/sda unit MiB print
+parted /dev/sda name 1 BACKUP
+parted /dev/sda unit MiB print
 # Model: ATA Samsung SSD 840 (scsi)
 # Disk /dev/sda: 476940MiB
 # Sector size (logical/physical): 512B/512B
@@ -495,7 +497,7 @@ sudo parted /dev/sda unit MiB print
 # Number  Start    End        Size       File system  Name    Flags
 #  1      1.00MiB  476940MiB  476939MiB               BACKUP
 
-sudo cryptsetup luksFormat /dev/sda1
+cryptsetup luksFormat /dev/sda1
 # WARNING: Device /dev/sda1 already contains a 'crypto_LUKS' superblock signature.
 # WARNING!
 # ========
@@ -504,14 +506,14 @@ sudo cryptsetup luksFormat /dev/sda1
 # Enter passphrase for /dev/sda1: 
 # Verify passphrase: 
 ```
-**If you set the same passphrase as for your system disk, then you won't have to enter the passphrase twice at boot (otherwise you need to create keyfiles, see appendix). This is what I usually do.** 
+**If you set the same passphrase as for your system disk, then you won't have to enter the passphrase twice at boot. This is what I usually do; otherwise you would need to create keyfiles which I won't cover in this guide.** 
 
-Anyways, lets continue:
+Lets continue:
 ```sh
-sudo cryptsetup luksOpen /dev/sda1 cryptbackup
+cryptsetup luksOpen /dev/sda1 cryptbackup
 # Enter passphrase for /dev/sda1: 
 
-sudo mkfs.btrfs /dev/mapper/cryptbackup 
+mkfs.btrfs /dev/mapper/cryptbackup 
 # btrfs-progs v5.15.1 
 # See http://btrfs.wiki.kernel.org for more information.
 # 
@@ -543,14 +545,13 @@ sudo mkfs.btrfs /dev/mapper/cryptbackup
 
 Let's create a mount point `/btrfs_backup` for this disk and update the fstab to mount this at boot:
 ```sh
-sudo mkdir /btrfs_backup
+mkdir /btrfs_backup
 ```
 Of course if you are using an external USB drive then skip this and the below changes to the fstab and to the crypttab. The mount point of your external disk will be in `/media/run/$USER/` and you can simply save the passphrase to your keyring to automatically unlock it when connecting it to your system. If you work with an internal backup disk, then continue.
 
 So, next I add an entry to the fstab to mount this at boot time:
 ```sh
-sudo blkid
-echo "UUID=$(blkid -s UUID -o value /dev/mapper/cryptbackup)  /btrfs_backup  btrfs  subvolid=5,ssd,compress=zstd,discard=async,x-systemd.device-timeout=0,x-systemd.after=/   0 0" | sudo tee -a /etc/fstab
+echo "UUID=$(blkid -s UUID -o value /dev/mapper/cryptbackup)  /btrfs_backup  btrfs  subvolid=5,ssd,compress=zstd,discard=async,x-systemd.device-timeout=0,x-systemd.after=/   0 0" >> /etc/fstab
 
 cat /etc/fstab
 # UUID=df2d4761-d84b-4fea-af88-2dd5d7eeca4c  /              btrfs   subvol=root,ssd,compress=zstd,discard=async,x-systemd.device-timeout=0                    0 0
@@ -560,31 +561,34 @@ cat /etc/fstab
 # UUID=df2d4761-d84b-4fea-af88-2dd5d7eeca4c  /btrfs_pool    btrfs   subvolid=5,ssd,compress=zstd,discard=async,x-systemd.device-timeout=0                     0 0
 # UUID=94b22aac-7697-4b2b-af88-c32870807984  /btrfs_backup  btrfs   subvolid=5,ssd,compress=zstd,discard=async,x-systemd.device-timeout=0,x-systemd.after=/   0 0
 
-sudo mount -av
+mount -av
 # /btrfs_backup            : successfully mounted
 ```
 
 Next, we need to make the crypttab aware of the encrypted backup disk:
 ```sh
-sudo blkid
-echo "cryptbackup UUID=$(blkid -s UUID -o value /dev/sda1) none discard" | sudo tee -a /etc/crypttab
+echo "cryptbackup UUID=$(blkid -s UUID -o value /dev/sda1) none discard" >> /etc/crypttab
 
-sudo cat /etc/crypttab
+cat /etc/crypttab
 # luks-8bf48ffa-78e1-4a16-ad9e-301b7199d8ac UUID=8bf48ffa-78e1-4a16-ad9e-301b7199d8ac none discard
 # cryptbackup                               UUID=47b0e8eb-51c8-40ad-8006-186f965236a2 none discard
 ```
 Update the initramfs:
 ```sh
-sudo dracut --force --regenerate-all
+dracut --force --regenerate-all
 ```
 Before we continue, let's test this by restarting the system. 
 ```sh
-sudo reboot now
+reboot now
 ```
-If you chose the same passphrase as for your system disk, you should be only asked once for a luks passphrase. Note that you can always change the passphrase in Gnome Disks by selecting the luks partition and the symbol for options will give you an option to change the passphrase. If you want to use different passphrases then have a look in the appendix how to create keyfiles and add them to the crypttab. If you are using an external USB drive then these steps can be skipped and you can simply add the luks passphrase to your keyring to automatically unlock it when it is connected; the mount point will be in `/media/run/$USER/`.
+If you chose the same passphrase as for your system disk, you should be only asked once for a luks passphrase. Note that you can always change the passphrase in Gnome Disks by selecting the luks partition and the symbol for options will give you an option to change the passphrase. If you want to use different passphrases then you would need to create keyfiles which is a bit messy in Fedora, so I usually simply stick to the same passphrase for convenience. If you are using an external USB drive then these steps can be skipped and you can simply add the luks passphrase to your keyring to automatically unlock it when it is connected; the mount point will be in `/media/run/$USER/`.
 
 ### Step 5b: Add target for btrfs send/receive in BTRBK configuration file
-We need to add `/btrfs_backup` as a target with a retention policy in our custom BTRBK configuration file: `nano $HOME/scripts/precision-btrbk.conf`:
+We need to add `/btrfs_backup` as a target with a retention policy in our BTRBK configuration file:
+```sh
+nano /etc/btrbk/btrbk.conf
+```
+My file with the target looks like this:
 ```sh
 transaction_log         /var/log/btrbk.log
 lockfile                /var/lock/btrbk.lock
@@ -607,7 +611,7 @@ For external disks, there is an `on-demand` flag you can set, see the [example c
 Either way, let's run BTRBK in dry mode first:
 
 ```sh
-sudo btrbk -c $HOME/scripts/precision-btrbk.conf dryrun
+btrbk dryrun
 # WARNING: Failed to parse subvolume detail "Send transid: 0" for: /btrfs_pool
 # WARNING: Failed to parse subvolume detail "Send time: 2021-12-14 09:23:35 +0100" for: /btrfs_pool
 # WARNING: Failed to parse subvolume detail "Receive transid: 0" for: /btrfs_pool
@@ -620,7 +624,7 @@ sudo btrbk -c $HOME/scripts/precision-btrbk.conf dryrun
 # Backup Summary (btrbk command line client, version 0.28.3)
 # 
 #     Date:   Tue Dec 14 11:23:24 2021
-#     Config: /home/wmutschl/scripts/precision-btrbk.conf
+#     Config: /etc/btrbk/btrbk.conf
 #     Dryrun: YES
 # 
 # Legend:
@@ -646,15 +650,15 @@ sudo btrbk -c $HOME/scripts/precision-btrbk.conf dryrun
 # 
 # NOTE: Dryrun was active, none of the operations above were actually executed!
 ```
-You can see that the first snapshots are sent in full, whereas the remaining ones are sent incrementially and therefore will be very fast. If there was no error (you can ignore the Warnings), run it:
+You can see that the first snapshots are sent in full, whereas the remaining ones are sent incrementally and therefore will be very fast. If there was no error (you can ignore the Warnings), run it:
 ```sh
-sudo btrbk -c $HOME/scripts/precision-btrbk.conf run --progress
+btrbk run --progress
 ```
-This might take a short while (I am using an NVME and a SSD so no problem), because the initial backup is transferred to your backup disk. All other snapshots will be sent and received incrementially.
+This might take a minute, because the initial backup is transferred to your backup disk. All other snapshots will be sent and received incrementally.
 
 Check if all snapshots are both in `/btrfs_pool/_btrbk_snap` and `/btrfs_backup`:
 ```sh
-sudo btrfs subvolume list /btrfs_pool/_btrbk_snap
+btrfs subvolume list /btrfs_pool/_btrbk_snap
 # ID 256 gen 168 top level 5 path home
 # ID 257 gen 169 top level 5 path root
 # ID 262 gen 159 top level 257 path root/var/lib/machines
@@ -667,7 +671,7 @@ sudo btrfs subvolume list /btrfs_pool/_btrbk_snap
 # ID 274 gen 167 top level 5 path _btrbk_snap/root.20211214T1126
 # ID 275 gen 169 top level 5 path _btrbk_snap/home.20211214T1126
 
-sudo btrfs subvolume list /btrfs_backup
+btrfs subvolume list /btrfs_backup
 # ID 256 gen 20 top level 5 path root.20211214T1035
 # ID 257 gen 23 top level 5 path root.20211214T1044
 # ID 258 gen 26 top level 5 path root.20211214T1100
@@ -679,7 +683,7 @@ sudo btrfs subvolume list /btrfs_backup
 ```
 Re-run btrbk to see that (as no files have been changed on the disk) the next snapshots and send/receive backups are instant:
 ```sh
-sudo btrbk -c $HOME/scripts/precision-btrbk.conf run --progress
+btrbk run --progress
 ```
 
 ## Final remarks
@@ -688,169 +692,3 @@ That's it. Remember to check in the next couple of hours or days whether the sys
 **FINISHED! CONGRATULATIONS AND THANKS FOR STICKING THROUGH!**
 
 **Check out my [Fedora post-installation steps](../fedora-post-install).**
-
-## Appendix (NOT YET-JUST SOME NOTES)
-
-I want my system to automatically unlock my backup disk such that I need to type my luks passphrase only once (this step is optional, but recommended). So let's create a key-file, secure it, and add it to our luks partition of the backup disk:
-
-```sh
-sudo mkdir /etc/luks
-sudo dd if=/dev/urandom of=/etc/luks/boot_os.keyfile bs=4096 count=1
-# 1+0 records in
-# 1+0 records out
-# 4096 bytes (4.1 kB, 4.0 KiB) copied, 0.000928939 s, 4.4 MB/s
-sudo chmod u=rx,go-rwx /etc/luks
-sudo chmod u=r,go-rwx /etc/luks/boot_os.keyfile
-sudo cryptsetup luksAddKey /dev/sda1 /etc/luks/boot_os.keyfile
-# Enter any existing passphrase: 
-```
-
-Let's restrict the pattern of keyfiles and avoid leaking key material for the initramfs hook:
-
-```sh
-echo "KEYFILE_PATTERN=/etc/luks/*.keyfile" | sudo tee -a /etc/cryptsetup-initramfs/conf-hook
-echo "UMASK=0077" | sudo tee -a /etc/initramfs-tools/initramfs.conf
-```
-These commands will harden the security options in the intiramfs configuration file and hook (*not sure if this is also needed for systemd bootloader?!?*).
-
-Next, add the keyfile to your `crypttab`:
-
-```sh
-echo "cryptbackup UUID=$(blkid -s UUID -o value /dev/sda1) /etc/luks/boot_os.keyfile luks,discard" | sudo tee -a /etc/crypttab
-
-cat /etc/crypttab
-# cryptdata UUID=c5b8099a-f035-47fb-939f-fa4ea770a403 none luks,discard
-# cryptswap UUID=52de8233-c50b-4873-b586-9ab313d28b56 /dev/urandom swap,plain,offset=1024,cipher=aes-xts-plain64,size=512
-# cryptbackup UUID=87278135-9aec-4da7-9fe4-fca1ecf2aeb7 /etc/luks/boot_os.keyfile luks,discard
-```
-and update the initramfs:
-```sh
-sudo update-initramfs -u -k all
-```
-
-
-
-
-
-
-
-
-
-
-
-## (NOT YET-JUST SOME NOTES)
-### STEP 5 (OPTIONAL): Full disk encryption including `/boot`
-I actually like to use a Yubikey as a second factor to unlock my luks partition, for this I need an unencrypted `/boot` partition (see my [Things to do after installing Fedora](../fedora-post-install)), so I usually skip this step. 
-
-If your needs are different, then it is also possible to fully encrypt your system based upon [security_modules in Grub2](https://fedoraproject.org/wiki/Changes/Include_security_modules_in_efi_Grub2), i.e. to also put `/boot` inside a luks container and let GRUB unlock this first and pass on the passphrase to unlock your root partition as well. If you want this, then follow on and open up a terminal with an interactive root shell:
-```sh
-sudo -i
-```
-
-### Backup the files in your boot partition
-The boot partition is on `/dev/vda2`, whereas the efi partition is on `/dev/vda1`. Let's backup the boot partition:
-```sh
-umount /boot/efi
-rsync -avuP /boot/ /boot.bak/
-```
-
-### Create luks1 partition for boot
-GRUB is able to decrypt luks version 1 partitions at boot time, but by default version 2 is used in cryptsetup. So we need to prepare the luks1 partition or else GRUB will not be able to unlock the encrypted device. Note that most Linux distributions also default to version 1 if you do a full disk encryption (e.g. Manjaro Architect). This step is still work-in-progress as I need to figure out how to prompt only once for the passphrase.
-
-```sh
-umount /boot
-cryptsetup luksFormat --type=luks1 /dev/vda2
-# WARNING!
-# ========
-# This will overwrite data on /dev/vda2 irrevocably.
-# Are you sure? (Type uppercase yes): YES
-# Enter passphrase for /dev/vda2: 
-# Verify passphrase:
-```
-Now map the encrypted partition to a device called `crypt-boot` and choose a filesystem (e.g. ext4 or btrfs)
-
-```sh
-cryptsetup luksOpen /dev/vda2 crypt-boot
-# Enter passphrase for /dev/vda2:
-
-ls /dev/mapper/
-# control  crypt-boot  luks-6e7e8f26-4f38-468e-aa2c-9ddaaad4aedf
-
-mkfs.btrfs /dev/mapper/crypt-boot
-```
-
-### Correct fstab, crypttab and restore boot backup files
-Let's find out the new UUID of our encrypted boot partition:
-```sh
-blkid | grep crypt-boot
-# dev/mapper/crypt-boot: UUID="3f75f101-bbe7-4850-9b33-a2196807fb01" UUID_SUB="984444d1-66fb-4d09-9586-8cb876653c28" BLOCK_SIZE="4096" TYPE="btrfs"
-```
-and replace the old UUID of the boot partition with the new one in /etc/fstab, also making sure that btrfs is the filesystem:
-```sh
-nano /etc/fstab
-# UUID=11fa3de5-bfb4-4227-a5ee-d8a3d2d2304a /                       btrfs   subvol=@,ssd,noatime,space_cache,commit=120,compress=zstd,discard=async,x-systemd.device-timeout=0      0 0
-# UUID=3f75f101-bbe7-4850-9b33-a2196807fb01 /boot                   btrfs   defaults         0 0
-# UUID=4FD9-A843                            /boot/efi               vfat    umask=0077,shortname=winnt                                                                              0 2
-# UUID=11fa3de5-bfb4-4227-a5ee-d8a3d2d2304a /home                   btrfs   subvol=@home,ssd,noatime,space_cache,commit=120,compress=zstd,discard=async,x-systemd.device-timeout=0  0 0
-# UUID=11fa3de5-bfb4-4227-a5ee-d8a3d2d2304a /btrfs_pool             btrfs   subvolid=5,ssd,noatime,space_cache,commit=120,compress=zstd,discard=async,x-systemd.device-timeout=0    0 0
-```
-
-Also add an entry for the crypt-boot container to /etc/crypttab:
-```sh
-blkid | grep vda2
-# UUID="84fbddb8-984c-4dda-b5b7-27a49864b5f8" TYPE="crypto_LUKS" PARTUUID="e4007823-54ac-4bce.929d-7616a04f59a8"
-
-nano /etc/crypttab
-# luks-6e7e8f26-4f38-468e-aa2c-9ddaaad4aedf UUID=6e7e8f26-4f38-468e-aa2c-9ddaaad4aedf none discard
-# crypt-boot                                UUID=84fbddb8-984c-4dda-b5b7-27a49864b5f8 none discard
-```
-
-Let's remount the boot partition, restore the backup, and mount the efi partition:
-```sh
-mount /boot
-rsync -avuP /boot.bak/ /boot/
-mount /boot/efi
-```
-
-### Enable cryptodisk in GRUB
-```sh
-echo "GRUB_ENABLE_CRYPTODISK=y" >> /etc/default/grub
-```
-
-### Regenerate the initram disk and Grub
-```sh
-dracut --force --regenerate-all --verbose
-grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
-```
-
-### Reboot and check whether this works
-Grub should ask for the password for the boot partition and then for the root partition. You will then also need to reenter your password for the root partition. If the system then starts, the change is successful, but we need to simplify the passphrase situation using a keyfile for filesystem root (or clevis package and a tpm).
-
-### Get rid of additional passphrase prompts [WIP]
-Not yet... Write me an email, if you know how!
-
-
-
-We need to let GRUB know about the changes as well:
-```sh
-grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
-```
-
-## Step 3: Reboot, some checks, and update system
-Cross your fingers and reboot:
-```sh
-reboot now
-```
-Now let's open up a terminal to see whether everything is set up correctly:
-
-
-
-
-
-
-
-
-
-
-
-
