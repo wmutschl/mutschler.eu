@@ -24,6 +24,7 @@ I am exclusively using btrfs as my filesystem on all my systems, see [Why I (sti
 - an encrypted swap partition which works with hibernation
 - a btrfs-LVM-inside-luks partition for the root filesystem
   - the btrfs logical volume contains a subvolume `@` for `/` and a subvolume `@home` for `/home`. Note that the Pop!_OS installer does not create any subvolumes on btrfs, so we need to do this manually.
+- automatic gnome-keyring unlocking using the LUKS password (if desired for automatic login)
 - automatic system snapshots and easy rollback similar to *zsys* using:
    - [Timeshift](https://github.com/teejee2008/timeshift) which will regularly take (almost instant) snapshots of the system
    - [timeshift-autosnap-apt](https://github.com/wmutschl/timeshift-autosnap-apt) which will automatically run Timeshift on any apt operation and also keep a backup of your EFI partition inside the snapshot
@@ -72,7 +73,8 @@ We'll now create a disk table and add four partitions on `nvme0n1`:
 1. a 498 MiB FAT32 EFI partition for the systemd bootloader
 2. a 4096 MiB FAT32 partition for the Pop!_OS recovery system
 3. a 4096 MiB swap partition for encrypted swap use
-4. a luks2 encrypted partition which contains a LVM with one logical volume formatted with btrfs, which will be our root filesystem
+   - Adjust the amount of swap space for your specific system and needs. See below [discussion on swappiness](#ssd). The kernel will try to compress the hibernation image to 2/5 the size of your RAM [by default](https://www.kernel.org/doc/html/latest/admin-guide/pm/sleep-states.html?highlight=image_size#basic-sysfs-interfaces-for-system-suspend-and-hibernation), but this is not always possible. If storage space is not at a premium, consider allocating at least half the size of your RAM for swap, or even as much as 2 GB larger than the size of your RAM.
+5. a luks2 encrypted partition which contains a LVM with one logical volume formatted with btrfs, which will be our root filesystem
 
 Some remarks:
 
@@ -82,6 +84,7 @@ Some remarks:
 
 Let's use `parted` for this:
 ```bash
+swapoff -a # Make sure no swap partitions are active
 parted /dev/nvme0n1 mklabel gpt
 # Confirm with Yes
 parted /dev/nvme0n1 mkpart primary fat32 2MiB 500MiB
@@ -93,7 +96,6 @@ parted /dev/nvme0n1 name 2 recovery
 parted /dev/nvme0n1 name 3 SWAP
 parted /dev/nvme0n1 name 4 POPOS
 parted /dev/nvme0n1 set 1 esp on
-parted /dev/nvme0n1 set 3 swap on
 parted /dev/nvme0n1 unit MiB print
 # Model: PM961 NVMe SAMSUNG 512GB (nvme)
 # Disk /dev/nvme0n1: 488386MiB
@@ -104,7 +106,7 @@ parted /dev/nvme0n1 unit MiB print
 # Number  Start    End        Size       File system  Name      Flags
 #  1      2.00MiB  500MiB     498MiB     fat32        EFI       boot, esp
 #  2      500MiB   4596MiB    4096MiB    fat32        recovery  msftdata
-#  3      4596MiB  8692MiB    4096MiB                 SWAP      swap
+#  3      4596MiB  8692MiB    4096MiB                 SWAP
 #  4      8692MiB  488386MiB  479694MiB               POPOS
 ```
 
@@ -154,18 +156,36 @@ ls /dev/mapper
 
 This is the typical btrfs layout used by the Ubuntu installer and supported by tools like Timeshift. Pop!_OS, however, does not create any subvolumes by default, so we will do that manually after the usual installation process.
 
+### Create luks2 partition for encrypted swap
+
+Much like the root partition, we will encrypt `nvme0n1p3` with luks2. We will not use LVM here though.
+
+**Use the same password you used for the root partition.** Otherwise you will need to enter both passwords on every startup.
+
+```bash
+cryptsetup luksFormat /dev/nvme0n1p3
+# WARNING!
+# ========
+# This will overwrite data on /dev/nvme0n1p3 irrevocably.
+# Are you sure? (Type uppercase yes): YES
+# Enter passphrase for /dev/nvme0n1p3: 
+# Verify passphrase: 
+```
+
 ## Step 3: Install Pop!_OS using the graphical installer
 
 Now let's open the installer from the dock, select the region, language and keyboard layout. Then choose `Custom (Advanced)`. You will see your partitioned hard disk:
 
 - Click on the first partition, activate `Use partition`, activate `Format`, Use as `Boot /boot/efi`, Filesystem: `fat32`.
 - Click on the second partition, activate `Use partition`, activate `Format`, Use as `Custom` and enter `/recovery`, Filesystem: `fat32`.
-- Click on the third partition, activate `Use partition`, Use as `Swap`.
+- Ignore the third partition (swap) for now. The Pop!\_OS installer will not let you use it since it does not have LVM, so we will manually configure swap later.
 - Click on the fourth and largest partition. A `Decrypt This Partition` dialog opens, enter your luks password and hit `Decrypt`. A new line is displayed `LVM data`. Click on this partition, activate `Use partition`, activate `Format`, Use as `Root (/)` , Filesystem: `btrfs`.
 
 *If you have other partitions, check their types and use; particularly, deactivate other EFI partitions.*
 
-Recheck everything (check the partitions where there is a black checkmark) and hit `Erase and Install`. Follow the steps to create a user account and to write the changes to the disk. Once the installer finishes do NOT **Restart Device**, but return to your terminal.
+Recheck everything (check the partitions where there is a black checkmark) and hit `Erase and Install`. Follow the steps to create a user account and write the changes to disk. If you intend to use automatic login (or fingerprint login, or any login method other than entering your password), **it is strongly recommended to use your luks password as your user account password.** If your luks password matches your login password, it can be used to automatically unlock your keyring.
+
+Once the installer finishes, **do NOT restart or shut down**. Right-click its dock icon and select Quit, then return to the terminal.
 
 ## Step 4: Post-Installation steps
 
@@ -214,20 +234,40 @@ btrfs subvolume list /mnt
 # ID 265 gen 340 top level 5 path @home
 ```
 
-### Changes to fstab and crypttab
-We need to adapt the `fstab` to
+### Changes to crypttab
+We need to modify the `crypttab` to:
+- unlock our swap partition
+- cache the luks password to unlock both partitions and the keyring
+- optimize SSD performance with `discard`
+
+You can edit it with e.g. `nano` or run these commands:
+```bash
+echo "cryptswap UUID=$(blkid -s UUID -o value /dev/nvme0n1p3) none swap,tries=1,luks" >> /mnt/@/etc/crypttab
+sed -i 's/luks/luks,discard,keyscript=decrypt_keyctl/' /mnt/@/etc/crypttab
+```
+
+Your final `crypttab` should look like this:
+```bash
+cat /mnt/@/etc/crypttab
+# cryptdata UUID=48acea7a-7290-40de-b3c8-3fab4e328f60 none luks,discard,keyscript=decrypt_keyctl
+# cryptswap UUID=4811153e-7b1d-489d-a350-a5b58e0c05b5 none swap,tries=1,luks,discard,keyscript=decrypt_keyctl
+```
+Note that your UUID numbers will be different.
+
+Remarks: `keyscript=decrypt_keyctl` will cache (or retrieve) the password for the given partition using the kernel keyring. Partitions with the same _key-file_ are assumed to share a password, with key-file `none` representing the password to unlock the keyring. To skip caching a certain password, simply remove its `keyscript=decrypt_keyctl` but leave the key-file as `none`.
+
+### Changes to fstab
+We need to modify the `fstab` to:
 - mount `/` from `@`
 - mount `/home` from `@home`
 - optimize mount options for btrfs
+- use our encrypted swap space
 
-So open it with a text editor, e.g.:
-```bash
-nano /mnt/@/etc/fstab
-```
-or use these `sed` commands
+You can edit it with e.g. `nano` or run these commands:
 ```bash
 sed -i 's/btrfs  defaults/btrfs  defaults,subvol=@,ssd,noatime,space_cache,commit=120,compress=zstd,discard=async/' /mnt/@/etc/fstab
-echo "UUID=$(blkid -s UUID -o value /dev/mapper/data-root)  /home  btrfs  defaults,subvol=@home,ssd,noatime,space_cache,commit=120,compress=zstd,discard=async   0 0" >> /mnt/@/etc/fstab
+echo "UUID=$(blkid -s UUID -o value /dev/mapper/data-root)  /home  btrfs  defaults,subvol=@home,ssd,noatime,space_cache,commit=120,compress=zstd,discard=async  0  0" >> /mnt/@/etc/fstab
+echo "/dev/mapper/cryptswap  none  swap  defaults,nofail,x-systemd.device-timeout=10s  0  0" >> /mnt/@/etc/fstab
 ```
 Either way your `fstab` should look like this:
 ```bash
@@ -235,20 +275,11 @@ cat /mnt/@/etc/fstab
 
 # PARTUUID=57a2caa4-adb4-4b30-bf56-370907690882  /boot/efi  vfat  umask=0077  0  0
 # PARTUUID=bc7b4892-230a-46ed-91a7-418b7b2726e1  /recovery  vfat  umask=0077  0  0
-# /dev/mapper/cryptswap  none  swap  defaults  0  0
 # UUID=498cd72c-fdcb-4569-991d-229aa17d3dd4  /  btrfs  defaults,subvol=@,ssd,noatime,space_cache,commit=120,compress=zstd,discard=async  0  0
-# UUID=498cd72c-fdcb-4569-991d-229aa17d3dd4 /home btrfs defaults,subvol=@home,ssd,noatime,space_cache,commit=120,compress=zstd,discard=async 0 0
+# UUID=498cd72c-fdcb-4569-991d-229aa17d3dd4  /home  btrfs  defaults,subvol=@home,ssd,noatime,space_cache,commit=120,compress=zstd,discard=async  0  0
+# /dev/mapper/cryptswap  none  swap  defaults,nofail,x-systemd.device-timeout=10s  0  0
 ```
 Note that your PARTUUID and UUID numbers will be different.
-
-Lastly, as we use `discard=async`, we need to add discard to the `crypttab`:
-
-```sh
-sed -i 's/luks/luks,discard/' /mnt/@/etc/crypttab
-cat /mnt/@/etc/crypttab
-# cryptswap UUID=4811153e-7b1d-489d-a350-a5b58e0c05b5 /dev/urandom swap,plain,offset=1024,cipher=aes-xts-plain64,size=512
-# cryptdata UUID=48acea7a-7290-40de-b3c8-3fab4e328f60 none luks,discard
-```
 
 ### Adjust configuration of systemd bootloader and kernelstub
 We need to adjust some settings for the systemd boot manager and also make sure these settings are not overwritten if we install or update kernels and modules.
@@ -335,9 +366,9 @@ Cool, you are now inside your system and we can check whether our `fstab` mounts
 mount -av
 # /boot/efi                : successfully mounted
 # /recovery                : successfully mounted
-# none                     : ignored
 # /                        : ignored
 # /home                    : successfully mounted
+# none                     : ignored
 ```
 Looks good! Now we need to update the initramfs to make it aware of our changes:
 ```bash
@@ -381,17 +412,20 @@ exit
 reboot now
 ```
 
-If all went well you should see a single passphrase prompt (YAY!), where you enter the luks passphrase and your system boots. 
+If all went well you should see a passphrase prompt (YAY!), where you enter the luks passphrase and your system boots.
 
-Now let's click through the welcome screen (actually it took a minute until the welcome screen appeared). Anyways, open a terminal to see whether everything is set up correctly:
+Now let's login and click through the welcome screen (actually it took a minute until the welcome screen appeared). Anyways, open a terminal to see whether everything is set up correctly:
 
 ```bash
+ls /dev/mapper
+# control  cryptdata  cryptswap  data-root
+
 sudo mount -av
 # /boot/efi                : already mounted
 # /recovery                : already mounted
-# none                     : ignored
 # /                        : ignored
 # /home                    : already mounted
+# none                     : ignored
 
 sudo mount -v | grep /dev/mapper
 # /dev/mapper/data-root on / type btrfs (rw,noatime,compress=zstd:3,ssd,discard=async,space_cache,commit=120,subvolid=264,subvol=/@)
@@ -410,29 +444,66 @@ sudo btrfs subvolume list /
 # ID 264 gen 410 top level 5 path @
 # ID 265 gen 410 top level 5 path @home
 ```
-If all look's good, let's update and upgrade the system:
+
+If your swap partition isn't active (`sudo swapon` returns no output) but `/dev/mapper/cryptswap` exists, increase `x-systemd.device-timeout` in `/etc/fstab` (or remove the option altogether) and reboot. The purpose of this option is to prevent your boot from hanging due to "A start job is running&hellip;" which is usually related to the swap partition, though it's extraordinarily unlikely you will encounter that problem using the configuration in this guide.
+
+If all look's good, connect to the internet and update the system:
 
 ```bash
 sudo apt update
-sudo apt upgrade
-sudo apt dist-upgrade
+sudo apt full-upgrade
 sudo apt autoremove
 sudo apt autoclean
 ```
 
-Optionally, if you installed on a SSD and NVME, enable `fstrim.timer` as [both fstrim and discard=async mount option can peacefully co-exist](https://www.phoronix.com/scan.php?page=news_item&px=Fedora-Btrfs-Opts-Discard-Comp):
+### Finishing touches for SSDs {#ssd}
+
+**TRIM:** Enable `fstrim.timer` as [both fstrim and discard=async mount option can peacefully co-exist](https://www.phoronix.com/scan.php?page=news_item&px=Fedora-Btrfs-Opts-Discard-Comp):
 ```sh
 sudo systemctl enable fstrim.timer
 ```
 Again, for [SSD trimming to work properly](https://www.heise.de/ct/hotline/Linux-Verschluesselte-SSD-trimmen-2405875.html), it is important that you add `discard` to your `crypttab` (see above). Also check whether you find `issue_discards=1` in `/etc/lvm/lvm.conf` (which should be correct by default).
 
-Now reboot:
+**Swappiness:** Heavy use of swap on an SSD will degrade it faster, though there are conflicting opinions about whether this accelerated degradation is insignificant on modern SSDs. Regardless, swap is significantly slower than RAM, so you should avoid using it if possible.
+
+If you have plenty of RAM and want to use your swap space for hibernation only:
+```bash
+sudo sysctl vm.swappiness=0
+# vm.swappiness = 0
+```
+Alternatively, any integer value between `1` and `100` would be the percentage of free RAM before swap is used, with `1` being the minimum without entirely disabling swappiness. For example, the default value of `10` means the system will start using swap when 90% of your RAM is in use.
+
+## Step 6: Enable hibernation
+
+We need to specify the resume device and update the initramfs:
+```bash
+sudo kernelstub -a "resume=/dev/mapper/cryptswap"
+echo "RESUME=/dev/mapper/cryptswap" | sudo tee /etc/initramfs-tools/conf.d/resume
+# RESUME=/dev/mapper/cryptswap
+sudo update-initramfs -c -k all
+```
+
+Reboot for good measure since we've made a lot of changes:
 ```bash
 sudo reboot now
 ```
 
+Now hibernation should be working! Test it out:
+```bash
+sudo systemctl hibernate
+```
 
-## Step 6: Install Timeshift and timeshift-autosnap-apt
+### Next steps
+
+**Add hibernate menu option in GNOME:** Install [System Action - Hibernate extension](https://extensions.gnome.org/extension/3814/system-action-hibernate/) and follow ["Enable Hibernate in Menus" instructions](https://ubuntuhandbook.org/index.php/2018/05/add-hibernate-option-ubuntu-18-04/).
+
+**Automatically hibernate after idling in suspend:** (Windows sleep behavior)
+```bash
+sudo ln -s /usr/lib/systemd/system/systemd-suspend-then-hibernate.service /etc/systemd/system/systemd-suspend.service
+```
+Then uncomment `HibernateDelaySec` in `/etc/systemd/sleep.conf` and set it to how long you want the system to stay in suspend before hibernating. Reboot to apply changes.
+
+## Step 7: Install Timeshift and timeshift-autosnap-apt
 
 Install Timeshift and configure it directly via the GUI:
 ```bash
