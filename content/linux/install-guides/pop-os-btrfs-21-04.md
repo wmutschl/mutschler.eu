@@ -74,7 +74,7 @@ We'll now create a disk table and add four partitions on `nvme0n1`:
 2. a 4096 MiB FAT32 partition for the Pop!_OS recovery system
 3. a 4096 MiB swap partition for encrypted swap use
    - Adjust the amount of swap space for your specific system and needs. See below [discussion on swappiness](#ssd). The kernel will try to compress the hibernation image to 2/5 the size of your RAM [by default](https://www.kernel.org/doc/html/latest/admin-guide/pm/sleep-states.html?highlight=image_size#basic-sysfs-interfaces-for-system-suspend-and-hibernation), but this is not always possible. If storage space is not at a premium, consider allocating at least half the size of your RAM for swap, or even as much as 2 GB larger than the size of your RAM.
-5. a luks2 encrypted partition which contains a LVM with one logical volume formatted with btrfs, which will be our root filesystem
+4. a luks2 encrypted partition which contains a LVM with one logical volume formatted with btrfs, which will be our root filesystem
 
 Some remarks:
 
