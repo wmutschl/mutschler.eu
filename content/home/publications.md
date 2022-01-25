@@ -10,33 +10,32 @@ headless: true
 weight: 91
 
 title: Publications
-subtitle: Click on title for abstract
+subtitle: ''
 
 content:
-  # Page type to display. E.g. post, talk, publication...
-  page_type: publication
-  # Choose how much pages you would like to display (0 = all pages)
-  count: 0
-  # Choose how many pages you would like to offset by
-  offset: 0
-  # Page order: descending (desc) or ascending (asc) date.
-  order: desc
   # Filter on criteria
   filters:
+    folders:
+      - publication
     tag: ''
     category: ''
     publication_type: '2'
     author: ''
     exclude_featured: false
+    exclude_future: false
+    exclude_past: false
+  # Choose how many pages you would like to display (0 = all pages)
+  count: 0
+  # Choose how many pages you would like to offset by
+  offset: 0
+  # Page order: descending (desc) or ascending (asc) date.
+  order: desc
 design:
   # Choose a view for the listings:
-  #   1 = List
-  #   2 = Compact
-  #   3 = Card
-  #   4 = Citation (publication only)
-  view: 4
+  view: citation
+  columns: '2'
 ---
 
 {{% callout note %}}
-Quickly discover relevant content by [filtering papers](./publication/).
+Click on the title for an abstract or discover relevant content by [filtering publications](./publication/).
 {{% /callout %}}
