@@ -111,8 +111,9 @@ copyright_license:
 abstract_length: 135
 plugins_js: []
 avatar:
-  gravatar: true
-  shape: square
+  gravatar: false
+  shape: circle
+  #shape: square
 publications:
   date_format: January 2006
   citation_style: apa
