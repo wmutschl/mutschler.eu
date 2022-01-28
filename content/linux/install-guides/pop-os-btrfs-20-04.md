@@ -198,10 +198,15 @@ ls /mnt/
 # @
 cd /
 ```
-Now let's create two more subvolumes `@home` and `@swap`. Note that the Pop!_OS installer does neither create a user nor a swapfile, so there is nothing we need to copy over.
+Now let's create two more subvolumes `@home` and `@swap`. Note that the Pop!_OS installer does not create a swapfile, so there is nothing we need to copy over for swap.
 ```bash
 btrfs subvolume create /mnt/@home
 # Create subvolume '/mnt/@home'
+mv /mnt/@/home/* /mnt/@home/
+ls -a /mnt/@/home
+# . ..
+ls -a /mnt/@home
+# . .. wmutschl
 btrfs subvolume create /mnt/@swap
 # Create subvolume '/mnt/@swap'
 btrfs subvolume list /mnt
