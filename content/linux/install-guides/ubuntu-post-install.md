@@ -208,7 +208,7 @@ Open GParted, check whether it works.
 #### Gnome-tweaks
 Using gnome tweaks
 ```bash
-sudo apt install gnome-tweak-tool 
+sudo apt install gnome-tweaks
 ```
 I like to display my battery life using a percentage, set do nothing on lid close, and add weekday to the clock. Also clicking on the clock I set the location for wheather.
 

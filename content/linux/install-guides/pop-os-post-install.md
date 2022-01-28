@@ -245,7 +245,7 @@ Open GParted, check whether it works.
 #### Gnome-tweaks
 Using gnome tweaks
 ```bash
-sudo apt install gnome-tweak-tool 
+sudo apt install gnome-tweaks
 ```
 In Gnome Tweaks I make the following changes:
 
