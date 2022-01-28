@@ -35,7 +35,7 @@ experience:
         * Teaching
         * PhD Supervision
   
-  - title: Developer
+  - title: Dynare Developer
     company: Dynare Team
     company_url: https://www.dynare.org/about/#team
     location: CEPREMAP, France
@@ -48,6 +48,14 @@ experience:
         * Bug fixing
         * Identification Toolbox
         * Method of Moments Estimation Toolbox
+
+  - title: Referee Service
+    company: ''
+    company_url: ''
+    location: ''
+    date_start: '2012-01-01'
+    date_end: ''
+    description: Computational Statistics and Data Analysis, Economic Modelling, Journal of Econometrics, Journal of Economic Dynamics and Control, Junior Management Science, National Science Centre Poland, The B.E. Journal of Macroeconomics
 
   - title: Principal Investigator (DFG funded)
     company: Deutsche Forschungsgesellschaft (DFG)
@@ -103,14 +111,6 @@ experience:
     date_start: '2012-06-01'
     date_end: '2015-10-31'
     description: PhD Thesis on *Local identification of nonlinear and non-Gaussian DSGE models*. Taught courses in DSGE Models, Empirical Methods, Macroeconometrics, Multivariate Time Series Analysis, Introduction to R, and GMM/Indirect Inference/Bootstrap.
-
-  - title: Referee Service
-    company: ''
-    company_url: ''
-    location: ''
-    date_start: '2012-01-01'
-    date_end: ''
-    description: Computational Statistics and Data Analysis, Economic Modelling, Journal of Economic Dynamics and Control, National Science Centre Poland, The B.E. Journal of Macroeconomics
 
 design:
   columns: '2'
