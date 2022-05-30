@@ -20,23 +20,8 @@ function update_wowchemy () {
   hugo mod tidy
 }
 
-# Update Netlify config
-function update_netlify () {
-  # - Update Netlify.toml with required Hugo version
-  if [ -f ./netlify.toml ]; then
-    echo "Attempting to get compatible Hugo version from https://raw.githubusercontent.com/wowchemy/wowchemy-hugo-modules/main/wowchemy/config.yaml ..."
-    curl -o "tmp_get_version" https://raw.githubusercontent.com/wowchemy/wowchemy-hugo-modules/main/wowchemy/config.yaml
-    version=$(sed -n 's/^[[:space:]]*min: //p' "tmp_get_version" | tr -d "'")
-    version="${version}"
-    echo "Set Netlify Hugo version to v${version}"
-    sed -i.bak -e "s/HUGO_VERSION = .*/HUGO_VERSION = \"$version\"/g" ./netlify.toml && rm -f ./netlify.toml.bak
-    rm tmp_get_version
-  fi
-}
-
 # Perform update
 update_wowchemy
-update_netlify
 
 echo
 echo "Warning: review the changes made by this helper script before pushing them to your site."
