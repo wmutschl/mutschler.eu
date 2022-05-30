@@ -6,7 +6,7 @@ title: Willi Mutschler
 superuser: true
 
 # Role/position/tagline
-role: "Assistant Professor for International Macroeconomics<br/>Open-Source Enthusiast"
+role: "Assistant Professor for International Macroeconomics<br/>Member of Dynare Team"
 
 # Organizations/Affiliations to show in About widget
 organizations:
@@ -27,9 +27,7 @@ interests:
 - Computational Economics
 - DSGE Models
 - Econometrics
-- Linux
 - Macroeconomics
-- Open Source
 - Rare Disasters
 - Time Series Analysis
 
@@ -99,8 +97,8 @@ highlight_name: false
 ---
 I am an *Assistant Professor* 🧑‍🏫 in *International Macroeconomics* 🌍 at the [University of Tuebingen](https://uni-tuebingen.de/en/19615) 🎓. My research interests 🔬 include quantitative macroeconomics 💹 and econometrics 🧮 with a focus on developing identification and estimation methods 🔮 for dynamic and stochastic models with skewed distributions 🪝 and rare disasters 🌪️. I am also a member of [Dynare's](https://www.dynare.org/about/#team) 📈 core development team and maintain the identification and method-of-moments toolboxes 🧰.
 
-I am an enthusiastic *Apple* 🍏 and *Linux* 🐧 user and actively contribute to several *open-source projects* 🤓 such as [Dynare](https://dynare.org), [Timeshift](https://github.com/wmutschl/timeshift) and [Timeshift-autosnap-apt](https://github.com/wmutschl/timeshift-autosnap-apt). You can find 🔍 me on several forums #️⃣ like [Ask Fedora](https://ask.fedoraproject.org/u/wmutschl), [Dynare](https://forum.dynare.org/u/wmutschl), [Destination Linux](https://discourse.destinationlinux.network/u/wmutschl/), [EndeavourOS](https://forum.endeavouros.com/u/wmutschl), [Pop!_Planet](https://pop-planet.info/forums/members/wmutschl.104) or [Ubuntu](https://discourse.ubuntu.com/u/wmutschl).
+You are highly encouraged to check out 👀 my [Dynare Teaching Materials](dynare).
 
-You are highly encouraged to check out 👀 my [Dynare Teaching Materials](dynare) or [Linux Guides](linux). The source code 📜 of the entire site is available on [GitHub](https://github.com/wmutschl/mutschler.eu); getting involved 👋 by opening issues or pull-request 🧑‍💻 is greatly appreciated 🙏. 
+The source code 📜 of the entire site is available on [GitHub](https://github.com/wmutschl/mutschler.eu); getting involved 👋 by opening issues or pull-request 🧑‍💻 is greatly appreciated 🙏. 
 
 Feel free to *[contact](#contact)* 🗣️ me directly or to *[schedule an appointment](https://schedule.mutschler.eu)* 🗓️.

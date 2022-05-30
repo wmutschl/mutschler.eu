@@ -8,8 +8,4 @@ draft: false
 toc: false
 weight: 1
 ---
-{{< figure src="linuxhacker.jpg" >}}
-
-{{< toc hide_on="xl" >}}
-
-{{< list_children >}}
+This site has moved to [https://mutschler.dev](https://mutschler.dev).

@@ -19,12 +19,6 @@ main:
   - name: Dynare
     url: dynare/
     weight: 1
-  - name: Linux
-    url: linux/
-    weight: 2
-  - name: Apple
-    url: apple/
-    weight: 3
   - name: Contact
     url: '#contact'
     weight: 50
