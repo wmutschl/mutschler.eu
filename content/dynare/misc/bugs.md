@@ -6,7 +6,7 @@ summary: A quick tutorial on how to proceed in case there is an error in the MAT
 type: book
 draft: false
 toc: true
-weight: 10
+weight: 90
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
