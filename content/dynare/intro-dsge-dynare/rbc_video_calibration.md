@@ -6,7 +6,7 @@ summary: 'In this video I show how to calibrate the parameters of the RBC model 
 type: book
 draft: false
 toc: true
-weight: 3
+weight: 30
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 

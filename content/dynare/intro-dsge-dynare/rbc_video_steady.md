@@ -6,7 +6,7 @@ summary: In this video we focus on computing the steady-state of the RBC model b
 type: book
 draft: false
 toc: true
-weight: 2
+weight: 20
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu. Pull requests are very much appreciated.***
 

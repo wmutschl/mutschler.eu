@@ -6,7 +6,7 @@ summary: In this video we derive the baseline Real Business Cycle (RBC) model wi
 type: book
 draft: false
 toc: true
-weight: 1
+weight: 10
 ---
 
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***

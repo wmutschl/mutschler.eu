@@ -7,7 +7,7 @@ by using Dynare''s *perfect_foresight_setup* and *perfect_foresight_solver* (i.e
 type: book
 draft: false
 toc: true
-weight: 4
+weight: 40
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
