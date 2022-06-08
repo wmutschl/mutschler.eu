@@ -2,7 +2,7 @@
 title: Basic New Keynesian model
 linktitle: Basic NK model
 summary: This tutorial covers the math of deriving the nonlinear model equations of a basic New Keynesian model with a linear production function and nominal price rigidities a la Calvo.
-#date: "2021-08-18"
+date: "2022-05-03"
 type: book
 draft: false
 toc: true
