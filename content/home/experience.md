@@ -25,6 +25,7 @@ experience:
   - title: Assistant Professor for International Macroeconomics
     company: University of Tuebingen
     company_url: https://uni-tuebingen.de/en/19615
+    company_logo: ''
     location: Tübingen, Germany
     date_start: '2021-04-01'
     date_end: ''
@@ -38,6 +39,7 @@ experience:
   - title: Dynare Developer
     company: Dynare Team
     company_url: https://www.dynare.org/about/#team
+    company_logo: ''
     location: CEPREMAP, France
     date_start: '2019-03-01'
     date_end: ''
@@ -52,6 +54,7 @@ experience:
   - title: Referee Service
     company: ''
     company_url: ''
+    company_logo: ''
     location: ''
     date_start: '2012-01-01'
     date_end: ''
@@ -60,6 +63,7 @@ experience:
   - title: Principal Investigator (DFG funded)
     company: Deutsche Forschungsgesellschaft (DFG)
     company_url: https://gepris.dfg.de/gepris/projekt/411754673?language=en
+    company_logo: ''
     location: Münster/Tübingen, Germany
     date_start: '2019-04-01'
     date_end: '2022-07-01'
@@ -75,6 +79,7 @@ experience:
   - title: Full Professor in Econometrics
     company: University of Muenster
     company_url: https://www.wiwi.uni-muenster.de/cqe/de/center/personen/willi-mutschler-1
+    company_logo: ''
     location: Münster, Germany
     date_start: '2017-10-01'
     date_end: '2018-09-30'
@@ -83,6 +88,7 @@ experience:
   - title: Research Fellow (PostDoc)
     company: SFB 823 at Technical University Dortmund
     company_url: https://www.statistik.tu-dortmund.de/sfb823.html
+    company_logo: ''
     location: Dortmund, Germany
     date_start: '2015-11-01'
     date_end: '2017-06-30'
@@ -91,6 +97,7 @@ experience:
   - title: Freelance
     company: Institut der Deutschen Wirtschaft
     company_url: https://www.iwkoeln.de/
+    company_logo: ''
     location: Köln, Germany
     date_start: '2018-02-01'
     date_end: '2019-12-01'
@@ -99,6 +106,7 @@ experience:
   - title: PhD Traineeship
     company: European Central Bank
     company_url: https://www.ecb.europa.eu
+    company_logo: ''
     location: Frankfurt, Germany
     date_start: '2015-05-01'
     date_end: '2015-07-31'
@@ -107,6 +115,7 @@ experience:
   - title: Research Associate (PhD Student)
     company: University of Muenster
     company_url: https://www.wiwi.uni-muenster.de/oeew/de
+    company_logo: ''
     location: Münster, Germany
     date_start: '2012-06-01'
     date_end: '2015-10-31'

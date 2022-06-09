@@ -7,6 +7,5 @@ type: book
 draft: false
 toc: false
 weight: 1
-
 ---
 This site has moved to [https://mutschler.dev](https://mutschler.dev).

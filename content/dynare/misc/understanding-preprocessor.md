@@ -2,7 +2,7 @@
 title: 'Understanding Dynare''s Preprocessor OR How to manually pre-process a DSGE model (with MATLAB)'
 linktitle: Understanding Dynare Preprocessor
 summary: This is a Zoom recording (hope the quality is still okay) of a session on Dynare's preprocessor and what it actually does. I illustrate preprocessing on a RBC model by manually re-doing some steps in MATLAB with a focus on writing out script files of the static/dynamic model equations and Jacobians. Note that Dynare's preprocessor is written in C++ and is capable to do much more things than I cover in this video, but I still hope this is useful for people who need to manually pre-process a DSGE model.
-date: "2022-06-01"
+date: '2022-06-01'
 type: book
 draft: false
 toc: true

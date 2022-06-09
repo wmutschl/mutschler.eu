@@ -1,31 +1,42 @@
 ---
-title: "Dynare: Reference Manual, Version 4"
+title: 'Dynare: Reference Manual'
+
+# Authors
+# If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
+# and it will be replaced with their full name and linked to their profile.
 authors:
-- Stéphane Adjemian
-- Houtan Bastani
-- Michel Juillard
-- Frédéric Karamé
-- Junior Maih
-- Ferhat Mihoubi
-- Willi Mutschler
-- George Perendia
-- Johannes Pfeifer
-- Marco Ratto
-- Sébastien Villemot 
-date: "2021-03-01"
+  - Stéphane Adjemian
+  - Houtan Bastani
+  - Michel Juillard
+  - Frédéric Karamé
+  - Junior Maih
+  - Ferhat Mihoubi
+  - Willi Mutschler
+  - George Perendia
+  - Johannes Pfeifer
+  - Marco Ratto
+  - Sébastien Villemot
+
+# Author notes (optional)
+#author_notes:
+#  - 'Equal contribution'
+#  - 'Equal contribution'
+
+date: '2021-03-01'
+doi: ''
 
 # Schedule page publish date (NOT publication's date).
-publishDate: ""
+publishDate: ''
 
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
 # 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
 # 7 = Thesis; 8 = Patent
-publication_types: ["3"]
+publication_types: ['3']
 
 # Publication name and optional abbreviated publication name.
-publication: "Dynare Working Papers"
-publication_short: ""
+publication: Dynare Working Papers
+publication_short: ''
 
 abstract: Dynare is a software platform for handling a wide class of economic models, in particular dynamic stochastic general equilibrium (DSGE) and overlapping generations (OLG) models. The models solved by Dynare include those relying on the rational expectations hypothesis, wherein agents form their expectations about the future in a way consistent with the model. But Dynare is also able to handle models where expectations are formed differently; on one extreme, models where agents perfectly anticipate the future; on the other extreme, models where agents have limited rationality or imperfect knowledge of the state of the economy and, hence, form their expectations through a learning process. Dynare offers a user-friendly and intuitive way of describing these models. It is able to perform simulations of the model given a calibration of the model parameters and is also able to estimate these parameters given a dataset. Dynare is a free software, which means that it can be downloaded free of charge, that its source code is freely available, and that it can be used for both non-profit and for-profit purposes.
 
@@ -33,28 +44,28 @@ abstract: Dynare is a software platform for handling a wide class of economic mo
 summary: Dynare is a software platform for handling a wide class of economic models, in particular dynamic stochastic general equilibrium (DSGE) and overlapping generations (OLG) models. The models solved by Dynare include those relying on the rational expectations hypothesis, wherein agents form their expectations about the future in a way consistent with the model. But Dynare is also able to handle models where expectations are formed differently; on one extreme, models where agents perfectly anticipate the future; on the other extreme, models where agents have limited rationality or imperfect knowledge of the state of the economy and, hence, form their expectations through a learning process. Dynare offers a user-friendly and intuitive way of describing these models. It is able to perform simulations of the model given a calibration of the model parameters and is also able to estimate these parameters given a dataset. Dynare is a free software, which means that it can be downloaded free of charge, that its source code is freely available, and that it can be used for both non-profit and for-profit purposes.
 
 tags:
-- DSGE
-- Dynare
+  - DSGE
+  - Dynare
 
+# Display this page in the Featured widget?
 featured: false
 
 links:
-- name: Dynare Working Paper 1
-  url: https://www.dynare.org/wp-repo/dynarewp001.pdf
+url_pdf: https://www.dynare.org/wp-repo/dynarewp001.pdf
 url_code: https://git.dynare.org/Dynare/dynare
 url_dataset: ''
-url_preprint: ''
 url_poster: ''
 url_project: ''
 url_slides: ''
 url_source: ''
 url_video: ''
+url_preprint: ''
 
 # Featured image
-# To use, add an image named `featured.jpg/png` to your page's folder. 
+# To use, add an image named `featured.jpg/png` to your page's folder.
 image:
   caption: ''
-  focal_point: ""
+  focal_point: ''
   preview_only: false
 
 # Associated Projects (optional).
@@ -62,7 +73,8 @@ image:
 #   Simply enter your project's folder or file name without extension.
 #   E.g. `internal-project` references `content/project/internal-project/index.md`.
 #   Otherwise, set `projects: []`.
-projects: []
+projects:
+  - dynare
 
 # Slides (optional).
 #   Associate this publication with Markdown slides.

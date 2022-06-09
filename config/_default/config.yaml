@@ -4,8 +4,7 @@
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
 title: Willi Mutschler # Website name
-baseurl: 'https://mutschler.eu' # Website URL
-copyright: '© 2020-present Willi Mutschler' # Footer text, e.g. '© {year} Me'
+baseURL: 'https://mutschler.eu/' # Website URL
 
 ############################
 ## LANGUAGE
@@ -68,4 +67,6 @@ related:
     - name: categories
       weight: 70
 security:
+  _merge: deep
+sitemap:
   _merge: deep

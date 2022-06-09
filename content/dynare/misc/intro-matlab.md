@@ -2,7 +2,7 @@
 title: Introduction to MATLAB
 linktitle: Introduction to MATLAB
 summary: A quick tutorial on MATLAB.
-date: "2022-04-18"
+date: '2022-04-18'
 type: book
 draft: false
 toc: true

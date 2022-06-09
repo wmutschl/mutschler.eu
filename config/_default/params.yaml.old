@@ -1,0 +1,38 @@
+edit_page:
+  repo_url: 'https://github.com/wmutschl/mutschler.eu'
+  content_dir: ''
+  repo_branch: main
+  editable:
+    page: false
+    post: false
+    book: false
+show_related:
+  book: true
+  page: false
+  post: true
+  project: true
+  publication: true
+  event: true
+reading_time: true
+section_pager: false
+docs_section_pager: true
+sharing: true
+
+abstract_length: 135
+plugins_js: []
+
+publications:
+  date_format: January 2006
+  citation_style: apa
+projects:
+  post_view: 2
+  publication_view: 2
+  talk_view: 2
+breadcrumb:
+  page_types:
+    book: true
+icon:
+  pack:
+    ai: true
+    fab: true
+    fa: true

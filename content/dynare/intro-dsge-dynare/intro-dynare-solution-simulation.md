@@ -2,7 +2,7 @@
 title: Introduction to Dynare (very rough and brief) with a focus on solution and simulation methods
 linktitle: Intro Dynare solution and simulation
 summary: A quick and rough introduction to Dynare on MATLAB with a focus on solution and simulation methods.
-date: "2022-04-18"
+date: '2022-04-18'
 type: book
 draft: false
 toc: true

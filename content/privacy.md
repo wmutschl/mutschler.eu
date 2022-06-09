@@ -1,6 +1,6 @@
 ---
 title: Privacy Policy
-date: "2020-03-18T00:00:00+01:00"
+date: '2020-03-18T00:00:00+01:00'
 draft: false
 share: false
 commentable: false
@@ -8,8 +8,8 @@ editable: false
 
 # Optional header image (relative to `static/media/` folder).
 header:
-  caption: ""
-  image: ""
+  caption: ''
+  image: ''
 ---
 
 ## Impressum
@@ -62,4 +62,3 @@ Insofar as the content on this site was not created by the operator, the copyrig
 
 
 Source: [eRecht24 Impressum Generator](https://www.e-recht24.de/impressum-generator.html)
-
