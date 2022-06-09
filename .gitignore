@@ -10,3 +10,5 @@ go.sum
 .hugo_build.lock
 
 .DS_Store
+
+static/files/dynare-macos-pkg/
