@@ -9,12 +9,11 @@ authors:
   - Houtan Bastani
   - Michel Juillard
   - Frédéric Karamé
-  - Junior Maih
   - Ferhat Mihoubi
   - Willi Mutschler
-  - George Perendia
   - Johannes Pfeifer
   - Marco Ratto
+  - Normann Rion
   - Sébastien Villemot
 
 # Author notes (optional)
@@ -22,7 +21,7 @@ authors:
 #  - 'Equal contribution'
 #  - 'Equal contribution'
 
-date: '2021-03-01'
+date: '2022-01-01'
 doi: ''
 
 # Schedule page publish date (NOT publication's date).
@@ -51,13 +50,13 @@ tags:
 featured: false
 
 links:
-url_pdf: https://www.dynare.org/wp-repo/dynarewp001.pdf
+url_pdf: https://www.dynare.org/wp-repo/dynarewp072.pdf
 url_code: https://git.dynare.org/Dynare/dynare
 url_dataset: ''
 url_poster: ''
-url_project: ''
+url_project: 'https://www.dynare.org/about'
 url_slides: ''
-url_source: ''
+url_source: 'https://git.dynare.org/Dynare/dynare/-/tree/master/doc/manual/source'
 url_video: ''
 url_preprint: ''
 
