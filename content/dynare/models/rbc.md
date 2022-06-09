@@ -15,17 +15,13 @@ Consider the basic Real Business Cycle (RBC) model with leisure. The representat
     \underset{\{C_{t},I_{t},L_t,K_{t}\}}{\max} E_t \sum_{j=0}^{\infty} \beta^{j} U_{t+j}
 \end{align*}
 with $\beta <1$ denoting the discount factor and $E_t$ is expectation given information at time $t$. We will consider two functional specifications for the contemporaneous utility function.
-
-First log-utility:
+{{< math >}}
 \begin{align*}
-U_t = \gamma \log(C_t) + \psi \log{(1-L_t)} & ~~[\text{log-utility}]
+U_t &= \gamma \log(C_t) + \psi \log{(1-L_t)} & ~~[\text{log-utility}]
+\\
+U_t &= \gamma \frac{C_{t}^{1-\eta_C}-1}{1-\eta_C} +\psi \frac{(1-L_{t})^{1-\eta_L}-1}{1-\eta_L} &~~[\text{CES}]
 \end{align*}
-
-Second a CES-utility function:
-\begin{align*}
-U_t = \gamma \frac{C_{t}^{1-\eta_C}-1}{1-\eta_C} +\psi \frac{(1-L_{t})^{1-\eta_L}-1}{1-\eta_L} &~~[\text{CES}]
-\end{align*}
-
+{{< /math >}}
 Note that due to L'Hopital's rule $\eta_C=\eta_L=1$ implies the log-utility specification. In both cases, contemporenous utility is additively separable and has two arguments: consumption $C_t$ and labor $L_t$. The marginal utility of consumption is positive, whereas more labor reduces utility. Accordingly, $\gamma$ is the consumption utility parameter and $\psi$ the labor disutility parameter. In each period the household takes the real wage $W_t$ as given and supplies perfectly elastic labor service to the representative firm. In return, she receives real labor income in the amount of $W_t L_t$ and, additionally, profits $\Pi_t$ from the firm as well as revenue from lending capital $K_t$ at interest rate $R_t$ to the firms, as it is assumed that the firm and capital stock are owned by the household. Income and wealth are used to finance consumption $C_t$ and investment $I_t$. In total, this defines the (real) budget constraint of the household:
 \begin{align*}
 C_t + I_t = W_t L_t + R_t K_t + \Pi_t
