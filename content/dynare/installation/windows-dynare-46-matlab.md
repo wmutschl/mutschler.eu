@@ -10,9 +10,7 @@ weight: 10
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube AvLF7l64zHs >}}
-```
 
 ## Description
 This is a quick video tutorial for Windows 10 on how to (1) install MATLAB R2021a, (2) install Dynare 4.6.4, (3) add the path of Dynare to MATLAB and (4) test if everything is working.

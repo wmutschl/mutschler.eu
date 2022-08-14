@@ -10,9 +10,7 @@ weight: 70
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube _CbLr11aeQ4 >}}
-```
 
 ## Description
 A quick tutorial on MATLAB and the most important features that one uses in Macroeconomics or for Dynare.

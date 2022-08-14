@@ -10,9 +10,7 @@ weight: 30
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube HRpynlbZBzM >}}
-```
 
 ## Description
 This video is part of a series of videos on the baseline Real Business Cycle model and its implementation in Dynare. In this video I show how to calibrate the model parameters in a sophisticated way using Dynare's preprocessing capabilities. First, we cover some general ideas and tips how to calibrate the parameters of a DSGE model, focusing on the RBC model with leisure. Then I show how to accomplish this in Dynare either directly or, a more advanced way, by modularizing your mod file and changing the type of variables and parameters. Once you start working with large-scale models, this modularization technique will make your models much more tractable.

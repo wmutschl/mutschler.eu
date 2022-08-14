@@ -10,9 +10,7 @@ weight: 10
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube 6vajPMksxJM >}}
-```
 
 ## Description
 In this video I will show you how to incorporate the Zero Lower Bound on nominal interest rates in the canonical New Keynesian model with Dynare. We'll discuss why and how this has an adverse effect on welfare, and how optimal policy under discretion and commitment looks like. We'll compare both cases in Dynare.

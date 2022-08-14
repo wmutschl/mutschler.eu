@@ -11,9 +11,7 @@ weight: 10
 
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube ZfsKGzR84hQ >}}
-```
 
 ## Description
 This video is part of a series of videos on the baseline Real Business Cycle model and its implementation in Dynare. It also overviews and introduces basic features of Dynare's preprocessor like workspace variables, global structures, dynamic vs. static model equations, Latex capabilities and model local variables.

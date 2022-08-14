@@ -12,9 +12,7 @@ weight: 11
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
 ## Algebra of New Keynesian models
-```md
 {{< youtube oEf9bc9_qxw >}}
-```
 
 ### Description
 This tutorial covers the math of deriving the nonlinear model equations of a basic New Keynesian model with a linear production function and nominal price rigidities a la Calvo.

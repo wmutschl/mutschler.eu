@@ -16,15 +16,11 @@ Recordings and lecture notes used in the session on Method-of-Moments estimation
 
 ## Lecture
 
-```md
 {{< youtube gOcwxZJND2M >}}
-```
 
 - [Slides used in the video](/files/estimation/dynare-summer-school-2021/Dynare_Method_of_Moments_presentation.pdf)
 - [Replication files used in the video](/files/estimation/dynare-summer-school-2021/RBC_MoM.zip)
 
 ## Q&A Session
 
-```md
 {{< youtube h5IRBHxjBrU >}}
-```

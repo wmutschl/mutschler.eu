@@ -110,9 +110,7 @@ However, we need to set up a configuration file first, which is a bit different 
 
 
 ## Windows
-```md
 {{< youtube QKVm4bKTRbY >}}
-```
 
 ### Step 1: PsTools
 
@@ -157,9 +155,7 @@ Another hint: If you always use the same configuration file, you can copy your c
 
 ## MacOS
 
-```md
 {{< youtube yuB75NmE3Is >}}
-```
 
 ### Step 1: Configuration file
 Create a new file with a text editor or MATLAB's script editor and call it, for example, `myconf`.
@@ -201,9 +197,7 @@ Another hint: If you always use the same configuration file, you can copy your `
 
 ## Linux
 
-```md
 {{< youtube ei8MjNipUyU >}}
-```
 
 ### Step 1: Configuration file
 

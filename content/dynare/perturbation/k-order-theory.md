@@ -10,9 +10,7 @@ weight: 1
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube Kncb31hyp2E >}}
-```
 
 ## Description
 This video is a didactic reference and in-depth review of k-order perturbation.

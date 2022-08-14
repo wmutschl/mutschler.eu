@@ -11,9 +11,7 @@ weight: 10
 
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube SH7J74-zsRY >}}
-```
 
 ## Description
 In this video I focus on Optimal Policy in the baseline New Keynesian model and discuss concepts like the Divine Coincidence, Indeterminacy, Taylor Principle, Optimal Policy under Commitment, Optimal Policy under Discretion, Simple Implementable Rules and how to compare different policy regimes. Even though this video provides some insight on the theory behind these concepts, I try to not get caught up in the details, but focus mainly on the implementation aspects in Dynare.

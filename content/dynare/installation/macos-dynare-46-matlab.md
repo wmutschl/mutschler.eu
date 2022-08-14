@@ -10,9 +10,7 @@ weight: 20
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube jFqNO4Hw-3Y >}}
-```
 
 ## Description
 This is a quick video tutorial for macOS Big Sur on how to (1) install MATLAB R2021a, (2) install Dynare 4.6.4, (3) add the path of Dynare to MATLAB and (4) test if everything is working. The installation is done on an Apple Silicon M1 Macbook Air.

@@ -10,9 +10,7 @@ weight: 23
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube HVnK9QrPYJY >}}
-```
 
 ## Description
 This is a quick video tutorial for macOS Big Sur on how to compile Dynare from the git source. The installation is done on an Apple Silicon M1 Macbook Air.

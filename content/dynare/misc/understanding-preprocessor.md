@@ -10,9 +10,7 @@ weight: 80
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube qTC2hP__WLA >}}
-```
 
 ## Description
 This is a Zoom recording (hope the quality is still okay) of a session on Dynare's preprocessor and what it actually does. I illustrate preprocessing on a RBC model by manually re-doing some steps in MATLAB with a focus on writing out script files of the static/dynamic model equations and Jacobians.

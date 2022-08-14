@@ -10,9 +10,7 @@ weight: 80
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube Hi28OQmkQ80 >}}
-```
 
 ## Description
 This is a Zoom recording (hope the quality is still okay) of a session on computing the steady-state of DSGE models numerically. I try to explain what the underlying objective function is and what it means to use numerical optimization techniques. This is illustrated by the RBC model, preprocessed manually in MATLAB and using different optimization methods. I also compare this to what Dynare's steady command does.

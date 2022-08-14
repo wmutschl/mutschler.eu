@@ -10,9 +10,7 @@ weight: 1
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube NDFSUx46FvM >}}
-```
 
 ## Description
 A quick and rough introduction to Dynare on MATLAB with a focus on solution and simulation methods.

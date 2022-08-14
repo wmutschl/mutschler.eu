@@ -10,9 +10,7 @@ weight: 21
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube uewN2j4mlic >}}
-```
 
 ## Description
 This is a quick video tutorial for macOS Big Sur on how to (1) use Homebrew to install Octave 6.2.0 and Dynare 4.6.4, (2) add the path of Dynare to Octave and (3) test if everything is working. The installation is done on an Apple Silicon M1 Macbook Air.

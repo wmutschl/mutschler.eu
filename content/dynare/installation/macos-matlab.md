@@ -10,9 +10,7 @@ weight: 29
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube EBz7BslRhDw >}}
-```
 
 ## Description
 This is a quick video tutorial for macOS Big Sur on how to install MATLAB using Rosetta 2 on an Apple Silicon M1 Macbook Air running Big Sur.

@@ -10,9 +10,7 @@ weight: 90
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube GSWW7PsIgAE >}}
-```
 
 ## Description
 A quick tutorial on how to proceed in case there is an error in the MATLAB routines of Dynare.

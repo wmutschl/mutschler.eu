@@ -10,9 +10,7 @@ weight: 1
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube Ei_z0HSfYNo >}}
-```
 
 ## Description
 In this tutorial we will discuss four different ways to compute the steady-state of a DSGE model in Dynare. We will cover (1) the steady_state_model block if your steady-state is available in closed-form, (2) the steady_state_model block with a helper function if some variables are not available in closed-form, (3) writing a steadystate MATLAB function, and (4) the initval block. As our example model we use a variant of the [RBC model with leisure](../../models/rbc) with a CES or log utility function. That is, when we consider the log-utility case, the steady state is given analytically, whereas in the CES utility case we cannot solve for labor in closed-form.

@@ -10,9 +10,7 @@ weight: 20
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu. Pull requests are very much appreciated.***
 
-```md
 {{< youtube 4xeoLh3edpo >}}
-```
 
 ## Description
 This video is part of a series of videos on the baseline Real Business Cycle model and its implementation in Dynare. We focus on computing the steady-state both analytically and numerically. First, we derive the steady-state using pen and paper and then implement this using either an *initval* or *steady_state_model* block in Dynare. We also cover "helper functions" that introduce numerical optimization in an otherwise analytical *steady_state_model* block, in order to compute the steady-state for variables for which we cannot derive closed-form expressions by hand.

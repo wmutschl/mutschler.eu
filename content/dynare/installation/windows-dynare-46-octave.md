@@ -10,9 +10,7 @@ weight: 11
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube XgGLDNQfVJ4 >}}
-```
 
 ## Description
 This is a quick video tutorial for Windows 10 on how to (1) install GNU Octave 6.2.0, (2) install Dynare 4.6.4, (3) add the path of Dynare to Octave and (4) test if everything is working.

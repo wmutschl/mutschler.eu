@@ -11,9 +11,7 @@ weight: 40
 ---
 ***Please feel free to raise any comments or issues on the [website's Github repository](https://github.com/wmutschl/mutschler.eu). Pull requests are very much appreciated.***
 
-```md
 {{< youtube KHTEZiw9ukU >}}
-```
 
 ## Description
 This video is part of a series of videos on the baseline Real Business Cycle model and its implementation in Dynare. In this video I focus on simulations and discuss the difference between the deterministic and stochastic model framework of Dynare. I provide intuition how Dynare "solves" or "simulates" these different model frameworks and guidance on when to run either deterministic or stochastic simulations. Then I show how to simulate various scenarios in the baseline RBC model. 
