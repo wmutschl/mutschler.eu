@@ -1,5 +1,5 @@
 ---
-title: 'Dynare: Reference Manual'
+title: 'Dynare: Reference Manual Version 4'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
@@ -7,13 +7,14 @@ title: 'Dynare: Reference Manual'
 authors:
   - Stéphane Adjemian
   - Houtan Bastani
+  - Junior Maih
   - Michel Juillard
   - Frédéric Karamé
   - Ferhat Mihoubi
   - Willi Mutschler
+  - George Perendia
   - Johannes Pfeifer
   - Marco Ratto
-  - Normann Rion
   - Sébastien Villemot
 
 # Author notes (optional)
@@ -21,7 +22,7 @@ authors:
 #  - 'Equal contribution'
 #  - 'Equal contribution'
 
-date: '2022-01-01'
+date: '2011-04-01'
 doi: ''
 
 # Schedule page publish date (NOT publication's date).
@@ -34,7 +35,7 @@ publishDate: ''
 publication_types: ['3']
 
 # Publication name and optional abbreviated publication name.
-publication: Dynare Working Papers
+publication: Dynare Working Papers 1, revised March 2021
 publication_short: ''
 
 abstract: Dynare is a software platform for handling a wide class of economic models, in particular dynamic stochastic general equilibrium (DSGE) and overlapping generations (OLG) models. The models solved by Dynare include those relying on the rational expectations hypothesis, wherein agents form their expectations about the future in a way consistent with the model. But Dynare is also able to handle models where expectations are formed differently; on one extreme, models where agents perfectly anticipate the future; on the other extreme, models where agents have limited rationality or imperfect knowledge of the state of the economy and, hence, form their expectations through a learning process. Dynare offers a user-friendly and intuitive way of describing these models. It is able to perform simulations of the model given a calibration of the model parameters and is also able to estimate these parameters given a dataset. Dynare is a free software, which means that it can be downloaded free of charge, that its source code is freely available, and that it can be used for both non-profit and for-profit purposes.
@@ -50,13 +51,13 @@ tags:
 featured: false
 
 links:
-url_pdf: https://www.dynare.org/wp-repo/dynarewp072.pdf
-url_code: https://git.dynare.org/Dynare/dynare
+url_pdf: https://www.dynare.org/wp-repo/dynarewp001.pdf
+url_code: https://git.dynare.org/Dynare/dynare/-/tree/4.6
 url_dataset: ''
 url_poster: ''
 url_project: 'https://www.dynare.org/about'
 url_slides: ''
-url_source: 'https://git.dynare.org/Dynare/dynare/-/tree/master/doc/manual/source'
+url_source: 'https://git.dynare.org/Dynare/dynare/-/tree/4.6/doc/manual/source'
 url_video: ''
 url_preprint: ''
 
