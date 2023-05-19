@@ -90,10 +90,10 @@ highlight_name: false
 
 ## this is how to use icons in posts: {{< icon name="download" pack="fas" >}}
 ---
-I am an *Assistant Professor* 🧑‍🏫 in *International Macroeconomics* 🌍 at the [University of Tuebingen](https://uni-tuebingen.de/en/19615) 🎓. My research interests 🔬 include quantitative macroeconomics 💹 and econometrics 🧮 with a focus on developing identification and estimation methods 🔮 for dynamic and stochastic models with skewed distributions 🪝 and rare disasters 🌪️. I am also a member of [Dynare's](https://www.dynare.org/about/#team) 📈 core development team and maintain the identification and method-of-moments toolboxes 🧰.
+I am an *Assistant Professor* in *International Macroeconomics* at the [University of Tuebingen](https://uni-tuebingen.de/en/19615). My research interests include quantitative macroeconomics and econometrics with a focus on developing identification and estimation methods for dynamic and stochastic models with skewed distributions and rare disasters.
 
-You are highly encouraged to check out 👀 my [Dynare Teaching Materials](dynare).
+I am a member of [Dynare's](https://www.dynare.org/about/#team) core development team and maintain the identification and method-of-moments toolboxes.
+You are highly encouraged to check out my [Dynare Teaching Materials](dynare)
+  and courses on [Computational Macroeconomics](https://github.com/wmutschl/Computational-Macroeconomics) and [Quantitative Macroeconomics](https://github.com/wmutschl/Quantitative-Macroeconomics).
 
-The source code 📜 of the entire site is available on [GitHub](https://github.com/wmutschl/mutschler.eu); getting involved 👋 by opening issues or pull-request 🧑‍💻 is greatly appreciated 🙏. 
-
-Feel free to *[contact](#contact)* 🗣️ me directly or to *[schedule an appointment](https://schedule.mutschler.eu)* 🗓️.
+Feel free to *[contact](#contact)* me directly or to *[schedule an appointment](https://schedule.mutschler.eu)*.
