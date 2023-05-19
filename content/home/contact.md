@@ -37,7 +37,7 @@ content:
   coordinates:
     latitude: '48.52970222407578'
     longitude: '9.060530898768823'
-  directions: 'Enter the building and go to the fourth floor. My office is number 416.'
+  directions: 'Enter the building and go to the 7th floor. My office is number 416.'
 #  office_hours:
 #    - 'Monday 10:00 to 13:00'
 #    - 'Wednesday 09:00 to 10:00'
