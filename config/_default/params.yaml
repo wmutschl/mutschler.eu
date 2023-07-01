@@ -6,10 +6,9 @@
 # Appearance
 
 appearance:
-  theme_day: minimal
-  theme_night: minimal
-  font: native
-  font_size: L
+  theme_night: my_theme
+  font: custom_font
+  font_size: M
 
 # SEO
 
@@ -110,3 +109,5 @@ extensions:
     enable: true
   academicons:
     enable: true
+
+plugins_css: ["custom","codefolding"]
