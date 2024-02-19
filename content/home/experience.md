@@ -51,6 +51,15 @@ experience:
         * Identification Toolbox
         * Method of Moments Estimation Toolbox
 
+  - title: Consultancy
+    company: OECD project on evaluation and analytical capacity building of the Federal Planning Bureau
+    company_url: https://www.plan.be/index.php?lang=en
+    company_logo: ''
+    location: Brussels, Belgium
+    date_start: '2023-05-01'
+    date_end: '2023-12-01'
+    description: Consulted Dynare related methods and optimizations for DynEMItE model.
+
   - title: Referee Service
     company: ''
     company_url: ''

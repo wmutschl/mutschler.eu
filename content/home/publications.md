@@ -35,7 +35,3 @@ design:
   view: citation
   columns: '2'
 ---
-
-{{% callout note %}}
-Click on the title for an abstract or discover relevant content by [filtering publications](./publication/).
-{{% /callout %}}

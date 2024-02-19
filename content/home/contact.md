@@ -42,11 +42,11 @@ content:
 #    - 'Monday 10:00 to 13:00'
 #    - 'Wednesday 09:00 to 10:00'
   appointment_url: 'https://schedule.mutschler.eu'
-#  contact_links:
-#    - icon: twitter
-#      icon_pack: fab
-#      name: DM Me
-#      link: 'https://twitter.com/wmutschl'
+  contact_links:
+    - icon: twitter
+      icon_pack: fab
+      name: DM Me
+      link: 'https://twitter.com/wmutschl'
 #    - icon: skype
 #      icon_pack: fab
 #      name: Skype Me

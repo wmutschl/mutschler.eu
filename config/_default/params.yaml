@@ -16,9 +16,9 @@ marketing:
   seo:
     site_type: Person
     local_business_type: ''
-    org_name: ''
-    description: 'Research and teaching website of Willi Mutschler'
-    twitter: ''
+    org_name: 'University Tübingen'
+    description: 'Willi Mutschler, Assistant Professor for International Macroeconomics'
+    twitter: 'wmutschl'
   analytics:
     google_analytics: ''
     baidu_tongji: ''
@@ -77,8 +77,8 @@ features:
     branch: main
   avatar:
     gravatar: false
-    shape: circle
-    #shape: square
+    #shape: circle
+    shape: square
   comment:
     provider: ''
     disqus:
