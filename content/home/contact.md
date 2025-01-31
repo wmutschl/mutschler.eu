@@ -31,13 +31,13 @@ content:
     street: 'Eberhard-Karls-University Tübingen<br />School of Business and Economics<br />Department of International Macroeconomics and Finance<br />Mohlstr. 36'
     city: Tübingen
     region: BW
-    postcode: 'D-72074'
+    postcode: '72074'
     country: Germany
     country_code: DE
   coordinates:
     latitude: '48.52970222407578'
     longitude: '9.060530898768823'
-  directions: 'Enter the building and go to the 7th floor. My office is number 416.'
+  directions: 'Enter the building and go to the 7th floor. My office is number 412.'
 #  office_hours:
 #    - 'Monday 10:00 to 13:00'
 #    - 'Wednesday 09:00 to 10:00'
