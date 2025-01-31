@@ -13,15 +13,18 @@ main:
   - name: Publications
     url: '#publications'
     weight: 41
-  - name: Short CV
-    url: '#experience'
-    weight: 45
+#  - name: Short CV
+#    url: '#experience'
+#    weight: 45
   - name: Dynare
     url: dynare/
     weight: 1
   - name: Contact
     url: '#contact'
     weight: 50
+  - name: CV
+    url: files/cv/cv_mutschler.pdf
+    weight: 46
 
 # Link to a PDF of your resume/CV from the menu.
 # To enable, copy your resume/CV to `static/uploads/resume.pdf` and uncomment the lines below.
