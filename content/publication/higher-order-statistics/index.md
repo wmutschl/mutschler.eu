@@ -25,7 +25,7 @@ publishDate: ''
 publication_types: ['2']
 
 # Publication name and optional abbreviated publication name.
-publication: '*Econometrics and Statistics*'
+publication: Econometrics and Statistics
 publication_short: ''
 
 abstract: Closed-form expressions for unconditional moments, cumulants and polyspectra of order higher than two are derived for non-Gaussian or nonlinear (pruned) solutions to DSGE models. Apart from the existence of moments and white noise property no distributional assumptions are needed. The accuracy and utility of the formulas for computing skewness and kurtosis are demonstrated by three prominent models, the baseline medium-sized New Keynesian model used for empirical analysis (first-order approximation), a small-scale monetary business cycle model (second-order approximation) and the neoclassical growth model (third-order approximation). Both the Gaussian as well as Student's t-distribution are considered as the underlying stochastic processes. Lastly, the efficiency gain of including higher-order statistics is demonstrated by the estimation of a RBC model within a Generalized Method of Moments framework.

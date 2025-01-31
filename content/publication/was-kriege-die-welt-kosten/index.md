@@ -1,5 +1,5 @@
 ---
-title: 'The Price of War'
+title: 'Ökonomische Folgen: Was Kriege die Welt kosten'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
@@ -16,8 +16,8 @@ authors:
 #  - 'Equal contribution'
 #  - 'Equal contribution'
 
-date: '2024-09-01'
-doi: ''
+date: '2024-04-01'
+doi: '10.2478/wd-2024-0075'
 
 # Schedule page publish date (NOT publication's date).
 publishDate: ''
@@ -26,17 +26,17 @@ publishDate: ''
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
 # 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
 # 7 = Thesis; 8 = Patent
-publication_types: ['3']
+publication_types: ['2']
 
 # Publication name and optional abbreviated publication name.
-publication: American Economic Review (Revise & Resubmit)
+publication: Wirtschaftsdienst
 publication_short: ''
 
-abstract: "We assemble a new data set spanning more than 150 years and 60 countries to study the economic impact of interstate war. The economic costs of war are not confined to the war site, where output on average declines by 20 percent and inflation increases persistently by almost 10 percentage points. There are strong spillovers to nearby countries which decline with geographic distance—both for belligerent and third countries. We rationalize these patterns in an international business cycle model: As war destroys the productive capacity of the war site, trade with nearby economies collapses, generating an endogenous supply-side contraction abroad."
+abstract: "Amid escalating geopolitical tensions, we offers insights into the far-reaching consequences of wars. Based on a new dataset on major conflicts since 1870, the findings show that wars cause a substantial decline in GDP and spike in inflation within war zones. Interestingly, countries geographically close to war zones experience significant economic disruptions, even when neutral to the conflict, whereas countries far from the conflict may see minimal to slightly positive spillovers. The study demonstrates how wars represent a massive negative supply shock, with geographical proximity and trade integration explaining the varying effects on different countries."
 
 
 # Summary. An optional shortened abstract.
-summary: "We assemble a new data set spanning more than 150 years and 60 countries to study the economic impact of interstate war. The economic costs of war are not confined to the war site, where output on average declines by 20 percent and inflation increases persistently by almost 10 percentage points. There are strong spillovers to nearby countries which decline with geographic distance—both for belligerent and third countries. We rationalize these patterns in an international business cycle model: As war destroys the productive capacity of the war site, trade with nearby economies collapses, generating an endogenous supply-side contraction abroad."
+summary: "Amid escalating geopolitical tensions, we offers insights into the far-reaching consequences of wars. Based on a new dataset on major conflicts since 1870, the findings show that wars cause a substantial decline in GDP and spike in inflation within war zones. Interestingly, countries geographically close to war zones experience significant economic disruptions, even when neutral to the conflict, whereas countries far from the conflict may see minimal to slightly positive spillovers. The study demonstrates how wars represent a massive negative supply shock, with geographical proximity and trade integration explaining the varying effects on different countries."
 
 tags:
   - interstate wars
@@ -52,19 +52,19 @@ tags:
 featured: false
 
 links:
-  - name: CEPR DP18834
-    url: /files/papers/Price_of_War_2024_CEPR.pdf
-  - name: Kiel Working Papers 2262
-    url: /files/papers/Price_of_War_2024_Kiel_Working_Paper.pdf
-url_pdf: ''
+  - name: Price of War Calculator
+    url: https://priceofwar.org/
+  - name: Kiel Policy Brief 171
+    url: /files/papers/Price_of_War_2024_Kiel_Policy_Brief.pdf
+url_pdf: '/files/papers/Price_of_War_2024_Wirtschaftsdienst.pdf'
 url_code: https://github.com/wmutschl/price-of-war
 url_dataset: ''
 url_poster: ''
 url_project: ''
 url_slides: ''
 url_source: ''
-url_video: https://www.youtube.com/watch?v=qe5vbsS0EWY&t=6707s
-url_preprint: '/files/papers/Price_of_War_2024.pdf'
+url_video: ''
+url_preprint: ''
 
 # Featured image
 # To use, add an image named `featured.jpg/png` to your page's folder.

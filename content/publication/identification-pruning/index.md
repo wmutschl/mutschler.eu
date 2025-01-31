@@ -26,7 +26,7 @@ publishDate: ''
 publication_types: ['2']
 
 # Publication name and optional abbreviated publication name.
-publication: '*Journal of Economic Dynamics and Control*'
+publication: Journal of Economic Dynamics and Control
 publication_short: ''
 
 abstract: This paper shows how to check rank criteria for a local identification of nonlinear DSGE models, given higher-order approximations and pruning. This approach imposes additional restrictions on (higher-order) moments and polyspectra, which can be used to identify parameters that are unidentified in a first-order approximation. The identification procedures are demonstrated by means of the Kim (2003) and the An and Schorfheide (2007) models. Both models are identifiable with a second-order approximation. Furthermore, analytical derivatives of unconditional moments, cumulants and corresponding polyspectra up to fourth order are derived for the pruned state-space.

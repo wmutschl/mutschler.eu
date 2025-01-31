@@ -22,7 +22,7 @@ publishDate: ''
 publication_types: ['2']
 
 # Publication name and optional abbreviated publication name.
-publication: '*Economic Modelling*'
+publication: Economic Modelling
 publication_short: ''
 
 abstract: The decisions a researcher makes at the model building stage are crucial for parameter identification. This paper contains a number of applied tips for solving identifiability problems and improving the strength of DSGE model parameter identification by fine-tuning the (1) choice of observables, (2) functional specifications, (3) model features and (4) choice of structural shocks. We offer a formal approach based on well-established diagnostics and indicators to uncover and address both theoretical (yes/no) identifiability issues and weak identification from a Bayesian perspective. The concepts are illustrated by two exemplary models that demonstrate the identification properties of different investment adjustment cost specifications and output-gap definitions. Our results provide theoretical support for the use of growth adjustment costs, investment-specific technology, and partial inflation indexation.

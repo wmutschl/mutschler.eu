@@ -25,7 +25,7 @@ publishDate: ''
 publication_types: ['5','2','7']
 
 # Publication name and optional abbreviated publication name.
-publication: '*PhD Thesis*'
+publication: PhD Thesis
 publication_short: ''
 
 abstract: This thesis adds to the literature on the local identification of nonlinear and non-Gaussian DSGE models. It gives applied researchers a strategy to detect identification problems and means to avoid them in practice. A comprehensive review of existing methods for linearized DSGE models is provided and extended to include restrictions from higher-order moments, cumulants and polyspectra. Another approach, established in this thesis, is to consider higher-order approximations. Formal rank criteria for a local identification of the deep parameters of nonlinear or non-Gaussian DSGE models, using the pruned state-space system are derived. The procedures can be implemented prior to estimating the nonlinear model. In this way, the identifiability of the Kim (2003) and the An and Schorfheide (2007) model are demonstrated, when solved by a second-order approximation.
