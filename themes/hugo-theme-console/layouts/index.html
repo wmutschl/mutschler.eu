@@ -1,0 +1,44 @@
+{{ define "main" }}
+
+<h1>Willi Mutschler</h1>
+
+<div style="display: flex; flex-direction: row; gap: 2em; max-width: 1000px; margin: 0 auto;">
+    <div style="flex: 0 0 300px;">
+        <img src="/images/willi_mutschler_1.jpg" alt="Willi Mutschler" style="width: 270px; height: 300px; border-radius: 3%; object-fit: cover; object-position: center;">
+    </div>
+    <div style="flex: 1;">
+    <p>
+    I am an assistant professor at the <a href="https://uni-tuebingen.de/en/fakultaeten/wirtschafts-und-sozialwissenschaftliche-fakultaet/faecher/fachbereich-wirtschaftswissenschaft/wirtschaftswissenschaft/lehrstuehle/volkswirtschaftslehre/international-macroeconomics-and-finance/team/">University of Tübingen</a>, where I focus on international macroeconomics and econometrics.
+    </p>
+    <p>
+    As a member of the core developer team of <a href="https://www.dynare.org/about/#team">Dynare</a>, I maintain the identification and method-of-moments toolboxes and offer <a href="/teaching">teaching materials</a> and <a href="https://www.youtube.com/@wmutschl/playlists">video tutorials</a>.
+    </p>
+    <p>
+    You can reach me at <a href="mailto:willi@mutschler.eu">willi@mutschler.eu</a>. 
+    </p>
+    <p>
+    Find me elsewhere:
+    <a href="http://github.com/wmutschl">GitHub</a>,
+    <a href="https://researchgate.net/profile/Willi_Mutschler">ResearchGate</a>,
+    <a href="https://ideas.repec.org/f/pmu508.html">Ideas</a>,
+    <a href="https://scholar.google.com/citations?user=7bx6PkwAAAAJ&amp;hl=en">Google Scholar</a>,
+    <a href="https://www.youtube.com/@wmutschl">YouTube</a>.
+    </p>
+    </div>
+</div>
+
+<style>
+@media (max-width: 768px) {
+    div[style*="display: flex"] {
+        flex-direction: column !important;
+    }
+    div[style*="flex: 0 0 300px"] {
+        flex: 0 0 auto !important;
+        margin-bottom: 1em;
+        display: flex !important;
+        justify-content: center !important;
+    }
+}
+</style>
+
+{{ end }}

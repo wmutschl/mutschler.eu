@@ -1,0 +1,38 @@
+baseurl = "https://mutschler.eu/"
+title = "Willi Mutschler"
+theme = "hugo-theme-console"
+languageCode = "en-us"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[[', '\]]'], ['$$', '$$']]
+          inline = [['\((', '\))']]
+[params]
+  # Cutting off the page title to two chars for mobile (console-demo -> co)
+  titleCutting = true
+
+  # Set the animation style -- https://animate.style/
+  # To disable animations, please remove or comment animationStyle parameter
+  animateStyle = "animate__zoomIn animate__fast"
+
+  math = true
+
+  [[params.navlinks]]
+  name = "</>"
+  url = "/"
+
+  [[params.navlinks]]
+  name = "research/"
+  url = "/research/"
+
+  [[params.navlinks]]
+  name = "teaching/"
+  url = "/teaching/"
+  
+  [[params.navlinks]]
+  name = "cv/"
+  url = "/files/cv/cv_mutschler.pdf"

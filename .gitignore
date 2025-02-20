@@ -1,14 +1,3 @@
-# IDEs
-.idea/
-
-# Hugo
-resources/
-public/
-jsconfig.json
-node_modules/
-go.sum
-.hugo_build.lock
-
 .DS_Store
-
-static/files/dynare-macos-pkg/
+public/
+.hugo_build.lock
