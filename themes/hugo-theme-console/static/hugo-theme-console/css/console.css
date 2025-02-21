@@ -222,7 +222,7 @@ figure {
 .terminal-prompt::after {
     -webkit-animation: cursor 1s infinite;
     animation: cursor 1s infinite;
-    width: 10px;
+    width: 0px;
 }
 
 .terminal-prompt::before {
