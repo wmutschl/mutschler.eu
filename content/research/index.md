@@ -1,9 +1,9 @@
 # Working Papers
 
 #### Pruned skewed Kalman filter and smoother with applications to DSGE models
-with Gaygysyz Guljanov and Mark Trede. Submitted.
+with Gaygysyz Guljanov and Mark Trede. [Journal of Economic Dynamics and Control](), revise and resubmit.
 
-[Current version (Jan. 2025)](/files/papers/GuljanovMutschlerTrede_PSKF.pdf) |
+[January 2025](/files/papers/GuljanovMutschlerTrede_PSKF.pdf) |
 [Online Appendix](/files/papers/GuljanovMutschlerTrede_PSKF_Online_Appendix.pdf) |
 [Codes](https://github.com/wmutschl/pruned-skewed-kalman-paper) |
 [Dynare Toolbox](https://git.dynare.org/wmutschl/dynare/-/tree/pskf) |
@@ -11,9 +11,10 @@ with Gaygysyz Guljanov and Mark Trede. Submitted.
 [Dynare Working Paper 78](https://www.dynare.org/wp-repo/dynarewp078.pdf)
 
 #### The Price of War
-with Jonathan Federle, André Meier, Gernot J. Müller, and Moritz Schularick. Revision requested at American Economic Review.
+with Jonathan Federle, André Meier, Gernot J. Müller, and Moritz Schularick. [American Economic Review](), revised and resubmitted.
 
-[Current version (Sep. 2024)](/files/papers/Price_of_War_2024.pdf) |
+[June 2025](/files/papers/Price_of_War_2025.pdf) |
+[September 2024](/files/papers/Price_of_War_2024.pdf) |
 [Code](https://github.com/wmutschl/price-of-war) |
 [CEPR Discussion Paper 18834](/files/papers/Price_of_War_2024_CEPR.pdf) |
 [Kiel Working Papers 2262](/files/papers/Price_of_War_2024_Kiel_Working_Paper.pdf) |
