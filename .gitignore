@@ -1,3 +1,15 @@
+# macOS
 .DS_Store
+
+# Hugo build output (built by GitHub Actions)
 public/
+resources/_gen/
+
+# Hugo lock file
 .hugo_build.lock
+
+# Editor directories and files
+.idea/
+.vscode/
+*.swp
+*.swo
