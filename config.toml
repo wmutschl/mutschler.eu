@@ -34,7 +34,7 @@ languageCode = "en-us"
   [[params.navlinks]]
   name = "teaching/"
   url = "/teaching/"
-  
+
   [[params.navlinks]]
   name = "cv/"
-  url = "/files/cv/cv_mutschler.pdf"
+  url = "/files/cv/cv_mutschler_homepage.pdf"
