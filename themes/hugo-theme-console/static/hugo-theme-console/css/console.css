@@ -410,3 +410,57 @@ pre code {
     padding: 0;
     border-radius: 0;
 }
+
+/* Collapsible abstract styles */
+details.abstract {
+    /* Tighten spacing around the collapsible abstract */
+    margin-top: 0.2em;
+    margin-bottom: 0.6em;
+}
+
+details.abstract summary {
+    cursor: pointer;
+    color: var(--secondary-color);
+    outline: none;
+    font-weight: 400;
+    text-decoration: none;
+    list-style: none;
+    /* Make the "Abstract" title smaller and remove extra spacing */
+    font-size: 0.85em;
+    line-height: 0.5;
+    margin: 0;
+}
+
+details.abstract summary:hover {
+    color: var(--primary-color);
+}
+
+/* Hide default marker and use custom caret */
+details.abstract summary::-webkit-details-marker {
+    display: none;
+}
+
+details.abstract summary::before {
+    content: "▶";
+    display: inline-block;
+    margin-right: 0.4em;
+    transform: translateY(1px);
+    transition: transform 0.2s ease;
+    color: inherit;
+}
+
+details.abstract[open] summary::before {
+    content: "▼";
+}
+
+details.abstract .abstract-body {
+    /* Slightly smaller abstract text and tighter top spacing */
+    margin-top: 0.4em;
+    font-size: 0.75em;
+    line-height: 1.3;
+    color: var(--font-color);
+}
+
+details.abstract .abstract-body p {
+    margin: 0 0 0.6em;
+}
