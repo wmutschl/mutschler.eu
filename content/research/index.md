@@ -1,13 +1,14 @@
 # Working Papers
 
-#### Pruned skewed Kalman filter and smoother with application to DSGE models
-[Journal of Economic Dynamics and Control](), acceptable for publication subject to minor revisions, with Gaygysyz Guljanov and Mark Trede.
+# Publications
 
-[November 2025](/files/papers/GuljanovMutschlerTrede_PSKF.pdf) |
-[January 2025](/files/papers/GuljanovMutschlerTrede_PSKF_2025_Jan.pdf) |
+#### Pruned skewed Kalman filter and smoother with application to DSGE models
+[Journal of Economic Dynamics and Control](/files/papers/GuljanovMutschlerTrede_PSKF.pdf), forthcoming, with Gaygysyz Guljanov and Mark Trede.
+
+[March 2026](/files/papers/GuljanovMutschlerTrede_PSKF.pdf) |
 [Online Appendix](/files/papers/GuljanovMutschlerTrede_PSKF_Online_Appendix.pdf) |
-[Codes](https://github.com/wmutschl/pruned-skewed-kalman-paper) |
-[Dynare Toolbox](https://git.dynare.org/wmutschl/dynare/-/tree/pskf) |
+[Replication codes](https://github.com/wmutschl/pruned-skewed-kalman-paper) |
+[CSN illustration webapp](https://wmutschl.github.io/csn-univariate-illustration/) |
 [CQE Working Paper 101](https://www.wiwi.uni-muenster.de/cqe/sites/cqe/files/CQE_Paper/cqe_wp_101_2022.pdf) |
 [Dynare Working Paper 78](https://www.dynare.org/wp-repo/dynarewp078.pdf)
 
@@ -15,15 +16,14 @@
 The skewed Kalman filter (SKF) extends the classical Gaussian Kalman filter by accommodating asymmetric error distributions in linear state-space models. We introduce a computationally efficient method to mitigate the curse of increasing skewness dimensions inherent in the SKF. By analyzing skewness propagation in state-space systems, we develop the pruned skewed Kalman filter (PSKF), which eliminates elements in cumulative distribution functions that do not significantly impact asymmetry beyond a specified threshold. Extensive simulations on univariate and multivariate state-space models validate the PSKF's accuracy and efficiency. Additionally, we derive the skewed Kalman smoother and its pruned variant, applying them to estimate a New Keynesian DSGE model using US data via standard maximum likelihood and Bayesian MCMC methods. Results strongly favor skewed distributions, particularly for productivity and monetary policy shocks.
 </div></details>
 
-# Publications
-
 #### The Price of War
-[American Economic Review](https://www.aeaweb.org/articles?id=10.1257/aer.20241355) forthcoming, March 2026, with Jonathan Federle, André Meier, Gernot J. Müller, and Moritz Schularick.
+[American Economic Review](https://www.aeaweb.org/articles?id=10.1257/aer.20241355) 116(3), March 2026, with Jonathan Federle, André Meier, Gernot J. Müller, and Moritz Schularick.
 
-[Published version](https://www.aeaweb.org/articles?id=10.1257/aer.20241355) |
+[Published version](/files/papers/Price_of_War_AER.pdf) |
 [June 2025](/files/papers/Price_of_War_2025.pdf) |
 [September 2024](/files/papers/Price_of_War_2024.pdf) |
-[Code](http://www.openicpsr.org/openicpsr/project/238484/version/V1/view) |
+[Replication codes](https://www.openicpsr.org/openicpsr/project/238484) |
+[Simplified R codes (TBA)](https://github.com/wmutschl/price-of-war) |
 [CEPR Discussion Paper 18834](/files/papers/Price_of_War_2024_CEPR.pdf) |
 [Kiel Working Papers 2262](/files/papers/Price_of_War_2024_Kiel_Working_Paper.pdf) |
 [Finance & History Podcast](https://creators.spotify.com/pod/show/carmen-hofmann/episodes/The-Price-of-War-e2ltfdq)
