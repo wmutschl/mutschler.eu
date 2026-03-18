@@ -1,5 +1,8 @@
 # Working Papers
 
+#### Clearing Up the Fiscal Multiplier Morass: A comment on posterior sampling
+[Draft available soon]().
+
 # Publications
 
 #### Pruned skewed Kalman filter and smoother with application to DSGE models
