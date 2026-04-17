@@ -5,22 +5,8 @@
 
 # Publications
 
-#### Pruned skewed Kalman filter and smoother with application to DSGE models
-[Journal of Economic Dynamics and Control](/files/papers/GuljanovMutschlerTrede_PSKF.pdf), forthcoming, with Gaygysyz Guljanov and Mark Trede.
-
-[March 2026](/files/papers/GuljanovMutschlerTrede_PSKF.pdf) |
-[Online Appendix](/files/papers/GuljanovMutschlerTrede_PSKF_Online_Appendix.pdf) |
-[Replication codes](https://github.com/wmutschl/pruned-skewed-kalman-paper) |
-[CSN illustration webapp](https://wmutschl.github.io/csn-univariate-illustration/) |
-[CQE Working Paper 101](https://www.wiwi.uni-muenster.de/cqe/sites/cqe/files/CQE_Paper/cqe_wp_101_2022.pdf) |
-[Dynare Working Paper 78](https://www.dynare.org/wp-repo/dynarewp078.pdf)
-
-<details class="abstract"><summary>Abstract</summary><div class="abstract-body">
-The skewed Kalman filter (SKF) extends the classical Gaussian Kalman filter by accommodating asymmetric error distributions in linear state-space models. We introduce a computationally efficient method to mitigate the curse of increasing skewness dimensions inherent in the SKF. By analyzing skewness propagation in state-space systems, we develop the pruned skewed Kalman filter (PSKF), which eliminates elements in cumulative distribution functions that do not significantly impact asymmetry beyond a specified threshold. Extensive simulations on univariate and multivariate state-space models validate the PSKF's accuracy and efficiency. Additionally, we derive the skewed Kalman smoother and its pruned variant, applying them to estimate a New Keynesian DSGE model using US data via standard maximum likelihood and Bayesian MCMC methods. Results strongly favor skewed distributions, particularly for productivity and monetary policy shocks.
-</div></details>
-
 #### The Price of War
-[American Economic Review](https://www.aeaweb.org/articles?id=10.1257/aer.20241355) 116(3), March 2026, with Jonathan Federle, André Meier, Gernot J. Müller, and Moritz Schularick.
+[American Economic Review](https://doi.org/10.1257/aer.20241355) 116(3), March 2026, with Jonathan Federle, André Meier, Gernot J. Müller, and Moritz Schularick.
 
 [Published version](/files/papers/Price_of_War_AER.pdf) |
 [June 2025](/files/papers/Price_of_War_2025.pdf) |
@@ -33,6 +19,21 @@ The skewed Kalman filter (SKF) extends the classical Gaussian Kalman filter by a
 
 <details class="abstract"><summary>Abstract</summary><div class="abstract-body">
 We assemble a new data set spanning 150 years and 60 countries to study the economic toll of war. A war of average intensity is associated with an output drop of close to 10 percent in the war-site economy, while consumer prices rise by approximately 20 percent. The capital stock, total factor productivity, and equity returns all decline sharply. The economic ramifications of war are not confined to the war site. The evidence points to adverse economic outcomes in other belligerent and third-party countries if they are exposed to the war site through trade linkages or share a common border.
+</div></details>
+
+
+#### Pruned skewed Kalman filter and smoother with application to DSGE models
+[Journal of Economic Dynamics and Control](https://doi.org/10.1016/j.jedc.2026.105315) 187, March 2026, with Gaygysyz Guljanov and Mark Trede.
+
+[Published version](/files/papers/GuljanovMutschlerTrede_PSKF.pdf) |
+[Online Appendix](/files/papers/GuljanovMutschlerTrede_PSKF_Online_Appendix.pdf) |
+[Replication codes](https://github.com/wmutschl/pruned-skewed-kalman-paper) |
+[CSN illustration webapp](https://wmutschl.github.io/csn-univariate-illustration/) |
+[CQE Working Paper 101](https://www.wiwi.uni-muenster.de/cqe/sites/cqe/files/CQE_Paper/cqe_wp_101_2022.pdf) |
+[Dynare Working Paper 78](https://www.dynare.org/wp-repo/dynarewp078.pdf)
+
+<details class="abstract"><summary>Abstract</summary><div class="abstract-body">
+The skewed Kalman filter (SKF) extends the classical Gaussian Kalman filter by accommodating asymmetric error distributions in linear state-space models. We introduce a computationally efficient method to mitigate the curse of increasing skewness dimensions inherent in the SKF. By analyzing skewness propagation in state-space systems, we develop the pruned skewed Kalman filter (PSKF), which eliminates elements in cumulative distribution functions that do not significantly impact asymmetry beyond a specified threshold. Extensive simulations on univariate and multivariate state-space models validate the PSKF's accuracy and efficiency. Additionally, we derive the skewed Kalman smoother and its pruned variant, applying them to estimate a New Keynesian DSGE model using US data via standard maximum likelihood and Bayesian MCMC methods. Results strongly favor skewed distributions, particularly for productivity and monetary policy shocks.
 </div></details>
 
 #### Ökonomische Folgen: Was Kriege die Welt kosten
